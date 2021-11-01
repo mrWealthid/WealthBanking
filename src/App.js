@@ -8,9 +8,11 @@ import Home from './components/Home';
 import PrivateRoute from './components/PrivateRoute';
 import LoginState from './components/LoginState';
 import Profile from './components/Profile';
+import Creating from './components/Creating';
+import Logout from './components/Logout';
 
 function App() {
-  const { data } = useBankContext();
+  const { data, handleModal, isOpen } = useBankContext();
   return (
     <div className='App min-h-screen'>
       <Navbar />
@@ -23,7 +25,13 @@ function App() {
         <Route path='/loginState' component={LoginState} />
         <Route path='/login' component={Login} />
         <PrivateRoute path='/profile' component={Profile} />
+
+        <Route path='/Logout' component={Logout} />
+
+        <Route path='/creating' component={Creating} />
       </Switch>
+
+      {isOpen ? <div className='overlay' onClick={handleModal}></div> : null}
     </div>
   );
 }

@@ -20,6 +20,7 @@ const Signup = () => {
           className='py-6 px-8 flex flex-col gap-2 items-center bg-gray-200 '
           onSubmit={handleSignup}
         >
+          <p className='text-2xl'> Sign Up</p>
           {/* <p className='text-2xl'>Register</p>
         {type ? (
           <p className='text-white bg-red-400 p-2 rounded'>{msg}</p>

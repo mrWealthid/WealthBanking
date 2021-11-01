@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,6 +6,115 @@
 
 * {
   font-family: Poppins;
+}
+
+.popup {
+  top: 80px;
+  width: 250px;
+  right: 0px;
+
+  position: absolute;
+}
+
+.nav {
+  z-index: 100;
+}
+
+.Pop {
+  cursor: pointer;
+  padding: 3px;
+}
+.overlay {
+  position: fixed;
+  min-height: 100%;
+  width: 100%;
+  top: 0px;
+  z-index: 50;
+  background: transparent;
+}
+
+/* For css harmburger */
+.navicon {
+  /* width: 112px; */
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-btn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  /* border: 3px solid #fff; */
+}
+.menu-btn__burger {
+  width: 30px;
+  height: 2px;
+
+  background-color: red;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(255, 101, 47, 0.2);
+  transition: all 0.5s ease-in-out;
+}
+.menu-btn__burger::before,
+.menu-btn__burger::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  background-color: red;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(255, 101, 47, 0.2);
+  transition: all 0.5s ease-in-out;
+}
+.menu-btn__burger::before {
+  transform: translateY(-6px);
+}
+.menu-btn__burger::after {
+  transform: translateY(6px);
+}
+/* ANIMATION */
+.menu-btn.open .menu-btn__burger {
+  transform: translateX(-50px);
+  background: transparent;
+  box-shadow: none;
+}
+.menu-btn.open .menu-btn__burger::before {
+  transform: rotate(45deg) translate(35px, -35px);
+}
+.menu-btn.open .menu-btn__burger::after {
+  transform: rotate(-45deg) translate(35px, 35px);
+}
+
+.navicon span {
+  display: block;
+}
+
+.navicon span:not(:last-child) {
+  margin-bottom: 6px;
+}
+
+.navicon span:nth-child(1) {
+  width: 20px;
+  height: 2px;
+
+  background-color: red;
+}
+
+.test {
+  width: 30px;
+  height: 2px;
+
+  background-color: red;
+}
+
+.navicon span:nth-child(3) {
+  width: 20px;
+  height: 2px;
+
+  background-color: red;
 }
 
 .App {

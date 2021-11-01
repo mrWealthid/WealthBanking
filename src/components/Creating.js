@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const LoginState = () => {
+const Creating = () => {
   const [counter, setCounter] = useState(4);
 
   useEffect(() => {
@@ -10,18 +10,19 @@ const LoginState = () => {
 
     return () => clearInterval(timer);
   }, [counter]);
+
   return (
-    <div className='min-h-screen flex flex-col items-center justify-center gap-3'>
-      <div className='grid rounded-full overflow-hidden animate-spin shadow-2xl grid-cols-2  w-28 h-28'>
+    <div className='min-h-screen flex gap-3 flex-col items-center justify-center'>
+      <div className='grid rounded-full overflow-hidden animate-bounce grid-cols-2 shadow-2xl w-28 h-28'>
         <p className='bg-gray-200'></p>
         <p className='bg-white'></p>
         <p className='bg-yellow-400'></p>
         <p className='bg-gray-700'></p>
       </div>
 
-      <p className='text-2xl'> Logs In Shortly... {counter}</p>
+      <p className='text-2xl'>Creating Account Shortly... {counter}</p>
     </div>
   );
 };
 
-export default LoginState;
+export default Creating;

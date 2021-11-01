@@ -1,8 +1,21 @@
 import React, { useContext, useState, useEffect, createContext } from 'react';
-import { doc, setDoc } from 'firebase/firestore';
+import {
+  doc,
+  setDoc,
+  onSnapshot,
+  collection,
+  orderBy,
+  query,
+  getDoc,
+} from 'firebase/firestore';
 import { useHistory } from 'react-router-dom';
 import { auth, db } from '../firebase-config';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 import { generateAccNums, CheckAccNums } from '../components/Utils';
 
 const BankAppContext = createContext();
@@ -16,42 +29,102 @@ const BankAppProvider = ({ children }) => {
     email: '',
     password: '',
   });
-  const [users, setUsers] = useState({});
+
+  const [accounts, setAccounts] = useState([]);
+
+  const [loading, setLoading] = useState(false);
+  const [users, setUsers] = useState('');
+  const [userDetails, setUserDetails] = useState({});
 
   const [resetEmail, setResetEmail] = useState('');
   const [confirmFields, setConfirmFields] = useState(true);
 
   const [buttonLoader, setButtonLoader] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const history = useHistory();
 
   const data = 'wealth';
 
-  const handleSignup = (e) => {
+  //get all documents in a collection
+
+  useEffect(() => {
+    //To order by timestamp
+
+    const q = query(collection(db, 'Accounts'), orderBy('timestamp', 'desc'));
+
+    const unsub = onSnapshot(q, (snapshot) => {
+      snapshot.docs.map((doc) => setAccounts({ ...doc.data(), id: doc.id }));
+    });
+    return unsub;
+  }, []);
+
+  // get currrent logged in user
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUsers(currentUser);
+    });
+
+    return unsubscribe;
+  }, [users]);
+
+  //Login
+  useEffect(() => {
+    if (login.email !== '' && login.password !== '') {
+      setConfirmFields(false);
+    } else {
+      setConfirmFields(true);
+    }
+  }, [login.email, login.password]);
+
+  //Register
+  useEffect(() => {
+    if (register.email !== '' && register.password !== '') {
+      setConfirmFields(false);
+    } else {
+      setConfirmFields(true);
+    }
+  }, [register.email, register.password]);
+
+  const handleSignup = async (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, register.email, register.password)
-      .then((data) => data.user.uid)
-      .then((uid) => {
-        const docRef = doc(db, 'Accounts', uid);
-        const payload = {
-          name: 'Wealth',
-          id: uid,
-          transactions: [],
-          accountNumber: generateAccNums(),
-        };
-        setDoc(docRef, payload);
 
+    try {
+      const data = await createUserWithEmailAndPassword(
+        auth,
+        register.email,
+        register.password
+      );
+
+      const { uid } = data.user;
+      console.log(uid);
+      const collectionRef = collection(db, 'Accounts');
+      const docRef = doc(collectionRef, uid);
+      const payload = {
+        name: 'Wealth',
+        id: uid,
+        transactions: [],
+        accountNumber: generateAccNums(),
+      };
+      await setDoc(docRef, payload);
+
+      history.push('/loginState');
+
+      const userRef = await getDoc(docRef);
+
+      userRef && setUserDetails(userRef.data());
+
+      setRegister({
+        email: '',
+        password: '',
+      });
+
+      setTimeout(() => {
         history.push('/profile');
-        setRegister({
-          email: '',
-          password: '',
-        });
-      })
-      .catch((error) => console.log(error));
-  };
-
-  const handleLogin = () => {
-    console.log('Logged In');
+      }, 4000);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleChangeRegister = (e) => {
@@ -64,6 +137,67 @@ const BankAppProvider = ({ children }) => {
     setLogin({ ...login, [name]: value });
   };
 
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await signInWithEmailAndPassword(
+        auth,
+        login.email,
+        login.password
+      );
+
+      console.log(data.user.uid);
+
+      setButtonLoader(true);
+
+      history.push('/loginState');
+
+      const collectionRef = collection(db, 'Accounts');
+      const docRef = doc(collectionRef, data.user.uid);
+
+      const userRef = await getDoc(docRef);
+
+      userRef.exists() && setUserDetails(userRef.data());
+      console.log(userRef);
+
+      setLogin({
+        email: '',
+        password: '',
+      });
+
+      setTimeout(() => {
+        setButtonLoader(false);
+        history.push('/profile');
+      }, 1500);
+    } catch (error) {
+      console.log(error.message);
+      // setAlert({
+      //   type: true,
+      //   msg: 'Failed To Login Try Again!!',
+      // });
+      setButtonLoader(true);
+
+      setTimeout(() => {
+        setButtonLoader(false);
+      }, 3000);
+    }
+  };
+
+  const handleLogout = () => {
+    history.push('/Logout');
+
+    setTimeout(() => {
+      signOut(auth);
+      history.push('/login');
+    }, 3000);
+  };
+
+  const handleModal = () => {
+    setIsOpen(!isOpen);
+  };
+
+  console.log(users);
+
   return (
     <BankAppContext.Provider
       value={{
@@ -72,8 +206,13 @@ const BankAppProvider = ({ children }) => {
         handleSignup,
         register,
         ...login,
+        users,
         handleChangeLogin,
         handleChangeRegister,
+        handleModal,
+        isOpen,
+        handleLogout,
+        userDetails,
       }}
     >
       {children}

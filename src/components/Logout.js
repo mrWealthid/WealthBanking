@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const LoginState = () => {
-  const [counter, setCounter] = useState(4);
+const Logout = () => {
+  const [counter, setCounter] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      counter > 0 && setCounter(counter - 1);
+      setCounter(counter + 1);
     }, 1000);
 
     return () => clearInterval(timer);
@@ -19,9 +19,9 @@ const LoginState = () => {
         <p className='bg-gray-700'></p>
       </div>
 
-      <p className='text-2xl'> Logs In Shortly... {counter}</p>
+      <p className='text-2xl'> Logging Out Shortly... {counter}</p>
     </div>
   );
 };
 
-export default LoginState;
+export default Logout;
