@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaShopify, FaBars } from 'react-icons/fa';
+import { FaShopify } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import Popup from './Popup';
 import { useBankContext } from '../BankContext/BankAppContext';

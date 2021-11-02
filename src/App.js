@@ -1,5 +1,5 @@
 import Navbar from './components/Navbar';
-import Shopify from './components/Shopify';
+
 import { useBankContext } from './BankContext/BankAppContext';
 import Signup from './components/Signup';
 import { Route, Switch } from 'react-router-dom';
@@ -12,7 +12,7 @@ import Creating from './components/Creating';
 import Logout from './components/Logout';
 
 function App() {
-  const { data, handleModal, isOpen } = useBankContext();
+  const { handleModal, isOpen } = useBankContext();
   return (
     <div className='App min-h-screen'>
       <Navbar />
@@ -20,11 +20,11 @@ function App() {
       <Switch>
         <Route exact path='/' component={Home} />
 
+        <PrivateRoute path='/profile' component={Profile} />
         <Route path='/create' component={Signup} />
 
         <Route path='/loginState' component={LoginState} />
         <Route path='/login' component={Login} />
-        <PrivateRoute path='/profile' component={Profile} />
 
         <Route path='/Logout' component={Logout} />
 
