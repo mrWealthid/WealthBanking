@@ -15,8 +15,8 @@ const Login = () => {
   } = useBankContext();
 
   return (
-    <div className='min-h-screen flex flex-col items-center justify-center'>
-      <div className='w-8/12 lg:w-5/12 flex flex-col gap-2'>
+    <div className='min-h-screen animate-slideOut flex flex-col items-center justify-center'>
+      <div className='w-8/12 lg:w-4/12 flex flex-col gap-2'>
         <form
           className='py-6 px-8 flex flex-col gap-2 items-center bg-gray-200 '
           onSubmit={handleLogin}
@@ -31,7 +31,7 @@ const Login = () => {
             type='email'
             placeholder='john@example.com'
             name='email'
-            className='my-2 block w-full p-3 rounded-md outline-none bg-gray-100'
+            className='my-2 block w-full p-2 rounded-md outline-none bg-gray-100'
             value={email}
             onChange={handleChangeLogin}
           />
@@ -40,7 +40,7 @@ const Login = () => {
             type='password'
             placeholder='Enter Password'
             name='password'
-            className='my-2 block w-full p-3 rounded-md outline-none bg-gray-100'
+            className='my-2 block w-full p-2 rounded-md outline-none bg-gray-100'
             value={password}
             onChange={handleChangeLogin}
           />

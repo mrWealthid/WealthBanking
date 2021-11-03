@@ -17,7 +17,11 @@ import {
   signOut,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { generateAccNums, CheckAccNums } from '../components/Utils';
+import {
+  generateAccNums,
+  CheckAccNums,
+  createUserStore,
+} from '../components/Utils';
 
 const BankAppContext = createContext();
 
@@ -33,12 +37,12 @@ const BankAppProvider = ({ children }) => {
 
   const [accounts, setAccounts] = useState([]);
 
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [users, setUsers] = useState({});
   const [userDetails, setUserDetails] = useState({});
 
-  const [resetEmail, setResetEmail] = useState('');
-  const [confirmFields, setConfirmFields] = useState(true);
+  // const [resetEmail, setResetEmail] = useState('');
+  // const [confirmFields, setConfirmFields] = useState(true);
 
   const [buttonLoader, setButtonLoader] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -47,13 +51,11 @@ const BankAppProvider = ({ children }) => {
   const history = useHistory();
 
   const data = 'wealth';
+
   const collectionRef = collection(db, 'Accounts');
 
-  //get all documents in a collection
-
+  //To order by timestamp
   useEffect(() => {
-    //To order by timestamp
-
     const q = query(collection(db, 'Accounts'), orderBy('timestamp', 'desc'));
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -63,7 +65,8 @@ const BankAppProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  //querying a collection by it's name to get all items
+  //get all documents in a collection
+
   useEffect(() => {
     onSnapshot(collection(db, 'Accounts'), (snapshot) => {
       setAccounts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
@@ -81,7 +84,9 @@ const BankAppProvider = ({ children }) => {
 
   //Get current signed in  user's firestore
   useEffect(() => {
-    setUserDetails(accounts.find((item) => item.id === users.uid));
+    if (users) {
+      setUserDetails(accounts.find((item) => item.id === users.uid));
+    }
   }, [accounts, users]);
   //Login
   // useEffect(() => {
@@ -112,23 +117,22 @@ const BankAppProvider = ({ children }) => {
       );
 
       const { uid } = data.user;
-      console.log(uid);
 
       const docRef = doc(collectionRef, uid);
       const payload = {
         name: 'Wealth',
         id: uid,
-        transactions: [],
+        transactions: [{ Depositor: 'Wealthy', amount: 1000 }],
         timestamp: serverTimestamp(),
         accountNumber: generateAccNums(),
       };
+
       await setDoc(docRef, payload);
 
-      history.push('/loginState');
+      history.push('/creating');
 
-      const userRef = await getDoc(docRef);
-
-      userRef && setUserDetails(userRef.data());
+      const myStore = await createUserStore(uid);
+      setUserDetails(myStore.data());
 
       setRegister({
         email: '',
@@ -168,12 +172,8 @@ const BankAppProvider = ({ children }) => {
 
       history.push('/loginState');
 
-      const docRef = doc(collectionRef, data.user.uid);
-
-      const userRef = await getDoc(docRef);
-
-      userRef.exists() && setUserDetails(userRef.data());
-      console.log(userRef);
+      const myStore = await createUserStore(data.user.uid);
+      setUserDetails(myStore.data());
 
       setLogin({
         email: '',
@@ -227,7 +227,6 @@ const BankAppProvider = ({ children }) => {
         handleLogout,
         userDetails,
         total,
-        loading,
       }}
     >
       {children}

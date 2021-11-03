@@ -7,8 +7,8 @@ import { useBankContext } from '../BankContext/BankAppContext';
 const Navbar = () => {
   const { handleModal, users, isOpen, handleLogout } = useBankContext();
   return (
-    <div className='bg-gray-700 relative text-white py-6'>
-      <div className='w-10/12 mx-auto flex justify-between items-center'>
+    <div className='bg-gray-700  bg-opacity-50 relative text-white py-6'>
+      <div className='w-11/12 mx-auto flex justify-between items-center'>
         <div>
           <a href='https://www.shopify.com/'>
             {' '}
@@ -35,7 +35,14 @@ const Navbar = () => {
             >
               Create Account
             </NavLink>
-          ) : null}
+          ) : (
+            <NavLink
+              className='hover:underline focus:text-yellow-300'
+              to='/profile'
+            >
+              Profile
+            </NavLink>
+          )}
           {users ? (
             <p
               className='hover:underline 

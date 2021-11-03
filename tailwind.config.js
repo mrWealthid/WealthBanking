@@ -27,8 +27,9 @@ module.exports = {
         float: 'float 3s infinite',
         refloat: 'refloat 3s infinite',
         like: 'like 0.5s ease-in-out',
-        slideIn: 'slideIn 0.7s ease-in',
-        slideOut: 'slideOut 0.5s ease-in-out',
+        slideIn: 'slideIn 1s ease-in',
+        slideOut: 'slideOut 1s ease-in',
+        pops: 'pops 3s infinite',
       },
       keyframes: {
         spin: {
@@ -72,10 +73,7 @@ module.exports = {
         like: {
           '100%': {
             transform: 'scale(2.0)',
-            // -webkit-transform: "rotate(-15deg) scale(1.3)",
-            // -moz-transform: "rotate(-15deg) scale(1.3)",
-            // -ms-transform: "rotate(-15deg) scale(1.3)",
-            // -o-transform: "rotate(-15deg) scale(1.3)",
+
             filter: 'blur(0.5px)',
             // -webkit-filter: "blur(0.5px)",
           },
@@ -85,6 +83,47 @@ module.exports = {
           },
         },
 
+        pops: {
+          '100%': {
+            transform: 'scale(0.3)',
+            filter: 'blur(0.5px)',
+            animationTimingFunction: 'ease-in-out',
+          },
+          '90%': {
+            transform: 'scale(0.8)',
+            filter: 'blur(0.5px)',
+            animationTimingFunction: 'ease-in-out',
+          },
+          '80%': {
+            transform: 'scale(0.3)',
+            filter: 'blur(0.5px)',
+            animationTimingFunction: 'ease-in-out',
+          },
+
+          '60%': {
+            transform: 'scale(0.8)',
+            filter: 'blur(0.5px)',
+            animationTimingFunction: 'ease-in-out',
+          },
+
+          '40%': {
+            transform: 'scale(0.3)',
+            filter: 'blur(0.5px)',
+            animationTimingFunction: 'ease-in-out',
+          },
+
+          '20%': {
+            transform: 'scale(0.8)',
+            filter: 'blur(0.5px)',
+            animationTimingFunction: 'ease-in-out',
+          },
+
+          '0%': {
+            transform: 'scale(0.3)',
+            filter: 'blur(0.5px)',
+            animationTimingFunction: 'ease-in-out',
+          },
+        },
         slideIn: {
           '0%': {
             transform: 'translateY(-30px)',
@@ -105,12 +144,12 @@ module.exports = {
 
         slideOut: {
           '0%': {
-            transform: 'translateY(238px)',
+            transform: 'translateY(50px)',
             animationTimingFunction: 'ease-in-out',
             opacity: 0,
           },
           '50%': {
-            transform: 'translateY(200px)',
+            transform: 'translateY(-10px)',
             animationTimingFunction: 'ease-in-out',
             opacity: 0.5,
           },
