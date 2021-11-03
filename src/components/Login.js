@@ -18,7 +18,7 @@ const Login = () => {
     <div className='min-h-screen animate-slideOut flex flex-col items-center justify-center'>
       <div className='w-8/12 lg:w-4/12 flex flex-col gap-2'>
         <form
-          className='py-6 px-8 flex flex-col gap-2 items-center bg-gray-200 '
+          className='py-6 px-8 cap bg-contain rounded-xl shadow-lg flex flex-col gap-2 items-center bg-gray-200 '
           onSubmit={handleLogin}
         >
           <p className='text-2xl'> Login</p>
@@ -48,7 +48,7 @@ const Login = () => {
           <button
             className={` ${
               confirmFields ? 'bg-gray-400' : ' bg-gray-700 hover:bg-gray-500'
-            }  text-white text-sm w-4/12 md:text-base rounded-lg  py-2 px-7 text-white transition ease-linear duration-1000`}
+            } text-white cap text-sm w-4/12 md:text-base rounded-lg  py-2 px-7 text-white transition ease-linear duration-1000`}
             disabled={confirmFields}
           >
             {buttonLoader ? 'Loading...' : 'Login'}

@@ -1,4 +1,10 @@
-import React, { useContext, useState, useEffect, createContext } from 'react';
+import React, {
+  useContext,
+  useState,
+  useEffect,
+  createContext,
+  useRef,
+} from 'react';
 import {
   doc,
   setDoc,
@@ -8,6 +14,8 @@ import {
   query,
   getDoc,
   serverTimestamp,
+  arrayUnion,
+  updateDoc,
 } from 'firebase/firestore';
 import { useHistory } from 'react-router-dom';
 import { auth, db } from '../firebase-config';
@@ -49,6 +57,9 @@ const BankAppProvider = ({ children }) => {
   const [total, setTotal] = useState(0);
 
   const history = useHistory();
+
+  const transferAmount = useRef();
+  const transferNum = useRef();
 
   const data = 'wealth';
 
@@ -211,6 +222,45 @@ const BankAppProvider = ({ children }) => {
     setIsOpen(!isOpen);
   };
 
+  const handleTransfers = async (e) => {
+    e.preventDefault();
+    const findAccount = accounts.find(
+      (acc) => acc.accountNumber == transferNum.current.value
+    );
+
+    if (findAccount) {
+      const recieverRef = doc(db, 'Accounts', findAccount.id);
+
+      const transferRef = doc(db, 'Accounts', users.uid);
+
+      //updating an array in a document field
+
+      const recieverPayload = [
+        ...findAccount.transactions,
+        {
+          Depositor: userDetails.name,
+          amount: transferAmount.current.value,
+        },
+      ];
+
+      const depositorPayload = [
+        ...userDetails.transactions,
+        {
+          Depositor: userDetails.name,
+          amount: -transferAmount.current.value,
+        },
+      ];
+
+      await updateDoc(recieverRef, {
+        transactions: recieverPayload,
+      });
+
+      await updateDoc(transferRef, {
+        transactions: depositorPayload,
+      });
+    }
+  };
+
   return (
     <BankAppContext.Provider
       value={{
@@ -227,6 +277,10 @@ const BankAppProvider = ({ children }) => {
         handleLogout,
         userDetails,
         total,
+        accounts,
+        transferAmount,
+        transferNum,
+        handleTransfers,
       }}
     >
       {children}

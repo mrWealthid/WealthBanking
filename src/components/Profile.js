@@ -9,14 +9,18 @@ const Profile = () => {
     total,
     handleLoan,
     closeAcc,
+    accounts,
     handleTransfers,
+    transferAmount,
+    transferNum,
   } = useBankContext();
 
-  const transferAmount = useRef();
-  const transferName = useRef();
+  // const transferAmount = useRef();
+  // const transferNum = useRef();
   const loanRef = useRef();
   const closeUser = useRef();
   const closeUserPin = useRef();
+
   return (
     <div className='flex flex-col animate-slideOut w-11/12 mx-auto'>
       {userDetails && (
@@ -44,15 +48,9 @@ const Profile = () => {
                 <FaClock /> Transaction History
               </div>
               {userDetails.transactions?.length > 0 &&
-                userDetails.transactions.map((item) => (
-                  <Transactions key={item.id} {...item} />
+                userDetails.transactions.map((item, index) => (
+                  <Transactions key={index} {...item} />
                 ))}
-              {/* {currents &&
-              transactions.movements
-                .map((mov, index) => (
-                  <Transactions key={index} index={index} mov={mov} />
-                ))
-                .reverse()} */}
             </section>
 
             <section className='flex rounded-lg flex-col w-5/12 gap-3'>
@@ -63,14 +61,14 @@ const Profile = () => {
                   <form onSubmit={handleTransfers}>
                     <input
                       className='w-full my-input p-0'
-                      type='text'
-                      name='name'
-                      ref={transferName}
+                      type='number'
+                      name='number'
+                      ref={transferNum}
                       required
                     />
                     <input
                       className='w-full my-input p-0'
-                      type='text'
+                      type='number'
                       name='amount'
                       ref={transferAmount}
                       required
