@@ -15,7 +15,7 @@ const Signup = () => {
 
   return (
     <div className='min-h-screen animate-slideIn flex flex-col items-center justify-center'>
-      <div className='w-8/12 lg:w-4/12 flex flex-col gap-2'>
+      <div className='w-8/12 6/12 sm:w- w-8/12 lg:w-4/12 flex flex-col gap-2'>
         <form
           className='py-6 px-8 flex rounded-lg cap bg-contain shadow-lg flex-col gap-2 items-center bg-gray-200 '
           onSubmit={handleSignup}
@@ -25,22 +25,60 @@ const Signup = () => {
         {type ? (
           <p className='text-white bg-red-400 p-2 rounded'>{msg}</p>
         ) : null} */}
-          <input
-            type='text'
-            placeholder='email'
-            value={register.email}
-            name='email'
-            onChange={handleChangeRegister}
-            className='my-2 block w-full p-2 rounded-md outline-none bg-gray-100'
-          />
-          <input
-            type='password'
-            placeholder='password'
-            value={register.password}
-            name='password'
-            onChange={handleChangeRegister}
-            className='my-2 block w-full p-2 rounded-md outline-none bg-gray-100'
-          />
+          <div className='flex item-center w-full gap-4'>
+            <input
+              type='text'
+              placeholder='First Name'
+              value={register.firstname}
+              name='firstname'
+              onChange={handleChangeRegister}
+              className='my-2 block w-full p-2 rounded-md outline-none bg-gray-100'
+            />
+            <input
+              type='text'
+              placeholder='Last Name'
+              value={register.lastname}
+              name='lastname'
+              onChange={handleChangeRegister}
+              className='my-2 block w-full p-2 rounded-md outline-none bg-gray-100'
+            />
+          </div>
+          {/* <div className='flex item-center w-full gap-4'>
+            <input
+              type='text'
+              placeholder='email'
+              value={register.email}
+              name='email'
+              onChange={handleChangeRegister}
+              className='my-2 block w-full p-2 rounded-md outline-none bg-gray-100'
+            />
+            <input
+              type='text'
+              placeholder='email'
+              value={register.email}
+              name='email'
+              onChange={handleChangeRegister}
+              className='my-2 block w-full p-2 rounded-md outline-none bg-gray-100'
+            />
+          </div> */}
+          <div className='flex item-center w-full gap-4'>
+            <input
+              type='text'
+              placeholder='email'
+              value={register.email}
+              name='email'
+              onChange={handleChangeRegister}
+              className='my-2 block w-full p-2 rounded-md outline-none bg-gray-100'
+            />
+            <input
+              type='password'
+              placeholder='password'
+              value={register.password}
+              name='password'
+              onChange={handleChangeRegister}
+              className='my-2 block w-full p-2 rounded-md outline-none bg-gray-100'
+            />
+          </div>
           <button
             className={` ${
               confirmFields ? 'bg-gray-400' : ' bg-gray-700 hover:bg-gray-500'

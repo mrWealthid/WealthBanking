@@ -35,6 +35,8 @@ const BankAppContext = createContext();
 
 const BankAppProvider = ({ children }) => {
   const [register, setRegister] = useState({
+    firstname: '',
+    lastname: '',
     email: '',
     password: '',
   });
@@ -55,11 +57,16 @@ const BankAppProvider = ({ children }) => {
   const [buttonLoader, setButtonLoader] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [total, setTotal] = useState(0);
+  const [deposit, setDeposit] = useState(0);
+  const [withdrawal, setWithdrawal] = useState(0);
 
   const history = useHistory();
 
   const transferAmount = useRef();
   const transferNum = useRef();
+  const loanRef = useRef();
+  const closeUser = useRef();
+  const closeUserPin = useRef();
 
   const data = 'wealth';
 
@@ -99,6 +106,35 @@ const BankAppProvider = ({ children }) => {
       setUserDetails(accounts.find((item) => item.id === users.uid));
     }
   }, [accounts, users]);
+
+  useEffect(() => {
+    setTotal(
+      userDetails?.transactions
+        ?.map((mov) => Number(mov.amount))
+        .reduce((arr, mov) => arr + mov, 0)
+    );
+  }, [userDetails]);
+
+  useEffect(() => {
+    setDeposit(
+      userDetails?.transactions
+        ?.map((mov) => Number(mov.amount))
+        .filter((mov) => mov > 0)
+        .reduce((arr, mov) => arr + mov, 0)
+    );
+  }, [userDetails]);
+
+  useEffect(() => {
+    setWithdrawal(
+      Math.abs(
+        userDetails?.transactions
+          ?.map((mov) => Number(mov.amount))
+          .filter((mov) => mov < 0)
+          .reduce((arr, mov) => arr + mov, 0)
+      )
+    );
+  }, [userDetails]);
+
   //Login
   // useEffect(() => {
   //   if (login.email !== '' && login.password !== '') {
@@ -131,9 +167,16 @@ const BankAppProvider = ({ children }) => {
 
       const docRef = doc(collectionRef, uid);
       const payload = {
-        name: 'Wealth',
+        name: register.firstname + ' ' + register.lastname,
         id: uid,
-        transactions: [{ Depositor: 'Wealthy', amount: 1000 }],
+        transactions: [
+          {
+            Depositor: 'WealthBank',
+            account: 'Management',
+            time: new Date().toISOString(),
+            amount: 1000,
+          },
+        ],
         timestamp: serverTimestamp(),
         accountNumber: generateAccNums(),
       };
@@ -228,7 +271,10 @@ const BankAppProvider = ({ children }) => {
       (acc) => acc.accountNumber == transferNum.current.value
     );
 
-    if (findAccount) {
+    if (
+      findAccount &&
+      findAccount.accountNumber !== userDetails.accountNumber
+    ) {
       const recieverRef = doc(db, 'Accounts', findAccount.id);
 
       const transferRef = doc(db, 'Accounts', users.uid);
@@ -239,6 +285,8 @@ const BankAppProvider = ({ children }) => {
         ...findAccount.transactions,
         {
           Depositor: userDetails.name,
+          account: userDetails.accountNumber,
+          time: new Date().toISOString(),
           amount: transferAmount.current.value,
         },
       ];
@@ -246,7 +294,9 @@ const BankAppProvider = ({ children }) => {
       const depositorPayload = [
         ...userDetails.transactions,
         {
-          Depositor: userDetails.name,
+          Depositor: findAccount.name,
+          account: findAccount.accountNumber,
+          time: new Date().toISOString(),
           amount: -transferAmount.current.value,
         },
       ];
@@ -258,6 +308,40 @@ const BankAppProvider = ({ children }) => {
       await updateDoc(transferRef, {
         transactions: depositorPayload,
       });
+    }
+  };
+
+  const handleLoans = async (e) => {
+    e.preventDefault();
+
+    if (deposit > 0.5 * total) {
+      const loanReference = doc(db, 'Accounts', users.uid);
+
+      //updating an array in a document field
+
+      const loanPayload = [
+        ...userDetails.transactions,
+        {
+          Depositor: 'WealthBank',
+          account: 'Management',
+          time: new Date().toISOString(),
+          amount: loanRef.current.value,
+        },
+      ];
+
+      await updateDoc(loanReference, {
+        transactions: loanPayload,
+      });
+    }
+  };
+
+  const handleCloseAccount = async (e) => {
+    e.preventDefault();
+    if (
+      userDetails.accountNumber === Number(closeUser.current.value) &&
+      closeUserPin.current.value === userDetails.email
+    ) {
+      console.log('correct');
     }
   };
 
@@ -281,6 +365,13 @@ const BankAppProvider = ({ children }) => {
         transferAmount,
         transferNum,
         handleTransfers,
+        deposit,
+        withdrawal,
+        loanRef,
+        closeUser,
+        closeUserPin,
+        handleLoans,
+        handleCloseAccount,
       }}
     >
       {children}

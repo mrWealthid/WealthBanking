@@ -35,11 +35,6 @@
 }
 
 /* For css harmburger */
-.navicon {
-  /* width: 112px; */
-  display: flex;
-  flex-direction: column;
-}
 
 .menu-btn {
   position: relative;
@@ -54,7 +49,7 @@
   width: 30px;
   height: 2px;
 
-  background-color: red;
+  background-color: rgb(102, 15, 15);
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(255, 101, 47, 0.2);
   transition: all 0.5s ease-in-out;
@@ -65,7 +60,7 @@
   position: absolute;
   width: 20px;
   height: 2px;
-  background-color: red;
+  background-color: rgb(102, 15, 15);
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(255, 101, 47, 0.2);
   transition: all 0.5s ease-in-out;
@@ -110,13 +105,6 @@
   background-color: rgba(255, 255, 255, 0.4);
 }
 
-.navicon span:nth-child(3) {
-  width: 20px;
-  height: 2px;
-
-  background-color: red;
-}
-
 .App,
 .cap {
   /* background-color: #f0f4fd; */
@@ -133,16 +121,18 @@
 
 .loader {
   border: 5px solid #f3f3f3;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   border-top: 5px solid #3498db;
-  width: 50px;
-  height: 50px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
+  /* width: 50px;
+  height: 50px; */
+  /* -webkit-animation: spin 2s linear infinite; */
+
+  /* Safari */
+  /* animation: spin 2s linear infinite; */
 }
 
 /* Safari */
-@-webkit-keyframes spin {
+/* @-webkit-keyframes spin {
   0% {
     -webkit-transform: rotate(0deg);
   }
@@ -158,6 +148,6 @@
   100% {
     transform: rotate(360deg);
   }
-}
+} */
 
 /* npm install @tailwindcss/forms */
