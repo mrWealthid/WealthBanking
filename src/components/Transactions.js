@@ -7,8 +7,8 @@ const Transactions = ({ Depositor, amount, account, time }) => {
     return currentDate.slice(0, 4) + ' ' + currentDate.split(':')[2].slice(3);
   }
   return (
-    <div className='flex justify-between font-extralight text-xs '>
-      <div className='flex justify-between w-10/12 items-center '>
+    <div className='flex justify-between font-extralight  py-2 px-1 text-xs hover:bg-gray-200 transition duration-200 ease-in-out hover:text-black hover: rounded-lg'>
+      <div className='flex justify-between w-10/12  items-center '>
         <p>
           {amount < 0 ? (
             <FaArrowUp color='red' />

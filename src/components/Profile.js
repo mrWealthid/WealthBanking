@@ -5,6 +5,7 @@ import {
   FaArrowCircleUp,
   FaArrowDown,
   FaArrowUp,
+  FaSearch,
 } from 'react-icons/fa';
 import Transactions from './Transactions';
 import Loader from './Loader';
@@ -102,15 +103,30 @@ const Profile = () => {
               Current Balance
               <p>As at {new Date().toDateString()}</p>
             </div>
-            <p className='text-lg'>€{totalCount}</p>
+            <div className='text-lg animate-slideIn'>
+              <p>Balance</p>
+              <p className='text-2xl text-gray-900 font-bold '>
+                €{totalCount}
+              </p>{' '}
+            </div>
           </div>
 
           <section className='flex flex-row-reverse gap-5 justify-between'>
-            <section className='bg-gray-800 cap bg-blend-color-burn rounded-lg bg-contain flex flex-col gap-3 p-4 text-white w-7/12'>
-              <div className='flex gap-2  items-center'>
-                <FaClock /> Transaction History
+            <section className='bg-gray-800 cap bg-blend-color-burn rounded-lg bg-contain flex flex-col gap-3 p-4 text-white w-10/12'>
+              <div className='flex gap-2 justify-between items-center'>
+                <div className='flex gap-2 items-center'>
+                  <FaClock /> Transaction History
+                </div>
+
+                <div className='bg-white items-center px-3 rounded-lg py-1 flex gap-2'>
+                  <FaSearch className='text-gray-700' />
+                  <input
+                    type='text'
+                    className='border-transparent focus:outline-none text-black focus:py-0 focus:ring-2 focus:ring-white focus:border-transparent py-0'
+                  />
+                </div>
               </div>
-              <div className='flex flex-col gap-4'>
+              <div className='flex flex-col '>
                 {userDetails.transactions?.length > 0 &&
                   userDetails.transactions.map((item, index) => (
                     <Transactions key={index} {...item} />
@@ -119,100 +135,118 @@ const Profile = () => {
             </section>
 
             <section className='flex rounded-lg flex-col w-5/12 text-gray-200 gap-3'>
-              <section className='transfer  flex flex-col gap-2  justify-center bg-blend-screen bg-contain h-40 cap rounded-lg p-5'>
-                <p>Transfer Money</p>
+              <section
+                className='transfer  flex flex-col gap-2  justify-center bg-blend-screen bg-contain h-40 cap rounded-lg p-5'
+                onMouseOver={() => setTransfer(true)}
+              >
+                <p> Make A Transfer Today</p>
 
-                <form
-                  className='flex flex-col gap-2'
-                  onSubmit={handleTransfers}
-                >
-                  <div className='flex'>
-                    <label htmlFor='number' className='w-40'>
-                      Account Number
-                    </label>
-                    <input
-                      className='w-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-transparent p-0'
-                      type='text'
-                      name='number'
-                      ref={transferNum}
-                      required
-                    />
-                  </div>
+                {transfer ? (
+                  <form
+                    className='flex flex-col gap-2 animate-slideIn'
+                    onSubmit={handleTransfers}
+                  >
+                    <div className='flex'>
+                      <label htmlFor='number' className='w-40'>
+                        Account Number
+                      </label>
+                      <input
+                        className='w-100 rounded-xl focus:outline-none text-black focus:ring-2 focus:ring-gray-200 focus:border-transparent py-0 px-2'
+                        type='text'
+                        name='number'
+                        ref={transferNum}
+                        required
+                      />
+                    </div>
 
-                  <div className='flex'>
-                    <label className='w-40' htmlFor='name'>
-                      Amount
-                    </label>
-                    <input
-                      className='w-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-transparent p-0'
-                      type='text'
-                      name='amount'
-                      ref={transferAmount}
-                      required
-                    />
-                  </div>
-                  <div className='flex justify-end'>
-                    <button className='bg-white text-black w-1/6 p-1 rounded-lg px-3 '>
-                      Send
-                    </button>
-                  </div>
-                </form>
+                    <div className='flex'>
+                      <label className='w-40' htmlFor='name'>
+                        Amount
+                      </label>
+                      <input
+                        className='w-100 rounded-xl focus:outline-none text-black  focus:ring-2 focus:ring-gray-200 focus:border-transparent py-0 px-2'
+                        type='text'
+                        name='amount'
+                        ref={transferAmount}
+                        required
+                      />
+                    </div>
+                    <div className='flex justify-end'>
+                      <button className='bg-white text-black w-1/6 p-1 rounded-lg px-3 '>
+                        Send
+                      </button>
+                    </div>
+                  </form>
+                ) : null}
               </section>
 
-              <section className='loan cap bg-blend-screen flex flex-col gap-2  justify-center bg-contain h-40 rounded-lg p-5'>
+              <section
+                className='loan cap bg-blend-screen flex flex-col gap-2  justify-center bg-contain h-40 rounded-lg p-5'
+                onMouseOver={() => setLoan(true)}
+              >
                 <p>Request Loan</p>
 
-                <form className='flex flex-col gap-2' onSubmit={handleLoans}>
-                  <div className='flex'>
-                    <label htmlFor='amount' className='w-40'>
-                      Amount
-                    </label>
-                    <input
-                      className='w-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-transparent p-0'
-                      type='text'
-                      name='amount'
-                      ref={loanRef}
-                      required
-                    />
-                  </div>
-                  <div className='flex justify-end'>
-                    <button className='bg-white text-black w-1/6 p-1 rounded-lg px-3 '>
-                      Send
-                    </button>
-                  </div>
-                </form>
+                {loan ? (
+                  <form
+                    className='flex flex-col gap-2 animate-slideOut'
+                    onSubmit={handleLoans}
+                  >
+                    <div className='flex'>
+                      <label htmlFor='amount' className='w-40'>
+                        Amount
+                      </label>
+                      <input
+                        className='w-100 rounded-xl focus:outline-none text-black  focus:ring-2 focus:ring-gray-200 focus:border-transparent py-0 px-2'
+                        type='text'
+                        name='amount'
+                        ref={loanRef}
+                        required
+                      />
+                    </div>
+                    <div className='flex justify-end'>
+                      <button className='bg-white text-black w-1/6 p-1 rounded-lg px-3 '>
+                        Send
+                      </button>
+                    </div>
+                  </form>
+                ) : null}
               </section>
 
-              <section className='close bg-contain gap-2  flex flex-col  justify-center cap h-40 rounded-lg p-5'>
+              <section
+                className='close bg-contain gap-2  flex flex-col  justify-center cap h-40 rounded-lg p-5'
+                onMouseOver={() => setCloseAcc(true)}
+              >
                 <p>Close Account</p>
 
-                <form
-                  className='flex flex-col gap-2'
-                  onSubmit={handleCloseAccount}
-                >
-                  <div className='flex'>
-                    <label className='w-40'>Account Number</label>
-                    <input
-                      className='w-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-transparent p-0'
-                      type='text'
-                      ref={closeUser}
-                    />
-                  </div>
-                  <div className='flex'>
-                    <label className='w-40'>Account Number</label>
-                    <input
-                      className='w-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-transparent p-0'
-                      type='text'
-                      ref={closeUserPin}
-                    />
-                  </div>
+                {closeAcc ? (
+                  <form
+                    className='flex flex-col gap-2 animate-slideIn'
+                    onSubmit={handleCloseAccount}
+                  >
+                    <div className='flex'>
+                      <label className='w-40'>Account Number</label>
+                      <input
+                        className='w-100 rounded-xl focus:outline-none text-black  focus:ring-2 focus:ring-gray-200 focus:border-transparent py-0 px-2'
+                        type='text'
+                        ref={closeUser}
+                      />
+                    </div>
+                    <div className='flex'>
+                      <label className='w-40'>Account Email</label>
+                      <input
+                        className='w-100 rounded-xl focus:outline-none text-black  focus:ring-2 focus:ring-gray-200 focus:border-transparent py-0 px-2'
+                        type='text'
+                        ref={closeUserPin}
+                      />
+                    </div>
 
-                  <div className='flex justify-end'>
-                    <button className='bg-white text-black w-1/6 p-1 rounded-lg px-3 '>
-                      Send
-                    </button>
-                  </div>
-                </form>
+                    <div className='flex justify-end'>
+                      <button className='bg-white text-black w-1/6 p-1 rounded-lg px-3 '>
+                        Send
+                      </button>
+                    </div>
+                  </form>
+                ) : null}
               </section>
             </section>
 

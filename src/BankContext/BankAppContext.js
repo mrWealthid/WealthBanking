@@ -172,7 +172,7 @@ const BankAppProvider = ({ children }) => {
         transactions: [
           {
             Depositor: 'WealthBank',
-            account: 'Management',
+            account: 'Bonus',
             time: new Date().toISOString(),
             amount: 1000,
           },
@@ -268,12 +268,13 @@ const BankAppProvider = ({ children }) => {
   const handleTransfers = async (e) => {
     e.preventDefault();
     const findAccount = accounts.find(
-      (acc) => acc.accountNumber == transferNum.current.value
+      (acc) => acc.accountNumber === Number(transferNum.current.value)
     );
 
     if (
       findAccount &&
-      findAccount.accountNumber !== userDetails.accountNumber
+      findAccount.accountNumber !== userDetails.accountNumber &&
+      Number(transferAmount.current.value) < total
     ) {
       const recieverRef = doc(db, 'Accounts', findAccount.id);
 
@@ -287,7 +288,7 @@ const BankAppProvider = ({ children }) => {
           Depositor: userDetails.name,
           account: userDetails.accountNumber,
           time: new Date().toISOString(),
-          amount: transferAmount.current.value,
+          amount: Number(transferAmount.current.value),
         },
       ];
 
@@ -325,7 +326,7 @@ const BankAppProvider = ({ children }) => {
           Depositor: 'WealthBank',
           account: 'Management',
           time: new Date().toISOString(),
-          amount: loanRef.current.value,
+          amount: Number(loanRef.current.value),
         },
       ];
 
@@ -339,7 +340,7 @@ const BankAppProvider = ({ children }) => {
     e.preventDefault();
     if (
       userDetails.accountNumber === Number(closeUser.current.value) &&
-      closeUserPin.current.value === userDetails.email
+      closeUserPin.current.value === users.email
     ) {
       console.log('correct');
     }
