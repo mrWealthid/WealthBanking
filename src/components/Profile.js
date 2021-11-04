@@ -1,14 +1,7 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useBankContext } from '../BankContext/BankAppContext';
-import {
-  FaClock,
-  FaArrowCircleUp,
-  FaArrowDown,
-  FaArrowUp,
-  FaSearch,
-} from 'react-icons/fa';
+import { FaClock, FaArrowDown, FaArrowUp, FaSearch } from 'react-icons/fa';
 import Transactions from './Transactions';
-import Loader from './Loader';
 
 const Profile = () => {
   const {

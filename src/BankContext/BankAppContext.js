@@ -12,9 +12,7 @@ import {
   collection,
   orderBy,
   query,
-  getDoc,
   serverTimestamp,
-  arrayUnion,
   updateDoc,
 } from 'firebase/firestore';
 import { useHistory } from 'react-router-dom';
@@ -25,11 +23,7 @@ import {
   signOut,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
-import {
-  generateAccNums,
-  CheckAccNums,
-  createUserStore,
-} from '../components/Utils';
+import { generateAccNums, createUserStore } from '../components/Utils';
 
 const BankAppContext = createContext();
 
@@ -54,7 +48,7 @@ const BankAppProvider = ({ children }) => {
   // const [resetEmail, setResetEmail] = useState('');
   // const [confirmFields, setConfirmFields] = useState(true);
 
-  const [buttonLoader, setButtonLoader] = useState(false);
+  // const [buttonLoader, setButtonLoader] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [total, setTotal] = useState(0);
   const [deposit, setDeposit] = useState(0);
@@ -222,7 +216,7 @@ const BankAppProvider = ({ children }) => {
 
       console.log(data.user.uid);
 
-      setButtonLoader(true);
+      // setButtonLoader(true);
 
       history.push('/loginState');
 
@@ -235,7 +229,7 @@ const BankAppProvider = ({ children }) => {
       });
 
       setTimeout(() => {
-        setButtonLoader(false);
+        // setButtonLoader(false);
         history.push('/profile');
       }, 1500);
     } catch (error) {
@@ -244,11 +238,11 @@ const BankAppProvider = ({ children }) => {
       //   type: true,
       //   msg: 'Failed To Login Try Again!!',
       // });
-      setButtonLoader(true);
+      // setButtonLoader(true);
 
-      setTimeout(() => {
-        setButtonLoader(false);
-      }, 3000);
+      // setTimeout(() => {
+      //   setButtonLoader(false);
+      // }, 3000);
     }
   };
 
@@ -309,6 +303,9 @@ const BankAppProvider = ({ children }) => {
       await updateDoc(transferRef, {
         transactions: depositorPayload,
       });
+
+      transferNum.current.value = '';
+      transferAmount.current.value = '';
     }
   };
 
@@ -333,6 +330,8 @@ const BankAppProvider = ({ children }) => {
       await updateDoc(loanReference, {
         transactions: loanPayload,
       });
+
+      loanRef.current.value = '';
     }
   };
 
