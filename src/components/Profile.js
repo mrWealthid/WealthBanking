@@ -5,7 +5,6 @@ import {
   FaArrowDown,
   FaArrowUp,
   FaSearch,
-  FaRecycle,
   FaSyncAlt,
 } from 'react-icons/fa';
 import Transactions from './Transactions';

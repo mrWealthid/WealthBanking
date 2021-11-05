@@ -23,8 +23,6 @@ import {
   onAuthStateChanged,
   signOut,
   signInWithEmailAndPassword,
-  deleteUser,
-  getAuth,
 } from 'firebase/auth';
 import { generateAccNums, createUserStore } from '../components/Utils';
 
