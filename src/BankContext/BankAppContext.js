@@ -14,6 +14,7 @@ import {
   query,
   serverTimestamp,
   updateDoc,
+  deleteDoc,
 } from 'firebase/firestore';
 import { useHistory } from 'react-router-dom';
 import { auth, db } from '../firebase-config';
@@ -22,6 +23,8 @@ import {
   onAuthStateChanged,
   signOut,
   signInWithEmailAndPassword,
+  deleteUser,
+  getAuth,
 } from 'firebase/auth';
 import { generateAccNums, createUserStore } from '../components/Utils';
 
@@ -246,7 +249,7 @@ const BankAppProvider = ({ children }) => {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     history.push('/Logout');
 
     setTimeout(() => {
@@ -337,11 +340,18 @@ const BankAppProvider = ({ children }) => {
 
   const handleCloseAccount = async (e) => {
     e.preventDefault();
-    if (
-      userDetails.accountNumber === Number(closeUser.current.value) &&
-      closeUserPin.current.value === users.email
-    ) {
-      console.log('correct');
+
+    try {
+      if (
+        userDetails.accountNumber === Number(closeUser.current.value) &&
+        closeUserPin.current.value === users.email
+      ) {
+        await deleteDoc(doc(collectionRef, users.uid));
+
+        users.delete();
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
