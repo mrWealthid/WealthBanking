@@ -8,8 +8,8 @@ const Signup = () => {
     handleChangeRegister,
     register,
     confirmFields,
-    // type,
-    // msg,
+    type,
+    msg,
     buttonLoader,
   } = useBankContext();
 
@@ -21,10 +21,9 @@ const Signup = () => {
           onSubmit={handleSignup}
         >
           <p className='text-2xl'> Sign Up</p>
-          {/* <p className='text-2xl'>Register</p>
-        {type ? (
-          <p className='text-white bg-red-400 p-2 rounded'>{msg}</p>
-        ) : null} */}
+          {type ? (
+            <p className='text-red-900  animate-slideIn p-2 rounded'>{msg}</p>
+          ) : null}
           <div className='flex item-center w-full gap-4'>
             <input
               type='text'
@@ -43,24 +42,6 @@ const Signup = () => {
               className='my-2 block w-full p-2 rounded-md outline-none bg-gray-100'
             />
           </div>
-          {/* <div className='flex item-center w-full gap-4'>
-            <input
-              type='text'
-              placeholder='email'
-              value={register.email}
-              name='email'
-              onChange={handleChangeRegister}
-              className='my-2 block w-full p-2 rounded-md outline-none bg-gray-100'
-            />
-            <input
-              type='text'
-              placeholder='email'
-              value={register.email}
-              name='email'
-              onChange={handleChangeRegister}
-              className='my-2 block w-full p-2 rounded-md outline-none bg-gray-100'
-            />
-          </div> */}
           <div className='flex item-center w-full gap-4'>
             <input
               type='text'

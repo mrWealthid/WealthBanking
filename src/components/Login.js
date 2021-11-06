@@ -10,8 +10,8 @@ const Login = () => {
     password,
     confirmFields,
     buttonLoader,
-    // type,
-    // msg,
+    type,
+    msg,
   } = useBankContext();
 
   return (
@@ -23,9 +23,9 @@ const Login = () => {
         >
           <p className='text-2xl'> Login</p>
 
-          {/* {type ? (
-          <p className='text-white bg-red-400 p-2 rounded'>{msg}</p>
-        ) : null} */}
+          {type ? (
+            <p className='text-red-800 animate-slideIn p-2 '>{msg}</p>
+          ) : null}
 
           <input
             type='email'

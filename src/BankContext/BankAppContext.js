@@ -47,7 +47,27 @@ const BankAppProvider = ({ children }) => {
   const [userDetails, setUserDetails] = useState({});
 
   // const [resetEmail, setResetEmail] = useState('');
-  // const [confirmFields, setConfirmFields] = useState(true);
+  const [confirmFields, setConfirmFields] = useState(true);
+
+  const [alert, setAlert] = useState({
+    type: false,
+    msg: '',
+  });
+
+  const [transferError, setTransferError] = useState({
+    type: true,
+    msg: '',
+  });
+
+  const [loanAlert, setLoanAlert] = useState({
+    type: true,
+    msg: '',
+  });
+
+  const [closeAlert, setCloseAlert] = useState({
+    type: true,
+    msg: '',
+  });
 
   // const [buttonLoader, setButtonLoader] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -66,6 +86,18 @@ const BankAppProvider = ({ children }) => {
   const data = 'wealth';
 
   const collectionRef = collection(db, 'Accounts');
+
+  //clearAlert
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setAlert({ ...alert, type: false });
+      setCloseAlert({ ...closeAlert, type: false });
+      setLoanAlert({ ...loanAlert, type: false });
+      setTransferError({ ...transferError, type: false });
+    }, 3000);
+    return () => clearTimeout(timeout);
+  }, [alert, closeAlert, transferError, loanAlert]);
 
   //To order by timestamp
   useEffect(() => {
@@ -131,22 +163,67 @@ const BankAppProvider = ({ children }) => {
   }, [userDetails]);
 
   //Login
-  // useEffect(() => {
-  //   if (login.email !== '' && login.password !== '') {
-  //     setConfirmFields(false);
-  //   } else {
-  //     setConfirmFields(true);
-  //   }
-  // }, [login.email, login.password]);
+  useEffect(() => {
+    if (login.email !== '' && login.password !== '') {
+      setConfirmFields(false);
+    } else {
+      setConfirmFields(true);
+    }
+  }, [login.email, login.password]);
 
-  //Register
-  // useEffect(() => {
-  //   if (register.email !== '' && register.password !== '') {
-  //     setConfirmFields(false);
-  //   } else {
-  //     setConfirmFields(true);
-  //   }
-  // }, [register.email, register.password]);
+  const errorChecker = ({ code }) => {
+    if (code === 'auth/email-already-in-use') {
+      setAlert({ type: true, msg: 'Email Already In Use' });
+
+      // const { message, code } = error;
+      // console.log(message);
+      // console.log(code);
+      // setAlert({
+      //   type: true,
+      //   msg:
+      //     code === 'auth/email-already-in-use'
+      //       ? 'Email Already In Use'
+      //       : code === 'auth/network-request-failed'
+      //       ? 'Check Your Network Connection'
+      //       : '',
+      // });
+    } else if (code === 'auth/network-request-failed') {
+      setAlert({ type: true, msg: 'Please Check Your Network Connection...' });
+
+      //transfer limit
+      //same account transfer
+      //Wrong account
+      //loan limit
+    } else if (code === 'auth/weak-password') {
+      setAlert({
+        type: true,
+        msg: 'Password should be at least 6 characters',
+      });
+    } else if (code === 'auth/wrong-password') {
+      setAlert({
+        type: true,
+        msg: 'Wrong Credentials',
+      });
+    } else if (code === 'auth/user-not-found') {
+      setAlert({
+        type: true,
+        msg: "Account doesn't exist ",
+      });
+    }
+  };
+  // Register;
+  useEffect(() => {
+    if (
+      register.email !== '' &&
+      register.password !== '' &&
+      register.firstname !== '' &&
+      register.lastname
+    ) {
+      setConfirmFields(false);
+    } else {
+      setConfirmFields(true);
+    }
+  }, [register.email, register.password]);
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -188,11 +265,15 @@ const BankAppProvider = ({ children }) => {
         password: '',
       });
 
+      setConfirmFields(true);
+
       setTimeout(() => {
         history.push('/profile');
       }, 4000);
     } catch (error) {
+      errorChecker(error);
       console.log(error);
+      setConfirmFields(false);
     }
   };
 
@@ -229,12 +310,15 @@ const BankAppProvider = ({ children }) => {
         password: '',
       });
 
+      setConfirmFields(true);
       setTimeout(() => {
         // setButtonLoader(false);
         history.push('/profile');
       }, 1500);
     } catch (error) {
       console.log(error.message);
+      errorChecker(error);
+      setConfirmFields(false);
       // setAlert({
       //   type: true,
       //   msg: 'Failed To Login Try Again!!',
@@ -258,6 +342,18 @@ const BankAppProvider = ({ children }) => {
 
   const handleModal = () => {
     setIsOpen(!isOpen);
+  };
+  const transferCheck = (find, user, transfer, total) => {
+    if (find === undefined) {
+      return "user doesn't exist";
+    }
+    if (find.accountNumber == user.accountNumber) {
+      return "You can't transfer to self";
+    } else if (Number(transfer.current.value) > total) {
+      return 'Insufficient Account';
+    } else {
+      return 'Check Network Connection';
+    }
   };
 
   const handleTransfers = async (e) => {
@@ -307,13 +403,24 @@ const BankAppProvider = ({ children }) => {
 
       transferNum.current.value = '';
       transferAmount.current.value = '';
+    } else {
+      setTransferError({
+        type: true,
+        msg: transferCheck(findAccount, userDetails, transferAmount, total),
+        // msg:
+        //   findAccount.accountNumber == userDetails.accountNumber
+        //     ? "You can't transfer to self"
+        //     : Number(transferAmount.current.value) > total
+        //     ? 'Insufficient Account'
+        //     : 'Check Network Connection',
+      });
     }
   };
 
   const handleLoans = async (e) => {
     e.preventDefault();
 
-    if (deposit > 0.5 * total) {
+    if (deposit > 0.5 * total && Number(loanRef.current.value) < total * 2) {
       const loanReference = doc(db, 'Accounts', users.uid);
 
       //updating an array in a document field
@@ -333,6 +440,14 @@ const BankAppProvider = ({ children }) => {
       });
 
       loanRef.current.value = '';
+    } else {
+      setLoanAlert({
+        type: true,
+        msg:
+          Number(loanRef.current.value) > total * 2
+            ? "You aren't qualified for this Loan"
+            : 'Check Network Connection',
+      });
     }
   };
 
@@ -347,6 +462,15 @@ const BankAppProvider = ({ children }) => {
         await deleteDoc(doc(collectionRef, users.uid));
 
         users.delete();
+      } else {
+        setCloseAlert({
+          type: true,
+          msg:
+            userDetails.accountNumber !== Number(closeUser.current.value) &&
+            closeUserPin.current.value !== users.email
+              ? 'Wrong Credentials'
+              : 'Check Network connection',
+        });
       }
     } catch (error) {
       console.log(error);
@@ -361,6 +485,7 @@ const BankAppProvider = ({ children }) => {
         handleSignup,
         register,
         ...login,
+        ...alert,
         users,
         handleChangeLogin,
         handleChangeRegister,
@@ -380,6 +505,10 @@ const BankAppProvider = ({ children }) => {
         closeUserPin,
         handleLoans,
         handleCloseAccount,
+        confirmFields,
+        transferError,
+        loanAlert,
+        closeAlert,
       }}
     >
       {children}

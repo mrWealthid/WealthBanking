@@ -13,7 +13,6 @@ const Profile = () => {
   const {
     userDetails,
     total,
-
     handleTransfers,
     transferAmount,
     transferNum,
@@ -24,6 +23,9 @@ const Profile = () => {
     closeUserPin,
     handleLoans,
     handleCloseAccount,
+    transferError,
+    loanAlert,
+    closeAlert,
   } = useBankContext();
 
   const [counter, setCounter] = useState(0);
@@ -136,10 +138,14 @@ const Profile = () => {
                     className='flex flex-col gap-2 animate-slideIn'
                     onSubmit={handleTransfers}
                   >
+                    {transferError.type ? (
+                      <p className='text-center text-sm'>{transferError.msg}</p>
+                    ) : null}
                     <div className='flex'>
                       <label htmlFor='number' className='w-40'>
                         Account Number
                       </label>
+
                       <input
                         className='w-100 rounded-xl focus:outline-none text-black focus:ring-2 focus:ring-gray-200 focus:border-transparent py-0 px-2'
                         type='text'
@@ -181,10 +187,14 @@ const Profile = () => {
                     className='flex flex-col gap-2 animate-slideOut'
                     onSubmit={handleLoans}
                   >
+                    {loanAlert.type ? (
+                      <p className='text-center text-sm'>{loanAlert.msg}</p>
+                    ) : null}
                     <div className='flex'>
                       <label htmlFor='amount' className='w-40'>
                         Amount
                       </label>
+
                       <input
                         className='w-100 rounded-xl focus:outline-none text-black  focus:ring-2 focus:ring-gray-200 focus:border-transparent py-0 px-2'
                         type='text'
@@ -213,6 +223,9 @@ const Profile = () => {
                     className='flex flex-col gap-2 animate-slideIn'
                     onSubmit={handleCloseAccount}
                   >
+                    {closeAlert.type ? (
+                      <p className='text-center text-sm'>{closeAlert.msg}</p>
+                    ) : null}
                     <div className='flex'>
                       <label className='w-40'>Account Number</label>
                       <input
