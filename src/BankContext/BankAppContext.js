@@ -223,7 +223,12 @@ const BankAppProvider = ({ children }) => {
     } else {
       setConfirmFields(true);
     }
-  }, [register.email, register.password]);
+  }, [
+    register.email,
+    register.firstname,
+    register.lastname,
+    register.password,
+  ]);
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -347,7 +352,7 @@ const BankAppProvider = ({ children }) => {
     if (find === undefined) {
       return "user doesn't exist";
     }
-    if (find.accountNumber == user.accountNumber) {
+    if (find.accountNumber === user.accountNumber) {
       return "You can't transfer to self";
     } else if (Number(transfer.current.value) > total) {
       return 'Insufficient Account';
