@@ -25,16 +25,20 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { generateAccNums, createUserStore } from '../components/Utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { isLoggedIn, isLoggedOut, logIn } from '../actions';
 
 const BankAppContext = createContext();
 
 const BankAppProvider = ({ children }) => {
+  const dispatch = useDispatch();
   const [register, setRegister] = useState({
     firstname: '',
     lastname: '',
     email: '',
     password: '',
   });
+
   const [login, setLogin] = useState({
     email: '',
     password: '',
@@ -43,7 +47,7 @@ const BankAppProvider = ({ children }) => {
   const [accounts, setAccounts] = useState([]);
 
   // const [loading, setLoading] = useState(true);
-  const [users, setUsers] = useState({});
+  // const [users, setUsers] = useState({});
   const [userDetails, setUserDetails] = useState({});
 
   // const [resetEmail, setResetEmail] = useState('');
@@ -121,18 +125,21 @@ const BankAppProvider = ({ children }) => {
   // get currrent logged in user
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUsers(currentUser);
+      // setUsers(currentUser);
+      dispatch(isLoggedIn(currentUser));
     });
 
     return unsubscribe;
-  }, []);
+  }, [dispatch]);
+
+  const authenticated = useSelector((state) => state.Authentication);
 
   //Get current signed in  user's firestore
   useEffect(() => {
-    if (users) {
-      setUserDetails(accounts.find((item) => item.id === users.uid));
+    if (authenticated) {
+      setUserDetails(accounts.find((item) => item.id === authenticated.uid));
     }
-  }, [accounts, users]);
+  }, [accounts, authenticated]);
 
   useEffect(() => {
     setTotal(
@@ -230,6 +237,8 @@ const BankAppProvider = ({ children }) => {
     register.password,
   ]);
 
+  //using redux useSelector
+
   const handleSignup = async (e) => {
     e.preventDefault();
 
@@ -241,6 +250,15 @@ const BankAppProvider = ({ children }) => {
       );
 
       const { uid } = data.user;
+
+      dispatch(
+        logIn({
+          email: data.user.email,
+          uid: data.user.uid,
+          displayName: data.user.displayName,
+          photoUrl: data.user.photoURL,
+        })
+      );
 
       const docRef = doc(collectionRef, uid);
       const payload = {
@@ -303,6 +321,15 @@ const BankAppProvider = ({ children }) => {
 
       console.log(data.user.uid);
 
+      dispatch(
+        logIn({
+          email: data.user.email,
+          uid: data.user.uid,
+          displayName: data.user.displayName,
+          photoUrl: data.user.photoURL,
+        })
+      );
+
       // setButtonLoader(true);
 
       history.push('/loginState');
@@ -340,6 +367,7 @@ const BankAppProvider = ({ children }) => {
     history.push('/Logout');
 
     setTimeout(() => {
+      dispatch(isLoggedOut());
       signOut(auth);
       history.push('/login');
     }, 3000);
@@ -374,7 +402,7 @@ const BankAppProvider = ({ children }) => {
     ) {
       const recieverRef = doc(db, 'Accounts', findAccount.id);
 
-      const transferRef = doc(db, 'Accounts', users.uid);
+      const transferRef = doc(db, 'Accounts', authenticated.uid);
 
       //updating an array in a document field
 
@@ -426,7 +454,7 @@ const BankAppProvider = ({ children }) => {
     e.preventDefault();
 
     if (deposit > 0.5 * total && Number(loanRef.current.value) < total * 2) {
-      const loanReference = doc(db, 'Accounts', users.uid);
+      const loanReference = doc(db, 'Accounts', authenticated.uid);
 
       //updating an array in a document field
 
@@ -462,17 +490,17 @@ const BankAppProvider = ({ children }) => {
     try {
       if (
         userDetails.accountNumber === Number(closeUser.current.value) &&
-        closeUserPin.current.value === users.email
+        closeUserPin.current.value === authenticated.email
       ) {
-        await deleteDoc(doc(collectionRef, users.uid));
-
-        users.delete();
+        await deleteDoc(doc(collectionRef, authenticated.uid));
+        authenticated.delete();
+        // users.delete();
       } else {
         setCloseAlert({
           type: true,
           msg:
             userDetails.accountNumber !== Number(closeUser.current.value) &&
-            closeUserPin.current.value !== users.email
+            closeUserPin.current.value !== authenticated.email
               ? 'Wrong Credentials'
               : 'Check Network connection',
         });
@@ -491,7 +519,7 @@ const BankAppProvider = ({ children }) => {
         register,
         ...login,
         ...alert,
-        users,
+
         handleChangeLogin,
         handleChangeRegister,
         handleModal,
@@ -514,6 +542,7 @@ const BankAppProvider = ({ children }) => {
         transferError,
         loanAlert,
         closeAlert,
+        authenticated,
       }}
     >
       {children}

@@ -4,14 +4,19 @@ import './index.css';
 import App from './App';
 import { BankAppProvider } from './BankContext/BankAppContext';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store';
+
 // import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <BankAppProvider>
-        <App />
-      </BankAppProvider>
+      <Provider store={store}>
+        <BankAppProvider>
+          <App />
+        </BankAppProvider>
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

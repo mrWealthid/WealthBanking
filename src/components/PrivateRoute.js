@@ -3,13 +3,13 @@ import { Route, Redirect } from 'react-router-dom';
 import { useBankContext } from '../BankContext/BankAppContext';
 
 function PrivateRoute({ component: Component, ...rest }) {
-  const { users } = useBankContext();
+  const { authenticated } = useBankContext();
 
   return (
     <Route
       {...rest}
       render={(props) =>
-        users ? <Component {...props} /> : <Redirect to='/login' />
+        authenticated ? <Component {...props} /> : <Redirect to='/login' />
       }
     />
   );

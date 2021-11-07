@@ -5,7 +5,7 @@ import Popup from './Popup';
 import { useBankContext } from '../BankContext/BankAppContext';
 
 const Navbar = () => {
-  const { handleModal, users, isOpen, handleLogout } = useBankContext();
+  const { handleModal, authenticated, isOpen, handleLogout } = useBankContext();
   return (
     <div className='bg-gray-700 bg-opacity-50 relative text-white py-6'>
       <div className='w-11/12 mx-auto flex justify-between items-center'>
@@ -27,7 +27,7 @@ const Navbar = () => {
             {' '}
             Home
           </NavLink>
-          {!users ? (
+          {!authenticated ? (
             <NavLink
               className='hover:underline focus:text-yellow-300'
               to='/create'
@@ -42,10 +42,10 @@ const Navbar = () => {
               Profile
             </NavLink>
           )}
-          {users ? (
+          {authenticated ? (
             <p
               className='hover:underline 
-            focus:text-yellow-300'
+            focus:text-yellow-300 cursor-pointer'
               onClick={handleLogout}
             >
               Logout
