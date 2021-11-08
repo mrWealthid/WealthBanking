@@ -26,7 +26,7 @@ import {
 } from 'firebase/auth';
 import { generateAccNums, createUserStore } from '../components/Utils';
 import { useDispatch, useSelector } from 'react-redux';
-import { isLoggedIn, isLoggedOut, logIn } from '../actions';
+import { isLoggedIn, isLoggedOut } from '../actions';
 
 const BankAppContext = createContext();
 
@@ -63,6 +63,7 @@ const BankAppProvider = ({ children }) => {
     msg: '',
   });
 
+  const [transVal, setTransVal] = useState('');
   const [loanAlert, setLoanAlert] = useState({
     type: true,
     msg: '',
@@ -71,6 +72,12 @@ const BankAppProvider = ({ children }) => {
   const [closeAlert, setCloseAlert] = useState({
     type: true,
     msg: '',
+  });
+
+  const [popUp, setpopUp] = useState(false);
+
+  const [selected, setSelected] = useState({
+    type: 1,
   });
 
   // const [buttonLoader, setButtonLoader] = useState(false);
@@ -82,7 +89,7 @@ const BankAppProvider = ({ children }) => {
   const history = useHistory();
 
   const transferAmount = useRef();
-  const transferNum = useRef();
+
   const loanRef = useRef();
   const closeUser = useRef();
   const closeUserPin = useRef();
@@ -169,6 +176,34 @@ const BankAppProvider = ({ children }) => {
     );
   }, [userDetails]);
 
+  // useEffect(() => {
+  //   if (selected.type === 1) {
+  //     setUserDetails(accounts.find((item) => item.id === authenticated.uid));
+  //   }
+  // }, [accounts, authenticated, selected.type]);
+
+  // useEffect(() => {
+  //   if (selected.type === 2) {
+  //     setUserDetails({
+  //       ...userDetails,
+  //       transactions: userDetails?.transactions?.filter(
+  //         (item) => item.amount > 0
+  //       ),
+  //     });
+  //   }
+  // }, [userDetails, selected.type]);
+
+  // useEffect(() => {
+  //   if (selected.type === 3) {
+  //     setUserDetails({
+  //       ...userDetails,
+  //       transactions: userDetails?.transactions?.filter(
+  //         (item) => item.amount < 0
+  //       ),
+  //     });
+  //   }
+  // }, [userDetails, selected.type]);
+
   //Login
   useEffect(() => {
     if (login.email !== '' && login.password !== '') {
@@ -181,26 +216,8 @@ const BankAppProvider = ({ children }) => {
   const errorChecker = ({ code }) => {
     if (code === 'auth/email-already-in-use') {
       setAlert({ type: true, msg: 'Email Already In Use' });
-
-      // const { message, code } = error;
-      // console.log(message);
-      // console.log(code);
-      // setAlert({
-      //   type: true,
-      //   msg:
-      //     code === 'auth/email-already-in-use'
-      //       ? 'Email Already In Use'
-      //       : code === 'auth/network-request-failed'
-      //       ? 'Check Your Network Connection'
-      //       : '',
-      // });
     } else if (code === 'auth/network-request-failed') {
       setAlert({ type: true, msg: 'Please Check Your Network Connection...' });
-
-      //transfer limit
-      //same account transfer
-      //Wrong account
-      //loan limit
     } else if (code === 'auth/weak-password') {
       setAlert({
         type: true,
@@ -237,7 +254,9 @@ const BankAppProvider = ({ children }) => {
     register.password,
   ]);
 
-  //using redux useSelector
+  const selectChange = (e) => {
+    setSelected({ ...selected, type: e.target.value });
+  };
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -389,7 +408,7 @@ const BankAppProvider = ({ children }) => {
   const handleTransfers = async (e) => {
     e.preventDefault();
     const findAccount = accounts.find(
-      (acc) => acc.accountNumber === Number(transferNum.current.value)
+      (acc) => acc.accountNumber === Number(transVal)
     );
 
     if (
@@ -430,9 +449,9 @@ const BankAppProvider = ({ children }) => {
       await updateDoc(transferRef, {
         transactions: depositorPayload,
       });
-
-      transferNum.current.value = '';
+      setTransVal('');
       transferAmount.current.value = '';
+      setpopUp(false);
     } else {
       setTransferError({
         type: true,
@@ -468,8 +487,8 @@ const BankAppProvider = ({ children }) => {
       await updateDoc(loanReference, {
         transactions: loanPayload,
       });
-
       loanRef.current.value = '';
+      setpopUp(false);
     } else {
       setLoanAlert({
         type: true,
@@ -486,7 +505,7 @@ const BankAppProvider = ({ children }) => {
 
     try {
       if (
-        userDetails.accountNumber === Number(closeUser.current.value) &&
+        userDetails.accountNumber === Number(transVal) &&
         closeUserPin.current.value === authenticated.email
       ) {
         await deleteDoc(doc(collectionRef, authenticated.uid));
@@ -497,7 +516,7 @@ const BankAppProvider = ({ children }) => {
         setCloseAlert({
           type: true,
           msg:
-            userDetails.accountNumber !== Number(closeUser.current.value) &&
+            userDetails.accountNumber !== Number(transVal) &&
             closeUserPin.current.value !== authenticated.email
               ? 'Wrong Credentials'
               : 'Check Network connection',
@@ -517,7 +536,8 @@ const BankAppProvider = ({ children }) => {
         register,
         ...login,
         ...alert,
-
+        popUp,
+        setpopUp,
         handleChangeLogin,
         handleChangeRegister,
         handleModal,
@@ -527,7 +547,7 @@ const BankAppProvider = ({ children }) => {
         total,
         accounts,
         transferAmount,
-        transferNum,
+        transVal,
         handleTransfers,
         deposit,
         withdrawal,
@@ -541,6 +561,9 @@ const BankAppProvider = ({ children }) => {
         loanAlert,
         closeAlert,
         authenticated,
+        setTransVal,
+        selected,
+        selectChange,
       }}
     >
       {children}

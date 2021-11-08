@@ -111,6 +111,11 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.check {
+  top: 89px;
+  right: 24px;
+}
 .App,
 .cap {
   /* background-color: #f0f4fd; */

@@ -3,8 +3,8 @@ import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
 
 const Transactions = ({ Depositor, amount, account, time }) => {
   function convertDate(times) {
-    const currentDate = new Date(times).toLocaleTimeString();
-    return currentDate.slice(0, 4) + ' ' + currentDate.split(':')[2].slice(3);
+    const currentDate = new Date(times).toTimeString();
+    return currentDate.slice(0, 5);
   }
   return (
     <div className='flex justify-between font-extralight animate-slideIn py-2 px-1 text-xs hover:bg-gray-200 transition duration-200 ease-in-out hover:text-black hover: rounded-lg'>
