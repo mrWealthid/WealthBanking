@@ -251,14 +251,11 @@ const BankAppProvider = ({ children }) => {
 
       const { uid } = data.user;
 
-      dispatch(
-        logIn({
-          email: data.user.email,
-          uid: data.user.uid,
-          displayName: data.user.displayName,
-          photoUrl: data.user.photoURL,
-        })
-      );
+      // dispatch(
+      //   logIn({
+      //     ...data,
+      //   })
+      // );
 
       const docRef = doc(collectionRef, uid);
       const payload = {
@@ -321,14 +318,14 @@ const BankAppProvider = ({ children }) => {
 
       console.log(data.user.uid);
 
-      dispatch(
-        logIn({
-          email: data.user.email,
-          uid: data.user.uid,
-          displayName: data.user.displayName,
-          photoUrl: data.user.photoURL,
-        })
-      );
+      // dispatch(
+      //   logIn({
+      //     email: data.user.email,
+      //     uid: data.user.uid,
+      //     displayName: data.user.displayName,
+      //     photoUrl: data.user.photoURL,
+      //   })
+      // );
 
       // setButtonLoader(true);
 
@@ -494,6 +491,7 @@ const BankAppProvider = ({ children }) => {
       ) {
         await deleteDoc(doc(collectionRef, authenticated.uid));
         authenticated.delete();
+
         // users.delete();
       } else {
         setCloseAlert({

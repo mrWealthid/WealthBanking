@@ -36,12 +36,14 @@ const Profile = () => {
 
   const [totalWithdrawalCount, setTotalWithdrawalCount] = useState(0);
 
-  const [transfer, setTransfer] = useState(false);
+  const [popUp, setpopUp] = useState(false);
   const [loan, setLoan] = useState(false);
   const [closeAcc, setCloseAcc] = useState(false);
 
-  const [reversal, setReversal] = useState(false);
+  const [sorted, setsorted] = useState(false);
   const [input, setInput] = useState('');
+
+  const [type, setType] = useState('');
 
   const value = 1000;
 
@@ -100,11 +102,7 @@ const Profile = () => {
   return (
     <div className='flex flex-col animate-slideOut  w-11/12 mx-auto'>
       {userDetails && (
-        <div
-          className={`${
-            userDetails ? 'opacity-100' : 'opacity- 0'
-          } px-4  transition-opacity my-4 duration-1000`}
-        >
+        <div className={`${popUp && 'filter blur'} px-4  my-4`}>
           <p className='text-xl'>
             Welcome Back,{' '}
             <span className='text-gray-900'>{userDetails.name}!</span>
@@ -125,131 +123,38 @@ const Profile = () => {
             </div>
           </div>
 
-          <section className='flex flex-row-reverse gap-5 justify-between'>
+          <section className='flex flex-row-reverse gap-5 justify-between relative'>
             <section className='flex w-3/12 sticky top-3 h-full rounded-lg flex-col w-5/12 text-gray-200 gap-3'>
               <section
                 className='transfer  flex flex-col gap-2  justify-center bg-blend-screen bg-contain h-40 cap rounded-lg p-5'
-                onMouseEnter={() => setTransfer(!transfer)}
+                onClick={() => {
+                  setpopUp(!popUp);
+
+                  setType('transfer');
+                }}
               >
                 <p> Make A Transfer Today</p>
-
-                {transfer ? (
-                  <form
-                    className='flex flex-col gap-2 animate-slideIn'
-                    onSubmit={handleTransfers}
-                  >
-                    {transferError.type ? (
-                      <p className='text-center text-sm'>{transferError.msg}</p>
-                    ) : null}
-                    <div className='flex'>
-                      <label htmlFor='number' className='w-40'>
-                        Account Number
-                      </label>
-
-                      <input
-                        className='w-100 rounded-xl focus:outline-none text-black focus:ring-2 focus:ring-gray-200 focus:border-transparent py-0 px-2'
-                        type='text'
-                        name='number'
-                        ref={transferNum}
-                        required
-                      />
-                    </div>
-
-                    <div className='flex'>
-                      <label className='w-40' htmlFor='name'>
-                        Amount
-                      </label>
-                      <input
-                        className='w-100 rounded-xl focus:outline-none text-black  focus:ring-2 focus:ring-gray-200 focus:border-transparent py-0 px-2'
-                        type='text'
-                        name='amount'
-                        ref={transferAmount}
-                        required
-                      />
-                    </div>
-                    <div className='flex justify-end'>
-                      <button className='bg-white text-black w-1/6 p-1 rounded-lg px-3 '>
-                        Send
-                      </button>
-                    </div>
-                  </form>
-                ) : null}
               </section>
 
               <section
                 className='loan cap bg-blend-screen flex flex-col gap-2  justify-center bg-contain h-40 rounded-lg p-5'
-                onMouseEnter={() => setLoan(!loan)}
+                onClick={() => {
+                  setpopUp(!popUp);
+                  setType('loan');
+                }}
               >
                 <p>Request Loan</p>
-
-                {loan ? (
-                  <form
-                    className='flex flex-col gap-2 animate-slideOut'
-                    onSubmit={handleLoans}
-                  >
-                    {loanAlert.type ? (
-                      <p className='text-center text-sm'>{loanAlert.msg}</p>
-                    ) : null}
-                    <div className='flex'>
-                      <label htmlFor='amount' className='w-40'>
-                        Amount
-                      </label>
-
-                      <input
-                        className='w-100 rounded-xl focus:outline-none text-black  focus:ring-2 focus:ring-gray-200 focus:border-transparent py-0 px-2'
-                        type='text'
-                        name='amount'
-                        ref={loanRef}
-                        required
-                      />
-                    </div>
-                    <div className='flex justify-end'>
-                      <button className='bg-white text-black w-1/6 p-1 rounded-lg px-3 '>
-                        Send
-                      </button>
-                    </div>
-                  </form>
-                ) : null}
               </section>
 
               <section
                 className='close bg-contain gap-2  flex flex-col  justify-center cap h-40 rounded-lg p-5'
-                onMouseEnter={() => setCloseAcc(!closeAcc)}
+                onClick={() => {
+                  setpopUp(!popUp);
+
+                  setType('close');
+                }}
               >
                 <p>Close Account</p>
-
-                {closeAcc ? (
-                  <form
-                    className='flex flex-col gap-2 animate-slideIn'
-                    onSubmit={handleCloseAccount}
-                  >
-                    {closeAlert.type ? (
-                      <p className='text-center text-sm'>{closeAlert.msg}</p>
-                    ) : null}
-                    <div className='flex'>
-                      <label className='w-40'>Account Number</label>
-                      <input
-                        className='w-100 rounded-xl focus:outline-none text-black  focus:ring-2 focus:ring-gray-200 focus:border-transparent py-0 px-2'
-                        type='text'
-                        ref={closeUser}
-                      />
-                    </div>
-                    <div className='flex'>
-                      <label className='w-40'>Account Email</label>
-                      <input
-                        className='w-100 rounded-xl focus:outline-none text-black  focus:ring-2 focus:ring-gray-200 focus:border-transparent py-0 px-2'
-                        type='text'
-                        ref={closeUserPin}
-                      />
-                    </div>
-
-                    <div className='flex justify-end'>
-                      <button className='bg-white text-black w-1/6 p-1 rounded-lg px-3 '>
-                        Send
-                      </button>
-                    </div>
-                  </form>
-                ) : null}
               </section>
             </section>
 
@@ -272,13 +177,13 @@ const Profile = () => {
 
                 <div
                   className='flex gap-2 bg-gray-50 text-gray-800 cursor-pointer rounded-xl px-2 items-center'
-                  onClick={() => setReversal(!reversal)}
+                  onClick={() => setsorted(!sorted)}
                 >
                   <FaSyncAlt /> sort
                 </div>
               </div>
               <div className='flex flex-col  '>
-                {reversal
+                {sorted
                   ? userDetails.transactions?.length > 0 &&
                     userDetails.transactions
                       .filter((item) =>
@@ -325,6 +230,104 @@ const Profile = () => {
           </section>
         </div>
       )}
+
+      {popUp ? (
+        <section className='flex transact_popup bg-white w-8/12  md:w-6/12   flex-col min-h-70 h-1/2'>
+          <section className='flex p-4'>
+            <div className='flex items-center justify-center  cap w-full h-full'>
+              {type === 'transfer'
+                ? 'Seamless Transfer'
+                : type === 'loan'
+                ? 'Quick Loan in 2 minutes'
+                : 'We will miss you'}
+            </div>
+
+            <form
+              className='flex flex-col gap-2 w-full animate-slideIn'
+              onSubmit={
+                type === 'transfer'
+                  ? handleTransfers
+                  : type === 'loan'
+                  ? handleLoans
+                  : handleCloseAccount
+              }
+            >
+              {type === 'transfer' && transferError.type ? (
+                <p className='text-center text-sm'>{transferError.msg}</p>
+              ) : type === 'loan' && loanAlert.type ? (
+                <p className='text-center text-sm'>{loanAlert.msg}</p>
+              ) : (
+                <p className='text-center text-sm'>{closeAlert.msg}</p>
+              )}
+              {type === 'transfer' || type === 'close' ? (
+                <div className='flex'>
+                  <label htmlFor='number' className='w-40'>
+                    Account Number
+                  </label>
+
+                  <input
+                    className='w-100  focus:outline-none text-black focus:ring-2 focus:ring-gray-200 focus:border-transparent py-1 px-2'
+                    type='text'
+                    name='number'
+                    ref={type === 'transfer' ? transferNum : closeUser}
+                    required
+                  />
+                </div>
+              ) : null}
+              {/* 
+              <div className='flex'>
+                <label htmlFor='number' className='w-40'>
+                  Account Name
+                </label>
+
+                <input
+                  className='w-100  focus:outline-none text-black focus:ring-2 focus:ring-gray-200 focus:border-transparent py-1 px-2'
+                  type='text'
+                  name='number'
+                  ref={transferNum}
+                  required
+                />
+              </div> */}
+
+              {type === 'close' && (
+                <div className='flex'>
+                  <label htmlFor='number' className='w-40'>
+                    Email
+                  </label>
+
+                  <input
+                    className='w-100  focus:outline-none text-black focus:ring-2 focus:ring-gray-200 focus:border-transparent py-1 px-2'
+                    type='email'
+                    name='email'
+                    ref={closeUserPin}
+                    required
+                  />
+                </div>
+              )}
+
+              {type === 'transfer' || type === 'loan' ? (
+                <div className='flex'>
+                  <label className='w-40' htmlFor='name'>
+                    Amount
+                  </label>
+                  <input
+                    className='w-100  focus:outline-none text-black  focus:ring-2 focus:ring-gray-200 focus:border-transparent py-1 px-2'
+                    type='text'
+                    name='amount'
+                    ref={type === 'loan' ? loanRef : transferAmount}
+                    required
+                  />
+                </div>
+              ) : null}
+              <div className='flex justify-end'>
+                <button className='bg-white text-black w-1/6 p-1 rounded-lg px-3 '>
+                  Send
+                </button>
+              </div>
+            </form>
+          </section>
+        </section>
+      ) : null}
     </div>
   );
 };

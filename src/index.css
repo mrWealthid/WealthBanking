@@ -105,6 +105,12 @@
   background-color: rgba(255, 255, 255, 0.4);
 }
 
+.transact_popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .App,
 .cap {
   /* background-color: #f0f4fd; */
