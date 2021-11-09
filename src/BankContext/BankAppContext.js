@@ -26,7 +26,13 @@ import {
 } from 'firebase/auth';
 import { generateAccNums, createUserStore } from '../components/Utils';
 import { useDispatch, useSelector } from 'react-redux';
-import { isLoggedIn, isLoggedOut } from '../actions';
+import {
+  isLoggedIn,
+  isLoggedOut,
+  getDebits,
+  getCredits,
+  getAll,
+} from '../actions';
 
 const BankAppContext = createContext();
 
@@ -49,6 +55,8 @@ const BankAppProvider = ({ children }) => {
   // const [loading, setLoading] = useState(true);
   // const [users, setUsers] = useState({});
   const [userDetails, setUserDetails] = useState({});
+
+  // const [usersData, setUsersData] = useState({});
 
   // const [resetEmail, setResetEmail] = useState('');
   const [confirmFields, setConfirmFields] = useState(true);
@@ -139,8 +147,10 @@ const BankAppProvider = ({ children }) => {
     return unsubscribe;
   }, [dispatch]);
 
+  //pulling from redux store
   const authenticated = useSelector((state) => state.Authentication);
 
+  const userData = useSelector((state) => state.userData);
   //Get current signed in  user's firestore
   useEffect(() => {
     if (authenticated) {
@@ -176,33 +186,37 @@ const BankAppProvider = ({ children }) => {
     );
   }, [userDetails]);
 
-  // useEffect(() => {
-  //   if (selected.type === 1) {
-  //     setUserDetails(accounts.find((item) => item.id === authenticated.uid));
-  //   }
-  // }, [accounts, authenticated, selected.type]);
+  useEffect(() => {
+    if (Number(selected.type) === 2) {
+      dispatch(
+        getDebits({
+          ...userDetails,
+          transactions: userDetails?.transactions?.filter(
+            (item) => item.amount < 0
+          ),
+        })
+      );
+    }
+  }, [selected.type, userDetails, dispatch]);
 
-  // useEffect(() => {
-  //   if (selected.type === 2) {
-  //     setUserDetails({
-  //       ...userDetails,
-  //       transactions: userDetails?.transactions?.filter(
-  //         (item) => item.amount > 0
-  //       ),
-  //     });
-  //   }
-  // }, [userDetails, selected.type]);
+  useEffect(() => {
+    if (Number(selected.type) === 3) {
+      dispatch(
+        getCredits({
+          ...userDetails,
+          transactions: userDetails?.transactions?.filter(
+            (item) => item.amount > 0
+          ),
+        })
+      );
+    }
+  }, [selected.type, userDetails, dispatch]);
 
-  // useEffect(() => {
-  //   if (selected.type === 3) {
-  //     setUserDetails({
-  //       ...userDetails,
-  //       transactions: userDetails?.transactions?.filter(
-  //         (item) => item.amount < 0
-  //       ),
-  //     });
-  //   }
-  // }, [userDetails, selected.type]);
+  useEffect(() => {
+    if (Number(selected.type) === 1) {
+      dispatch(getAll({ ...userDetails }));
+    }
+  }, [userDetails, selected.type, dispatch]);
 
   //Login
   useEffect(() => {
@@ -564,6 +578,8 @@ const BankAppProvider = ({ children }) => {
         setTransVal,
         selected,
         selectChange,
+        userData,
+        // getAllCredit,
       }}
     >
       {children}

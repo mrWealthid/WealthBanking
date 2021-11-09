@@ -15,13 +15,14 @@ const Profile = () => {
   const {
     userDetails,
     total,
-    // selectChange,
-    // selected,
+    selectChange,
+    selected,
     deposit,
     withdrawal,
 
     popUp,
     setpopUp,
+    userData,
   } = useBankContext();
 
   const [counter, setCounter] = useState(0);
@@ -167,17 +168,17 @@ const Profile = () => {
                     <input type='checkbox' />
                   </label> */}
 
-                  {/* <select
+                  <select
                     className='py-0 w-28'
                     value={selected.type}
                     onChange={selectChange}
                   >
                     <option value={1}>All</option>
 
-                    <option value={3}>Debit</option>
+                    <option value={2}>Debit</option>
 
-                    <option value={2}>Credit</option>
-                  </select> */}
+                    <option value={3}>Credit</option>
+                  </select>
                 </div>
               </section>
               <section className='bg-gray-800 cap bg-blend-color-burn rounded-lg bg-contain flex flex-col gap-3 p-4 text-white'>
@@ -206,16 +207,16 @@ const Profile = () => {
                 </div>
                 <div className='flex flex-col  '>
                   {sorted
-                    ? userDetails.transactions?.length > 0 &&
-                      userDetails.transactions
+                    ? userData.transactions?.length > 0 &&
+                      userData.transactions
                         .filter((item) =>
                           item.Depositor.includes(capitalize(input))
                         )
                         .map((item, index) => (
                           <Transactions key={index} {...item} />
                         ))
-                    : userDetails.transactions?.length > 0 &&
-                      userDetails.transactions
+                    : userData.transactions?.length > 0 &&
+                      userData.transactions
                         .filter((item) =>
                           item.Depositor.includes(capitalize(input))
                         )

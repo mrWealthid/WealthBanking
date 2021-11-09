@@ -1,19 +1,17 @@
-const UsersReducer = (state, action) => {
+const UsersReducer = (usersData = {}, action) => {
   switch (action.type) {
-    case LOGIN:
-      return (state = true);
-      break;
+    case 'DEBIT':
+      return (usersData = action.payload);
 
-    case LOGOUT:
-      return (state = false);
-      break;
+    case 'CREDIT':
+      return (usersData = action.payload);
 
-    case USERS:
-      return (state = action.payload);
-      break;
+    case 'ALL':
+      return (usersData = action.payload);
 
     default:
-      return state;
-      break;
+      return usersData;
   }
 };
+
+export default UsersReducer;

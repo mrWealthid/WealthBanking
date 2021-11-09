@@ -18,9 +18,23 @@ export const isLoggedOut = () => {
   };
 };
 
-export const selectUser = (payload) => {
+export const getDebits = (payload) => {
   return {
-    type: 'Users',
+    type: 'DEBIT',
+    payload: payload,
+  };
+};
+
+export const getCredits = (payload) => {
+  return {
+    type: 'CREDIT',
+    payload: payload,
+  };
+};
+
+export const getAll = (payload) => {
+  return {
+    type: 'ALL',
     payload: payload,
   };
 };

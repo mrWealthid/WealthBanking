@@ -32,6 +32,7 @@ const Signup = () => {
               name='firstname'
               onChange={handleChangeRegister}
               className='my-2 block w-full p-2 rounded-md outline-none bg-gray-100'
+              autoCapitalize
             />
             <input
               type='text'

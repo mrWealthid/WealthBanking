@@ -30,11 +30,9 @@ const ProfilePopup = ({ type }) => {
 
   const [transferAccount, setTransferAccount] = useState('');
   useEffect(() => {
-    const findAccount = accounts.find(
-      (acc) => acc.accountNumber === Number(transVal)
-    );
-    console.log(findAccount);
-
+    const findAccount =
+      transVal &&
+      accounts.find((acc) => acc.accountNumber === Number(transVal));
     setTransferAccount(findAccount);
   }, [accounts, transVal]);
 
