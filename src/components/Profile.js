@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useBankContext } from '../BankContext/BankAppContext';
 import {
-  FaClock,
   FaArrowDown,
   FaArrowUp,
   FaSearch,
-  FaSyncAlt,
   FaSortAmountDown,
   FaSortAmountUp,
   FaHistory,
@@ -27,6 +25,7 @@ const Profile = () => {
     popUp,
     setpopUp,
     userData,
+    setSuccessMsg,
     asc,
   } = useBankContext();
 
@@ -106,7 +105,7 @@ const Profile = () => {
 
           <p>Account Number : {userDetails.accountNumber}</p>
 
-          <div className='flex justify-between py-16 '>
+          <div className='flex justify-between items-center py-16 '>
             <div className='flex  flex-col'>
               Current Balance
               <p>As at {new Date().toDateString()}</p>
@@ -114,7 +113,7 @@ const Profile = () => {
             <div className='text-lg animate-slideIn'>
               <p>Balance</p>
               <p className='text-2xl text-gray-900 font-bold '>
-                €{totalCount}
+                ₦{totalCount}
               </p>{' '}
             </div>
           </div>
@@ -125,7 +124,7 @@ const Profile = () => {
                 className='transfer  flex flex-col gap-2  justify-center bg-blend-screen bg-contain h-40 cap rounded-lg p-5'
                 onClick={() => {
                   setpopUp(!popUp);
-
+                  setSuccessMsg(false);
                   setType('transfer');
                 }}
               >
@@ -136,6 +135,7 @@ const Profile = () => {
                 className='loan cap bg-blend-screen flex flex-col gap-2  justify-center bg-contain h-40 rounded-lg p-5'
                 onClick={() => {
                   setpopUp(!popUp);
+                  setSuccessMsg(false);
                   setType('loan');
                 }}
               >
@@ -146,7 +146,7 @@ const Profile = () => {
                 className='close bg-contain gap-2  flex flex-col  justify-center cap h-40 rounded-lg p-5'
                 onClick={() => {
                   setpopUp(!popUp);
-
+                  setSuccessMsg(false);
                   setType('close');
                 }}
               >
@@ -179,7 +179,7 @@ const Profile = () => {
                   </label> */}
 
                   <select
-                    className='py-0 w-28'
+                    className='py-0 w-28 rounded'
                     value={selected.type}
                     onChange={selectChange}
                   >
@@ -225,7 +225,7 @@ const Profile = () => {
                   )}
                 </div>
                 {asc ? (
-                  <div className='flex flex-col'>
+                  <div className='flex flex-col animate-slideIn'>
                     {userData.transactions?.length > 0 &&
                       userData.transactions
                         .filter((item) =>
@@ -236,7 +236,7 @@ const Profile = () => {
                         ))}
                   </div>
                 ) : (
-                  <div className='flex flex-col'>
+                  <div className='flex flex-col animate-slideOut'>
                     {userData.transactions?.length > 0 &&
                       userData.transactions
                         .filter((item) =>

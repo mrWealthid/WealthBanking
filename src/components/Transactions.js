@@ -28,7 +28,7 @@ const Transactions = ({ Depositor, amount, account, time }) => {
 
         <p>{amount < 0 ? 'Debit' : 'Credit'}</p>
       </div>
-      <p>{Math.abs(amount)}</p>
+      <p>₦{Math.abs(amount)}</p>
     </div>
   );
 };

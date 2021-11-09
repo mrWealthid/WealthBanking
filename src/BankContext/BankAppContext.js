@@ -98,6 +98,7 @@ const BankAppProvider = ({ children }) => {
   const [deposit, setDeposit] = useState(0);
   const [withdrawal, setWithdrawal] = useState(0);
   const [asc, setAsc] = useState(false);
+  const [successMsg, setSuccessMsg] = useState(false);
 
   const history = useHistory();
 
@@ -475,7 +476,10 @@ const BankAppProvider = ({ children }) => {
       });
       setTransVal('');
       transferAmount.current.value = '';
-      setpopUp(false);
+      setSuccessMsg(true);
+      setTimeout(() => {
+        setpopUp(false);
+      }, 3000);
     } else {
       setTransferError({
         type: true,
@@ -506,7 +510,11 @@ const BankAppProvider = ({ children }) => {
         transactions: loanPayload,
       });
       loanRef.current.value = '';
-      setpopUp(false);
+      setSuccessMsg(true);
+
+      setTimeout(() => {
+        setpopUp(false);
+      }, 3000);
     } else {
       setLoanAlert({
         type: true,
@@ -610,6 +618,8 @@ const BankAppProvider = ({ children }) => {
         handleSortAsc,
         handleSortDesc,
         asc,
+        successMsg,
+        setSuccessMsg,
       }}
     >
       {children}

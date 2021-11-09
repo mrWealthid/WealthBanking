@@ -7,6 +7,7 @@ import {
   FaHandHoldingUsd,
   FaCheck,
   FaTimesCircle,
+  FaClipboardCheck,
 } from 'react-icons/fa';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -27,6 +28,7 @@ const ProfilePopup = ({ type }) => {
     loanAlert,
     closeAlert,
     accounts,
+    successMsg,
   } = useBankContext();
 
   const [transferAccount, setTransferAccount] = useState('');
@@ -47,16 +49,30 @@ const ProfilePopup = ({ type }) => {
           </p>
           <div className='flex items-center px-2 flex-col close bg-contain gap-2 justify-center text-center text-white cap bg-red-100 w-full min-h-full'>
             {type === 'transfer' ? (
-              <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2'>
-                <FaArrowRight color='green' />
+              !successMsg ? (
+                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2'>
+                  <FaArrowRight color='green' />
 
-                <FaArrowLeft color='brown' />
-              </div>
+                  <FaArrowLeft color='brown' />
+                </div>
+              ) : (
+                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2'>
+                  <FaClipboardCheck color='green' />
+
+                  {/* <FaArrowLeft color='brown' /> */}
+                </div>
+              )
             ) : type === 'loan' ? (
-              <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2'>
-                {' '}
-                <FaHandHoldingUsd color='green' />
-              </div>
+              !successMsg ? (
+                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2'>
+                  {' '}
+                  <FaHandHoldingUsd color='green' />
+                </div>
+              ) : (
+                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2'>
+                  <FaClipboardCheck color='green' />
+                </div>
+              )
             ) : (
               <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2'>
                 <FaTimes color='brown' />
@@ -65,9 +81,13 @@ const ProfilePopup = ({ type }) => {
 
             <p>
               {type === 'transfer'
-                ? 'Seamless Transfer'
+                ? successMsg
+                  ? 'Transfer Completed'
+                  : 'Seamless Transfer'
                 : type === 'loan'
-                ? 'Quick Loan in 2 minutes'
+                ? successMsg
+                  ? 'Payment Completed'
+                  : 'Quick Loan in 2 minutes'
                 : 'We will miss you'}
             </p>
           </div>

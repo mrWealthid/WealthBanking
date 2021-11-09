@@ -7,7 +7,7 @@ const Analytics = ({ counts, color, icon }) => {
         {icon}
       </div>
 
-      <p className='text-2xl'>{counts}</p>
+      <p className='text-2xl'>₦{counts}</p>
     </section>
   );
 };
