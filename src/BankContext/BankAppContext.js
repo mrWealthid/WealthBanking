@@ -33,7 +33,6 @@ import {
   getCredits,
   getAll,
   getAccounts,
-  sortByTime,
   sortByDesc,
   sortByAsc,
 } from '../actions';
