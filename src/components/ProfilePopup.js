@@ -187,13 +187,13 @@ const ProfilePopup = ({ type }) => {
             ) : null}
             <div className='flex justify-end w-full'>
               <button
-                disabled={
-                  type === 'transfer' && transVal && transferAmount
-                    ? false
-                    : type === 'loan' && loanRef
-                    ? false
-                    : true
-                }
+                // disabled={
+                //   type === 'transfer' && transVal && transferAmount
+                //     ? false
+                //     : type === 'loan' && loanRef
+                //     ? false
+                //     : true
+                // }
                 className='bg-gray-800 cap   text-white w-2/6 p-1 rounded px-3 '
               >
                 Send

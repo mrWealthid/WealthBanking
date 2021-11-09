@@ -533,8 +533,11 @@ const BankAppProvider = ({ children }) => {
         userDetails.accountNumber === Number(transVal) &&
         closeUserPin.current.value === authenticated.email
       ) {
+        setTransVal('');
+        closeUserPin.current.value = '';
+        setpopUp(false);
+        await authenticated.delete();
         await deleteDoc(doc(collectionRef, authenticated.uid));
-        authenticated.delete();
 
         // users.delete();
       } else {
