@@ -9,6 +9,12 @@ const UsersReducer = (usersData = {}, action) => {
     case 'ALL':
       return (usersData = action.payload);
 
+    case 'SORT_DESC':
+      return (usersData = action.payload);
+
+    case 'SORT_ASC':
+      return (usersData = action.payload);
+
     default:
       return usersData;
   }

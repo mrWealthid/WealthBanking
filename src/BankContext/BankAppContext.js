@@ -32,6 +32,10 @@ import {
   getDebits,
   getCredits,
   getAll,
+  getAccounts,
+  sortByTime,
+  sortByDesc,
+  sortByAsc,
 } from '../actions';
 
 const BankAppContext = createContext();
@@ -50,7 +54,7 @@ const BankAppProvider = ({ children }) => {
     password: '',
   });
 
-  const [accounts, setAccounts] = useState([]);
+  // const [accounts, setAccounts] = useState([]);
 
   // const [loading, setLoading] = useState(true);
   // const [users, setUsers] = useState({});
@@ -93,6 +97,7 @@ const BankAppProvider = ({ children }) => {
   const [total, setTotal] = useState(0);
   const [deposit, setDeposit] = useState(0);
   const [withdrawal, setWithdrawal] = useState(0);
+  const [asc, setAsc] = useState(false);
 
   const history = useHistory();
 
@@ -133,9 +138,11 @@ const BankAppProvider = ({ children }) => {
 
   useEffect(() => {
     onSnapshot(collection(db, 'Accounts'), (snapshot) => {
-      setAccounts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      dispatch(
+        getAccounts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+      );
     });
-  }, []);
+  }, [dispatch]);
 
   // get currrent logged in user
   useEffect(() => {
@@ -151,6 +158,9 @@ const BankAppProvider = ({ children }) => {
   const authenticated = useSelector((state) => state.Authentication);
 
   const userData = useSelector((state) => state.userData);
+
+  const accounts = useSelector((state) => state.Accounts);
+
   //Get current signed in  user's firestore
   useEffect(() => {
     if (authenticated) {
@@ -470,12 +480,6 @@ const BankAppProvider = ({ children }) => {
       setTransferError({
         type: true,
         msg: transferCheck(findAccount, userDetails, transferAmount, total),
-        // msg:
-        //   findAccount.accountNumber == userDetails.accountNumber
-        //     ? "You can't transfer to self"
-        //     : Number(transferAmount.current.value) > total
-        //     ? 'Insufficient Account'
-        //     : 'Check Network Connection',
       });
     }
   };
@@ -492,7 +496,7 @@ const BankAppProvider = ({ children }) => {
         ...userDetails.transactions,
         {
           Depositor: 'WealthBank',
-          account: 'Management',
+          account: 'Loan',
           time: new Date().toISOString(),
           amount: Number(loanRef.current.value),
         },
@@ -541,6 +545,30 @@ const BankAppProvider = ({ children }) => {
     }
   };
 
+  const handleSortDesc = () => {
+    dispatch(
+      sortByDesc({
+        ...userData,
+        transactions: userData.transactions.sort(
+          (a, b) => new Date(b.time) - new Date(a.time)
+        ),
+      })
+    );
+    setAsc(!asc);
+  };
+
+  const handleSortAsc = () => {
+    dispatch(
+      sortByAsc({
+        ...userData,
+        transactions: userData.transactions.sort(
+          (a, b) => new Date(a.time) - new Date(b.time)
+        ),
+      })
+    );
+    setAsc(!asc);
+  };
+
   return (
     <BankAppContext.Provider
       value={{
@@ -579,7 +607,9 @@ const BankAppProvider = ({ children }) => {
         selected,
         selectChange,
         userData,
-        // getAllCredit,
+        handleSortAsc,
+        handleSortDesc,
+        asc,
       }}
     >
       {children}

@@ -18,7 +18,7 @@ const Transactions = ({ Depositor, amount, account, time }) => {
         </p>
 
         <p className='w-10'> {amount < 0 ? 'To' : 'From'} </p>
-        <p className='w-20'>{Depositor}</p>
+        <p className='w-28'>{Depositor}</p>
 
         <p className='w-20'>{account}</p>
 

@@ -116,6 +116,13 @@
   top: 89px;
   right: 24px;
 }
+
+.times {
+  position: fixed;
+  right: 5px;
+  top: 4px;
+  color: rgb(102, 15, 15);
+}
 .App,
 .cap {
   /* background-color: #f0f4fd; */

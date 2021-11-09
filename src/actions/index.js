@@ -38,3 +38,24 @@ export const getAll = (payload) => {
     payload: payload,
   };
 };
+
+export const getAccounts = (payload) => {
+  return {
+    type: 'LOAD_ACCOUNTS',
+    payload: payload,
+  };
+};
+
+export const sortByDesc = (payload) => {
+  return {
+    type: 'SORT_DESC',
+    payload: payload,
+  };
+};
+
+export const sortByAsc = (payload) => {
+  return {
+    type: 'SORT_ASC',
+    payload: payload,
+  };
+};

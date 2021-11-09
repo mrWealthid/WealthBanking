@@ -6,6 +6,9 @@ import {
   FaArrowUp,
   FaSearch,
   FaSyncAlt,
+  FaSortAmountDown,
+  FaSortAmountUp,
+  FaHistory,
 } from 'react-icons/fa';
 import Transactions from './Transactions';
 import ProfilePopup from './ProfilePopup';
@@ -19,10 +22,12 @@ const Profile = () => {
     selected,
     deposit,
     withdrawal,
-
+    handleSortAsc,
+    handleSortDesc,
     popUp,
     setpopUp,
     userData,
+    asc,
   } = useBankContext();
 
   const [counter, setCounter] = useState(0);
@@ -33,7 +38,6 @@ const Profile = () => {
 
   const [totalWithdrawalCount, setTotalWithdrawalCount] = useState(0);
 
-  const [sorted, setsorted] = useState(false);
   const [input, setInput] = useState('');
   const [type, setType] = useState('');
 
@@ -152,8 +156,14 @@ const Profile = () => {
             <section className='w-10/12 flex flex-col gap-3'>
               <p className='text-xl'>Transactions</p>
 
-              <section className='flex bg-white shadow px-2 py-4 justify-between items-center'>
-                <p className='text-xl'>All Transactions</p>
+              <section className='flex bg-white shadow-lg px-2 py-4 text-gray-800 justify-between items-center'>
+                <p className='text-xl'>
+                  {Number(selected.type) === 1
+                    ? 'All Transactions'
+                    : Number(selected.type) === 2
+                    ? 'All Debits'
+                    : 'All Credits'}
+                </p>
                 <div className='flex gap-3'>
                   {/* <label className='flex gap-3 items-center'>
                     All
@@ -181,10 +191,10 @@ const Profile = () => {
                   </select>
                 </div>
               </section>
-              <section className='bg-gray-800 cap bg-blend-color-burn rounded-lg bg-contain flex flex-col gap-3 p-4 text-white'>
+              <section className='bg-gray-800 cap bg-blend-color-burn rounded-lg bg-contain flex flex-col gap-3 p-4 text-white h-full'>
                 <div className='flex gap-2 justify-between items-center'>
                   <div className='flex gap-2 items-center'>
-                    <FaClock /> Transaction History
+                    <FaHistory /> Transaction History
                   </div>
 
                   <div className='bg-white items-center px-3 rounded-3xl py-1 flex gap-2'>
@@ -198,33 +208,46 @@ const Profile = () => {
                     />
                   </div>
 
-                  <div
-                    className='flex gap-2 bg-gray-50 text-gray-800 cursor-pointer rounded-xl px-2 items-center'
-                    onClick={() => setsorted(!sorted)}
-                  >
-                    <FaSyncAlt /> sort
+                  {asc ? (
+                    <div
+                      className='flex gap-2 bg-gray-50 text-gray-800 cursor-pointer text-sm rounded-xl px-3 py-1 items-center '
+                      onClick={handleSortDesc}
+                    >
+                      <FaSortAmountDown color='green' /> Desc
+                    </div>
+                  ) : (
+                    <div
+                      className='flex gap-2 bg-gray-50 text-gray-800 cursor-pointer rounded-xl px-3 py-1 items-center text-sm '
+                      onClick={handleSortAsc}
+                    >
+                      <FaSortAmountUp color='cadetblue' /> Asc
+                    </div>
+                  )}
+                </div>
+                {asc ? (
+                  <div className='flex flex-col'>
+                    {userData.transactions?.length > 0 &&
+                      userData.transactions
+                        .filter((item) =>
+                          item.Depositor.includes(capitalize(input))
+                        )
+                        .map((item, index) => (
+                          <Transactions key={index} {...item} />
+                        ))}
                   </div>
-                </div>
-                <div className='flex flex-col  '>
-                  {sorted
-                    ? userData.transactions?.length > 0 &&
+                ) : (
+                  <div className='flex flex-col'>
+                    {userData.transactions?.length > 0 &&
                       userData.transactions
                         .filter((item) =>
                           item.Depositor.includes(capitalize(input))
                         )
+                        .sort((a, b) => new Date(b.time) - new Date(a.time))
                         .map((item, index) => (
                           <Transactions key={index} {...item} />
-                        ))
-                    : userData.transactions?.length > 0 &&
-                      userData.transactions
-                        .filter((item) =>
-                          item.Depositor.includes(capitalize(input))
-                        )
-                        .map((item, index) => (
-                          <Transactions key={index} {...item} />
-                        ))
-                        .reverse()}
-                </div>
+                        ))}
+                  </div>
+                )}
               </section>
             </section>
 

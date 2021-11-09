@@ -6,6 +6,7 @@ import {
   FaTimes,
   FaHandHoldingUsd,
   FaCheck,
+  FaTimesCircle,
 } from 'react-icons/fa';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -18,7 +19,7 @@ const ProfilePopup = ({ type }) => {
     setTransVal,
 
     loanRef,
-
+    setpopUp,
     closeUserPin,
     handleLoans,
     handleCloseAccount,
@@ -41,6 +42,9 @@ const ProfilePopup = ({ type }) => {
       (
       <section className='flex transact_popup bg-white overflow-hidden shadow w-8/12 rounded-lg md:w-6/12   flex-col min-h-70 h-1/2'>
         <section className='flex h-full'>
+          <p className='times  cursor-pointer' onClick={() => setpopUp(false)}>
+            <FaTimesCircle size='20px' />
+          </p>
           <div className='flex items-center px-2 flex-col close bg-contain gap-2 justify-center text-center text-white cap bg-red-100 w-full min-h-full'>
             {type === 'transfer' ? (
               <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2'>
@@ -123,6 +127,7 @@ const ProfilePopup = ({ type }) => {
                   className='w-100  focus:outline-none text-black border-none focus:ring-2 focus:ring-gray-200 focus:border-transparent py-1 px-2'
                   type='text'
                   value={transferAccount.name}
+                  readOnly
                 />
               </div>
             ) : null}
