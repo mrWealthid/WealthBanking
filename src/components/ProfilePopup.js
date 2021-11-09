@@ -116,7 +116,7 @@ const ProfilePopup = ({ type }) => {
               </p>
             )}
             {type === 'transfer' || type === 'close' ? (
-              <div className='flex'>
+              <div className='flex relative'>
                 <label htmlFor='number' className='w-40 text-gray-700'>
                   Account Number
                 </label>
@@ -132,7 +132,10 @@ const ProfilePopup = ({ type }) => {
                 />
 
                 {transferAccount && type === 'transfer' ? (
-                  <FaCheck className='absolute check' color='green' />
+                  <FaCheck
+                    className='absolute animate-slideIn check'
+                    color='green'
+                  />
                 ) : null}
               </div>
             ) : null}
