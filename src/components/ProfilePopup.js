@@ -42,7 +42,7 @@ const ProfilePopup = ({ type }) => {
   return (
     <div>
       (
-      <section className='flex transact_popup bg-white overflow-hidden shadow w-full md:w-10/12 lg:w-8/12 rounded-lg   flex-col min-h-70 h-1/2'>
+      <section className='flex transact_popup bg-white overflow-hidden w-6/12 shadow w-full md:w-8/12 lg:w-6/12 rounded-lg   flex-col min-h-70 h-1/2'>
         <section className='flex h-full'>
           <p className='times  cursor-pointer' onClick={() => setpopUp(false)}>
             <FaTimesCircle size='20px' />
