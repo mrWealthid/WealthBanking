@@ -16,7 +16,7 @@ const Login = () => {
 
   return (
     <div className='min-h-screen animate-slideOut flex flex-col items-center justify-center'>
-      <div className='w-4/12 sm:w-6/12 lg:w-4/12 flex flex-col gap-2'>
+      <div className='w-10/12 sm:w-8/12 md:w-6/12 lg:w-4/12 flex flex-col max-w-xl gap-2'>
         <form
           className='py-6 px-8 cap bg-contain rounded-xl shadow-lg flex flex-col gap-2 items-center bg-gray-200 '
           onSubmit={handleLogin}
@@ -59,7 +59,7 @@ const Login = () => {
 
           <p>
             Need An Account {''}{' '}
-            <Link className='text-blue-600' to='/Signup'>
+            <Link className='text-blue-600' to='/create'>
               Sign up
             </Link>
           </p>

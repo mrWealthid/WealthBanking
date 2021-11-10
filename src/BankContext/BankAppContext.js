@@ -148,7 +148,7 @@ const BankAppProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       // setUsers(currentUser);
-      dispatch(isLoggedIn(currentUser));
+      currentUser ? dispatch(isLoggedIn(currentUser)) : dispatch(isLoggedOut());
     });
 
     return unsubscribe;
@@ -282,6 +282,14 @@ const BankAppProvider = ({ children }) => {
     setSelected({ ...selected, type: e.target.value });
   };
 
+  const capitalize = (vals) => {
+    if (vals) {
+      return vals.split('')[0].toUpperCase() + vals.slice(1);
+    } else {
+      return vals;
+    }
+  };
+
   const handleSignup = async (e) => {
     e.preventDefault();
 
@@ -302,7 +310,8 @@ const BankAppProvider = ({ children }) => {
 
       const docRef = doc(collectionRef, uid);
       const payload = {
-        name: register.firstname + ' ' + register.lastname,
+        name:
+          capitalize(register.firstname) + ' ' + capitalize(register.lastname),
         id: uid,
         transactions: [
           {
@@ -622,6 +631,7 @@ const BankAppProvider = ({ children }) => {
         asc,
         successMsg,
         setSuccessMsg,
+        capitalize,
       }}
     >
       {children}

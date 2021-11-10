@@ -1,42 +1,54 @@
 import React from 'react';
-import { FaShopify } from 'react-icons/fa';
+import { Fa500Px } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import Popup from './Popup';
 import { useBankContext } from '../BankContext/BankAppContext';
 
 const Navbar = () => {
   const { handleModal, authenticated, isOpen, handleLogout } = useBankContext();
+
+  const styles = {
+    color: 'seagreen',
+    border: '1px solid seagreen',
+    borderRadius: '20px',
+    padding: '4px 10px',
+  };
   return (
-    <div className='bg-gray-700 bg-opacity-50 relative text-white py-6'>
+    <div className='bg-white  relative greentxt py-6'>
       <div className='w-11/12 mx-auto flex-wrap flex justify-between items-center'>
         <div>
-          <a href='https://www.shopify.com/'>
-            <div className='text-lg flex items-center gap-2'>
-              <span>
-                <FaShopify
-                  color='#bae26a'
-                  className='w-6 h-6 md:w-8 p-1 shadow-xl animate-bounce md:h-8 object-fit bg-white rounded-full'
-                />
-              </span>
-              <span> BankApp</span>
-            </div>
-          </a>
+          <div className='text-lg flex items-center gap-2'>
+            <span>
+              <Fa500Px
+                color='seagreen'
+                className='w-6 h-6 md:w-10 p-2 shadow-xl
+              animate-bounce md:h-10 object-fit bg-white border border-green-700 rounded-full'
+              />
+            </span>
+            <span> BankApp</span>
+          </div>
         </div>
         <div className='flex items-center gap-6'>
-          <NavLink className='hover:underline focus:text-yellow-300' to='/'>
-            {' '}
+          <NavLink
+            activeStyle={styles}
+            className='hidden md:block '
+            exact
+            to='/'
+          >
             Home
           </NavLink>
           {!authenticated ? (
             <NavLink
-              className='hover:underline focus:text-yellow-300'
+              activeStyle={styles}
+              className='hidden md:block '
               to='/create'
             >
               Create Account
             </NavLink>
           ) : (
             <NavLink
-              className='hover:underline focus:text-yellow-300'
+              activeStyle={styles}
+              className='hidden md:block  '
               to='/profile'
             >
               Profile
@@ -44,16 +56,16 @@ const Navbar = () => {
           )}
           {authenticated ? (
             <p
-              className='hover:underline 
-            focus:text-yellow-300 cursor-pointer'
+              className='hidden md:block  
+             cursor-pointer'
               onClick={handleLogout}
             >
               Logout
             </p>
           ) : (
             <NavLink
-              className='hover:underline 
-            focus:text-yellow-300 trans'
+              activeStyle={styles}
+              className='hidden md:block '
               to='/login'
             >
               {' '}
@@ -61,7 +73,7 @@ const Navbar = () => {
             </NavLink>
           )}
 
-          <div className='nav'>
+          <div className='nav md:hidden  '>
             <nav className='Pop' onClick={handleModal}>
               <div className={`${isOpen && 'open'}     menu-btn`}>
                 <div className='menu-btn__burger'></div>

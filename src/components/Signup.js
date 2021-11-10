@@ -15,7 +15,7 @@ const Signup = () => {
 
   return (
     <div className='min-h-screen animate-slideIn flex flex-col items-center justify-center'>
-      <div className='w-8/12 6/12 sm:w- w-8/12 lg:w-4/12 flex flex-col gap-2'>
+      <div className='w-10/12 sm:w-8/12 md:w-6/12 lg:w-4/12 flex flex-col max-w-xl gap-2'>
         <form
           className='py-6 px-8 flex rounded-lg cap bg-contain shadow-lg flex-col gap-2 items-center bg-gray-200 '
           onSubmit={handleSignup}

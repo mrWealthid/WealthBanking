@@ -27,6 +27,7 @@ const Profile = () => {
     userData,
     setSuccessMsg,
     asc,
+    capitalize,
   } = useBankContext();
 
   const [counter, setCounter] = useState(0);
@@ -86,53 +87,49 @@ const Profile = () => {
 
   // To capitalize input
 
-  const capitalize = (vals) => {
-    if (vals) {
-      return vals.split('')[0].toUpperCase() + vals.slice(1);
-    } else {
-      return vals;
-    }
-  };
-
   return (
     <div className='flex flex-col animate-slideOut  w-11/12 mx-auto'>
       {userDetails && (
-        <div className={`${popUp && 'filter blur'} px-4  my-4`}>
-          <p className='text-xl'>
-            Welcome Back,{' '}
-            <span className='text-gray-900'>{userDetails.name}!</span>
+        <div className={`${popUp && 'filter blur'} px-4 my-2 lg:my-4`}>
+          <p className='text-base flex gap-3 text-gray-800  md:text-xl'>
+            Welcome Back,
+            <span className='text-gray-800 '>{userDetails.name}!</span>
           </p>
 
-          <p>Account Number : {userDetails.accountNumber}</p>
+          <p className='text-sm text-gray-800  md:text-base'>
+            Account Number : {userDetails.accountNumber}
+          </p>
 
-          <div className='flex md:flex-row flex-col  justify-between md:items-center py-16 '>
-            <div className='flex  flex-col'>
+          <div className='flex md:flex-row flex-col  justify-between md:items-center gap-2 py-8 lg:py-16 '>
+            <div className='flex text-sm lg:text-base  flex-col text-gray-800 '>
               Current Balance
-              <p>As at {new Date().toDateString()}</p>
+              <p className='text-sm text-gray-800 '>
+                As at {new Date().toDateString()}
+              </p>
             </div>
-            <div className='text-lg animate-slideIn'>
-              <p>Balance</p>
-              <p className='text-2xl text-gray-900 font-bold '>
-                ₦{totalCount}
+            <div className='animate-slideIn'>
+              <p className='text-sm lg:text-base'>Balance</p>
+              <p className=' text-lg lg:text-2xl text-gray-900 font-bold '>
+                ₦{totalCount?.toLocaleString()}
               </p>{' '}
             </div>
           </div>
 
           <section className='flex flex-col lg:flex-row-reverse gap-5 justify-between '>
-            <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 lg:w-3/12 w-full lg:sticky top-3 order-2 lg:order-none  h-full rounded-lg  text-gray-200 gap-3'>
+            <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 lg:w-5/12 w-full lg:sticky top-3 order-2 lg:order-none  h-full rounded-lg  text-gray-200 gap-3'>
               <section
-                className='transfer flex flex-col gap-2 w-full  justify-center bg-blend-screen bg-contain h-40 cap rounded-lg p-5'
+                className='transfer flex flex-col gap-2 w-full items-center md:items-start max-w-md mx-auto justify-center bg-blend-screen bg-contain h-40 cap rounded-lg cursor-pointer p-5'
                 onClick={() => {
                   setpopUp(!popUp);
                   setSuccessMsg(false);
                   setType('transfer');
                 }}
               >
-                <p> Make A Transfer Today</p>
+                <p> Make A Transfer</p>
               </section>
 
               <section
-                className='loan cap bg-blend-screen flex flex-col w-full gap-2  justify-center bg-contain h-40 rounded-lg p-5'
+                className='loan cap bg-blend-screen flex flex-col w-full gap-2 items-center md:items-start max-w-md mx-auto  justify-center  cursor-pointer bg-contain h-40 rounded-lg p-5'
                 onClick={() => {
                   setpopUp(!popUp);
                   setSuccessMsg(false);
@@ -143,7 +140,7 @@ const Profile = () => {
               </section>
 
               <section
-                className='close bg-contain gap-2  flex flex-col w-full justify-center cap h-40 rounded-lg p-5'
+                className='white shadow-2xl bg-contain gap-2  flex flex-col items-center md:items-start max-w-md mx-auto w-full justify-center  bg-gray-900 cursor-pointer cap h-40 rounded-lg p-5'
                 onClick={() => {
                   setpopUp(!popUp);
                   setSuccessMsg(false);
@@ -153,11 +150,11 @@ const Profile = () => {
                 <p>Close Account</p>
               </section>
             </section>
-            <section className='lg:w-10/12 order-1 lg:order-none  flex flex-col gap-3'>
-              <p className='text-xl'>Transactions</p>
+            <section className='lg:w-8/12 order-1 lg:order-none  flex flex-col gap-3'>
+              <p className='text-base lg:text-xl greentxt '>Transactions</p>
 
-              <section className='flex bg-white shadow-lg px-2 py-4  text-gray-800 justify-between items-center'>
-                <p className='text-xl'>
+              <section className='flex bg-white shadow-lg border border-gray-300 rounded-lg px-3 py-4  text-gray-800 justify-between items-center'>
+                <p className='text-sm greentxt lg:text-base'>
                   {Number(selected.type) === 1
                     ? 'All Transactions'
                     : Number(selected.type) === 2
@@ -179,7 +176,7 @@ const Profile = () => {
                   </label> */}
 
                   <select
-                    className='py-0 w-28 rounded'
+                    className='py-0 text-sm lg-text-base greentxt border border-green-600 focus:outline-none focus:ring-green-500  w-28 rounded'
                     value={selected.type}
                     onChange={selectChange}
                   >
@@ -191,7 +188,7 @@ const Profile = () => {
                   </select>
                 </div>
               </section>
-              <section className='bg-gray-800  w-full  cap bg-blend-color-burn rounded-lg bg-contain flex flex-col gap-3 p-4 text-white h-full'>
+              <section className='green  w-full  cap bg-blend-color-burn rounded-lg bg-contain flex flex-col gap-2 p-4 text-white h-full'>
                 <div className='flex gap-2 justify-between flex-col md:flex-row items-center'>
                   <div className='flex gap-2 items-center'>
                     <FaHistory /> Transaction History
@@ -251,26 +248,38 @@ const Profile = () => {
               </section>
             </section>
 
-            <div className='lg:w-3/12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  w-full order-3 lg:sticky top-3 lg:h-full gap-3 lg:grid-cols-1'>
+            <div className='lg:w-4/12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  w-full order-3 lg:sticky top-3 lg:h-full gap-3 lg:grid-cols-1'>
               <Analytics
-                counts={totalDepCount}
+                counts={totalDepCount.toLocaleString()}
                 icon={<FaArrowDown color='green' />}
+                color='transfer'
               />
               <Analytics
-                counts={totalWithdrawalCount}
-                color={'red'}
+                counts={totalWithdrawalCount.toLocaleString()}
+                color={'loan'}
                 icon={<FaArrowUp color='red' />}
               />
               <Analytics
                 counts={10}
-                color={'green'}
+                color={'bg-gray-900'}
                 icon={<FaArrowDown color='green' />}
               />
             </div>
           </section>
         </div>
       )}
-      {popUp ? <ProfilePopup type={type} /> : null}
+      {popUp ? (
+        <ProfilePopup
+          type={type}
+          color={
+            type === 'transfer'
+              ? 'transfer'
+              : type === 'loan'
+              ? 'loan'
+              : 'bg-gray-900'
+          }
+        />
+      ) : null}
     </div>
   );
 };

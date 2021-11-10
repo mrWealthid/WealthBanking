@@ -6,13 +6,13 @@ import {
   FaTimes,
   FaHandHoldingUsd,
   FaCheck,
-  FaTimesCircle,
   FaClipboardCheck,
+  FaSadTear,
 } from 'react-icons/fa';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
-const ProfilePopup = ({ type }) => {
+const ProfilePopup = ({ type, color }) => {
   const {
     handleTransfers,
     transferAmount,
@@ -42,12 +42,17 @@ const ProfilePopup = ({ type }) => {
   return (
     <div>
       (
-      <section className='flex transact_popup bg-white overflow-hidden w-6/12 shadow w-full md:w-8/12 lg:w-6/12 rounded-lg   flex-col min-h-70 h-1/2'>
+      <section className='flex transact_popup bg-white overflow-hidden w-6/12 shadow  md:w-8/12 lg:w-6/12 rounded-lg w-10/12  flex-col h-96'>
         <section className='flex h-full'>
-          <p className='times  cursor-pointer' onClick={() => setpopUp(false)}>
-            <FaTimesCircle size='20px' />
+          <p
+            className='times cursor-pointer bg-white shadow-2xl rounded-full p-1'
+            onClick={() => setpopUp(false)}
+          >
+            <FaTimes size='18px' color='darkslategrey' />
           </p>
-          <div className='flex items-center px-2 flex-col close bg-contain gap-2 justify-center text-center text-white cap bg-red-100 w-full min-h-full'>
+          <div
+            className={`${color} hidden sm:flex items-center px-2 flex-col bg-contain gap-2 justify-center text-center bg-blend-screen text-white cap  w-full min-h-full`}
+          >
             {type === 'transfer' ? (
               !successMsg ? (
                 <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 mx-auto'>
@@ -74,8 +79,8 @@ const ProfilePopup = ({ type }) => {
                 </div>
               )
             ) : (
-              <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 mx-auto'>
-                <FaTimes color='brown' />
+              <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-1 px-3 mx-auto'>
+                <FaSadTear color='brown' />
               </div>
             )}
 
@@ -88,12 +93,12 @@ const ProfilePopup = ({ type }) => {
                 ? successMsg
                   ? 'Payment Completed'
                   : 'Quick Loan in 2 minutes'
-                : 'We will miss you'}
+                : "It's Hard To See You Go"}
             </p>
           </div>
 
           <form
-            className='flex w-8/12 lg:w-auto flex-col lg:gap-3 gap-2  w-full min-h-full items-center justify-center p-4 animate-slideIn'
+            className='flex  flex-col  gap-3  w-full min-h-full items-center cap bg-contain justify-center p-4 animate-slideIn'
             onSubmit={
               type === 'transfer'
                 ? handleTransfers
@@ -102,6 +107,25 @@ const ProfilePopup = ({ type }) => {
                 : handleCloseAccount
             }
           >
+            <div className=' sm:hidden'>
+              {type === 'transfer' ? (
+                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 shadow-2xl mx-auto'>
+                  <FaArrowRight color='green' />
+
+                  <FaArrowLeft color='brown' />
+                </div>
+              ) : type === 'loan' ? (
+                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 shadow-2xl  mx-auto'>
+                  <FaHandHoldingUsd color='green' />
+                </div>
+              ) : (
+                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 shadow-2xl  mx-auto'>
+                  {' '}
+                  <FaSadTear color='brown' />
+                </div>
+              )}
+            </div>
+
             {type === 'transfer' && transferError.type ? (
               <p className='text-center text-sm animate-slideIn'>
                 {transferError.msg}
@@ -116,7 +140,7 @@ const ProfilePopup = ({ type }) => {
               </p>
             )}
             {type === 'transfer' || type === 'close' ? (
-              <div className='flex lg:flex-row flex-col relative'>
+              <div className='flex w-10/12 lg-w-full flex-col relative'>
                 <label htmlFor='number' className='w-40 text-gray-700'>
                   Account Number
                 </label>
@@ -127,7 +151,6 @@ const ProfilePopup = ({ type }) => {
                   name='number'
                   value={transVal}
                   onChange={(e) => setTransVal(e.target.value)}
-                  // ref={type === 'transfer' ? transferNum : closeUser}
                   required
                 />
 
@@ -141,13 +164,11 @@ const ProfilePopup = ({ type }) => {
             ) : null}
 
             {transferAccount && type === 'transfer' ? (
-              <div className='flex  lg:flex-row flex-col animate-slideOut'>
-                <label htmlFor='number' className='w-40 text-gray-700'>
-                  Account Name
-                </label>
+              <div className='flex w-10/12  flex-col animate-slideOut'>
+                <label htmlFor='number' className='w-40 text-gray-700'></label>
 
                 <input
-                  className='w-100  focus:outline-none text-black border-none focus:ring-2 focus:ring-gray-200 focus:border-transparent py-1 px-2'
+                  className='w-100  focus:outline-none text-gray-700 border-none focus:ring-2 focus:ring-gray-200 focus:border-transparent py-1 px-2'
                   type='text'
                   value={transferAccount.name}
                   readOnly
@@ -156,7 +177,7 @@ const ProfilePopup = ({ type }) => {
             ) : null}
 
             {type === 'close' && (
-              <div className='flex lg:flex-row flex-col'>
+              <div className='flex w-10/12  flex-col'>
                 <label htmlFor='number' className='w-40 text-gray-700'>
                   Email
                 </label>
@@ -172,7 +193,7 @@ const ProfilePopup = ({ type }) => {
             )}
 
             {type === 'transfer' || type === 'loan' ? (
-              <div className='flex lg:flex-row flex-col'>
+              <div className='flex w-10/12  flex-col'>
                 <label className='w-40 text-gray-700' htmlFor='name'>
                   Amount
                 </label>
@@ -185,7 +206,7 @@ const ProfilePopup = ({ type }) => {
                 />
               </div>
             ) : null}
-            <div className='flex justify-end w-full'>
+            <div className='flex justify-end w-10/12'>
               <button
                 // disabled={
                 //   type === 'transfer' && transVal && transferAmount
@@ -194,9 +215,9 @@ const ProfilePopup = ({ type }) => {
                 //     ? false
                 //     : true
                 // }
-                className='bg-gray-800 cap   text-white w-2/6 p-1 rounded px-3 '
+                className={`${color} cap text-white w-2/6 p-1 rounded px-3 `}
               >
-                Send
+                {type === 'close' ? 'Close' : 'Send'}
               </button>
             </div>
           </form>
