@@ -16,7 +16,11 @@ module.exports = {
     fontColor: {
       wheat: ['wheat'],
     },
+
     extend: {
+      screens: {
+        '3xl': '1600px',
+      },
       animation: {
         none: 'none',
         spin: 'spin 2s linear ',

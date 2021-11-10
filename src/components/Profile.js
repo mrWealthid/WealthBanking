@@ -105,7 +105,7 @@ const Profile = () => {
 
           <p>Account Number : {userDetails.accountNumber}</p>
 
-          <div className='flex justify-between items-center py-16 '>
+          <div className='flex md:flex-row flex-col  justify-between md:items-center py-16 '>
             <div className='flex  flex-col'>
               Current Balance
               <p>As at {new Date().toDateString()}</p>
@@ -118,10 +118,10 @@ const Profile = () => {
             </div>
           </div>
 
-          <section className='flex flex-row-reverse gap-5 justify-between relative'>
-            <section className='flex w-3/12 sticky top-3 h-full rounded-lg flex-col w-5/12 text-gray-200 gap-3'>
+          <section className='flex flex-col lg:flex-row-reverse gap-5 justify-between '>
+            <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 lg:w-3/12 w-full lg:sticky top-3 order-2 lg:order-none  h-full rounded-lg  text-gray-200 gap-3'>
               <section
-                className='transfer  flex flex-col gap-2  justify-center bg-blend-screen bg-contain h-40 cap rounded-lg p-5'
+                className='transfer flex flex-col gap-2 w-full  justify-center bg-blend-screen bg-contain h-40 cap rounded-lg p-5'
                 onClick={() => {
                   setpopUp(!popUp);
                   setSuccessMsg(false);
@@ -132,7 +132,7 @@ const Profile = () => {
               </section>
 
               <section
-                className='loan cap bg-blend-screen flex flex-col gap-2  justify-center bg-contain h-40 rounded-lg p-5'
+                className='loan cap bg-blend-screen flex flex-col w-full gap-2  justify-center bg-contain h-40 rounded-lg p-5'
                 onClick={() => {
                   setpopUp(!popUp);
                   setSuccessMsg(false);
@@ -143,7 +143,7 @@ const Profile = () => {
               </section>
 
               <section
-                className='close bg-contain gap-2  flex flex-col  justify-center cap h-40 rounded-lg p-5'
+                className='close bg-contain gap-2  flex flex-col w-full justify-center cap h-40 rounded-lg p-5'
                 onClick={() => {
                   setpopUp(!popUp);
                   setSuccessMsg(false);
@@ -153,10 +153,10 @@ const Profile = () => {
                 <p>Close Account</p>
               </section>
             </section>
-            <section className='w-10/12 flex flex-col gap-3'>
+            <section className='lg:w-10/12 order-1 lg:order-none  flex flex-col gap-3'>
               <p className='text-xl'>Transactions</p>
 
-              <section className='flex bg-white shadow-lg px-2 py-4 text-gray-800 justify-between items-center'>
+              <section className='flex bg-white shadow-lg px-2 py-4  text-gray-800 justify-between items-center'>
                 <p className='text-xl'>
                   {Number(selected.type) === 1
                     ? 'All Transactions'
@@ -191,17 +191,17 @@ const Profile = () => {
                   </select>
                 </div>
               </section>
-              <section className='bg-gray-800 cap bg-blend-color-burn rounded-lg bg-contain flex flex-col gap-3 p-4 text-white h-full'>
-                <div className='flex gap-2 justify-between items-center'>
+              <section className='bg-gray-800  w-full  cap bg-blend-color-burn rounded-lg bg-contain flex flex-col gap-3 p-4 text-white h-full'>
+                <div className='flex gap-2 justify-between flex-col md:flex-row items-center'>
                   <div className='flex gap-2 items-center'>
                     <FaHistory /> Transaction History
                   </div>
 
-                  <div className='bg-white items-center px-3 rounded-3xl py-1 flex gap-2'>
-                    <FaSearch className='text-gray-700' />
+                  <div className='bg-white items-center px-3 rounded-3xl w-10/12 sm:w-auto overflow-hidden flex gap-2'>
+                    <FaSearch size='10px' className='text-gray-700' />
                     <input
                       type='text'
-                      className='border-transparent focus:outline-none text-black focus:py-0 focus:ring-2 focus:ring-white focus:border-transparent py-0'
+                      className='border-transparent focus:outline-none text-black focus:py-0 focus:ring-2 focus:ring-white focus:border-transparent  py-0'
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       placeholder='Search...'
@@ -210,14 +210,14 @@ const Profile = () => {
 
                   {asc ? (
                     <div
-                      className='flex gap-2 bg-gray-50 text-gray-800 cursor-pointer text-sm rounded-xl px-3 py-1 items-center '
+                      className='flex gap-2 bg-gray-50 text-gray-800 cursor-pointer text-sm rounded-xl px-3 py-1 items-center   w-20'
                       onClick={handleSortDesc}
                     >
                       <FaSortAmountDown color='green' /> Desc
                     </div>
                   ) : (
                     <div
-                      className='flex gap-2 bg-gray-50 text-gray-800 cursor-pointer rounded-xl px-3 py-1 items-center text-sm '
+                      className='flex gap-2 bg-gray-50 text-gray-800 cursor-pointer rounded-xl px-3 w-20 py-1 items-center text-sm '
                       onClick={handleSortAsc}
                     >
                       <FaSortAmountUp color='cadetblue' /> Asc
@@ -225,7 +225,7 @@ const Profile = () => {
                   )}
                 </div>
                 {asc ? (
-                  <div className='flex flex-col animate-slideIn'>
+                  <div className='flex gap-2 flex-col animate-slideIn min-w-full overflow-auto w-full '>
                     {userData.transactions?.length > 0 &&
                       userData.transactions
                         .filter((item) =>
@@ -236,7 +236,7 @@ const Profile = () => {
                         ))}
                   </div>
                 ) : (
-                  <div className='flex flex-col animate-slideOut'>
+                  <div className='flex flex-col animate-slideOut gap-2 min-w-full w-full overflow-auto '>
                     {userData.transactions?.length > 0 &&
                       userData.transactions
                         .filter((item) =>
@@ -251,7 +251,7 @@ const Profile = () => {
               </section>
             </section>
 
-            <div className='w-3/12 flex sticky top-3 h-full flex-col gap-3'>
+            <div className='lg:w-3/12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  w-full order-3 lg:sticky top-3 lg:h-full gap-3 lg:grid-cols-1'>
               <Analytics
                 counts={totalDepCount}
                 icon={<FaArrowDown color='green' />}

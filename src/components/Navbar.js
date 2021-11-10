@@ -8,7 +8,7 @@ const Navbar = () => {
   const { handleModal, authenticated, isOpen, handleLogout } = useBankContext();
   return (
     <div className='bg-gray-700 bg-opacity-50 relative text-white py-6'>
-      <div className='w-11/12 mx-auto flex justify-between items-center'>
+      <div className='w-11/12 mx-auto flex-wrap flex justify-between items-center'>
         <div>
           <a href='https://www.shopify.com/'>
             <div className='text-lg flex items-center gap-2'>

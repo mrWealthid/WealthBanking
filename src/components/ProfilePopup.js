@@ -42,7 +42,7 @@ const ProfilePopup = ({ type }) => {
   return (
     <div>
       (
-      <section className='flex transact_popup bg-white overflow-hidden shadow w-8/12 rounded-lg md:w-6/12   flex-col min-h-70 h-1/2'>
+      <section className='flex transact_popup bg-white overflow-hidden shadow w-full md:w-10/12 lg:w-8/12 rounded-lg   flex-col min-h-70 h-1/2'>
         <section className='flex h-full'>
           <p className='times  cursor-pointer' onClick={() => setpopUp(false)}>
             <FaTimesCircle size='20px' />
@@ -50,13 +50,13 @@ const ProfilePopup = ({ type }) => {
           <div className='flex items-center px-2 flex-col close bg-contain gap-2 justify-center text-center text-white cap bg-red-100 w-full min-h-full'>
             {type === 'transfer' ? (
               !successMsg ? (
-                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2'>
+                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 mx-auto'>
                   <FaArrowRight color='green' />
 
                   <FaArrowLeft color='brown' />
                 </div>
               ) : (
-                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2'>
+                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 mx-auto'>
                   <FaClipboardCheck color='green' />
 
                   {/* <FaArrowLeft color='brown' /> */}
@@ -64,17 +64,17 @@ const ProfilePopup = ({ type }) => {
               )
             ) : type === 'loan' ? (
               !successMsg ? (
-                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2'>
+                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 mx-auto'>
                   {' '}
                   <FaHandHoldingUsd color='green' />
                 </div>
               ) : (
-                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2'>
+                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 mx-auto'>
                   <FaClipboardCheck color='green' />
                 </div>
               )
             ) : (
-              <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2'>
+              <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 mx-auto'>
                 <FaTimes color='brown' />
               </div>
             )}
@@ -93,7 +93,7 @@ const ProfilePopup = ({ type }) => {
           </div>
 
           <form
-            className='flex flex-col gap-3 w-full min-h-full items-center justify-center p-4 animate-slideIn'
+            className='flex w-8/12 lg:w-auto flex-col lg:gap-3 gap-2  w-full min-h-full items-center justify-center p-4 animate-slideIn'
             onSubmit={
               type === 'transfer'
                 ? handleTransfers
@@ -116,7 +116,7 @@ const ProfilePopup = ({ type }) => {
               </p>
             )}
             {type === 'transfer' || type === 'close' ? (
-              <div className='flex relative'>
+              <div className='flex lg:flex-row flex-col relative'>
                 <label htmlFor='number' className='w-40 text-gray-700'>
                   Account Number
                 </label>
@@ -141,7 +141,7 @@ const ProfilePopup = ({ type }) => {
             ) : null}
 
             {transferAccount && type === 'transfer' ? (
-              <div className='flex animate-slideOut'>
+              <div className='flex  lg:flex-row flex-col animate-slideOut'>
                 <label htmlFor='number' className='w-40 text-gray-700'>
                   Account Name
                 </label>
@@ -156,7 +156,7 @@ const ProfilePopup = ({ type }) => {
             ) : null}
 
             {type === 'close' && (
-              <div className='flex'>
+              <div className='flex lg:flex-row flex-col'>
                 <label htmlFor='number' className='w-40 text-gray-700'>
                   Email
                 </label>
@@ -172,7 +172,7 @@ const ProfilePopup = ({ type }) => {
             )}
 
             {type === 'transfer' || type === 'loan' ? (
-              <div className='flex'>
+              <div className='flex lg:flex-row flex-col'>
                 <label className='w-40 text-gray-700' htmlFor='name'>
                   Amount
                 </label>
