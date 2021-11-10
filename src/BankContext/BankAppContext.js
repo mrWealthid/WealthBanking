@@ -427,12 +427,12 @@ const BankAppProvider = ({ children }) => {
   };
   const transferCheck = (find, user, transfer, total) => {
     if (find === undefined) {
-      return "user doesn't exist";
+      return "User doesn't exist";
     }
     if (find.accountNumber === user.accountNumber) {
       return "You can't transfer to self";
     } else if (Number(transfer.current.value) > total) {
-      return 'Insufficient Account';
+      return 'Insufficient Balance';
     } else {
       return 'Check Network Connection';
     }
@@ -527,7 +527,7 @@ const BankAppProvider = ({ children }) => {
       setLoanAlert({
         type: true,
         msg:
-          Number(loanRef.current.value) > total * 2
+          Number(loanRef.current.value) >= total * 2
             ? "You aren't qualified for this Loan"
             : 'Check Network Connection',
       });
