@@ -381,10 +381,7 @@ const BankAppProvider = ({ children }) => {
 
       // setButtonLoader(true);
 
-      history.push('/loginState');
-
-      const myStore = await createUserStore(data.user.uid);
-      setUserDetails(myStore.data());
+      history.push('/loginState')
 
       setLogin({
         email: '',
