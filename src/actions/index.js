@@ -59,3 +59,16 @@ export const sortByAsc = (payload) => {
     payload: payload,
   };
 };
+
+export const getTotalCredit = (payload) => {
+  return {
+    type: 'TOTAL_CREDIT',
+    payload: payload,
+  };
+};
+export const getTotalDebit = (payload) => {
+  return {
+    type: 'TOTAL_DEBIT',
+    payload: payload,
+  };
+};

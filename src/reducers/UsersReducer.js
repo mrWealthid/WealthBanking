@@ -15,6 +15,12 @@ const UsersReducer = (usersData = {}, action) => {
     case 'SORT_ASC':
       return (usersData = action.payload);
 
+      case 'TOTAL_CREDIT':
+        return (usersData = action.payload);
+
+        case 'TOTAL_DEBIT':
+          return (usersData = action.payload);
+
     default:
       return usersData;
   }
