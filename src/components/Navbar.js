@@ -15,7 +15,7 @@ const Navbar = () => {
   };
   return (
     <div className='bg-white  relative greentxt py-6'>
-      <div className='w-11/12 mx-auto flex-wrap flex justify-between items-center'>
+      <div className='w-11/12 text-sm mx-auto flex-wrap flex justify-between items-center'>
         <div>
           <div className='text-lg flex items-center gap-2'>
             <span>
@@ -43,7 +43,7 @@ const Navbar = () => {
               className='hidden md:block '
               to='/create'
             >
-              Create Account
+              Register
             </NavLink>
           ) : (
             <NavLink

@@ -13,12 +13,12 @@ const Transactions = ({ Depositor, amount, account, time }) => {
     //darkslategrey;
   }
   return (
-    <div className='flex  gap group hover: rounded-3xl hover:bg-gray-200 justify-between lg:justify-start  gap-4  px-2 sm:border-none font-extralight text-xs w-full py-2  min-w-max items-center transition duration-300 ease-in-out animate-slideIn '>
-      <p className='w-3'>
+    <div className='flex  gap group hover:rounded-3xl hover:bg-gray-200 justify-between lg:justify-start  gap-4  px-2 sm:border-none font-extralight text-xs w-full py-2  min-w-max items-center transition duration-300 ease-in-out animate-slideIn '>
+      <p className='w-4 h-4 bg-white rounded-full flex items-center object-contain p-1 justify-center'>
         {amount < 0 ? (
           <FaArrowUp color='red' />
         ) : (
-          <FaArrowDown color='white' className='group-hover:text-green-600' />
+          <FaArrowDown color='green' className='group-hover:text-green-600' />
         )}
       </p>
 
