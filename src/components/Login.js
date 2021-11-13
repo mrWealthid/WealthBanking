@@ -18,7 +18,7 @@ const Login = () => {
     <div className='min-h-screen animate-slideOut flex flex-col items-center justify-center'>
       <div className='w-10/12 sm:w-8/12 md:w-6/12 lg:w-4/12 flex flex-col max-w-xl  gap-1 transform hover:scale-105 transition ease-in-out duration-500'>
         <form
-          className='py-6 px-8 cap sc bg-contain rounded-xl shadow-lg flex flex-col gap-2 items-center bg-white '
+          className='py-6 px-8 cap  bg-contain rounded-xl shadow-lg flex flex-col gap-2 items-center glass '
           onSubmit={handleLogin}
         >
           <p className='text-xl'> Login</p>
@@ -53,9 +53,9 @@ const Login = () => {
           >
             {buttonLoader ? 'Loading...' : 'Login'}
           </button>
-          <Link className='text-sm' to='/resetPassword'>
+          {/* <Link className='text-sm' to='/resetPassword'>
             Forgot Password{' '}
-          </Link>
+          </Link> */}
 
           <p className=' text-sm'>
             Need An Account {''}{' '}

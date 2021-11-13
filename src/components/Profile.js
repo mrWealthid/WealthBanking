@@ -7,6 +7,10 @@ import {
   FaSortAmountDown,
   FaSortAmountUp,
   FaHistory,
+  FaArrowRight,
+  FaArrowLeft,
+  FaSadTear,
+  FaHandHoldingUsd,
 } from 'react-icons/fa';
 import Transactions from './Transactions';
 import ProfilePopup from './ProfilePopup';
@@ -118,42 +122,54 @@ const Profile = () => {
           <section className='flex flex-col lg:flex-row-reverse gap-5 justify-between '>
             <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 lg:w-5/12 w-full lg:sticky top-3 order-2 lg:order-none  h-full rounded-lg  text-gray-200 gap-3'>
               <section
-                className='transfer flex flex-col gap-2 w-full items-center md:items-start max-w-md mx-auto justify-center bg-blend-screen bg-contain h-40 cap rounded-lg cursor-pointer p-5'
+                className='transfer flex flex-col gap-2 w-full items-center  max-w-md mx-auto justify-center bg-blend-screen bg-contain h-40 cap rounded-lg cursor-pointer p-5'
                 onClick={() => {
                   setpopUp(!popUp);
                   setSuccessMsg(false);
                   setType('transfer');
                 }}
               >
+                <div className='glass rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-1 px-1 shadow-2xl mx-auto'>
+                  <FaArrowRight color='green' />
+
+                  <FaArrowLeft color='brown' />
+                </div>
                 <p> Make A Transfer</p>
               </section>
 
               <section
-                className='loan cap bg-blend-screen flex flex-col w-full gap-2 items-center md:items-start max-w-md mx-auto  justify-center  cursor-pointer bg-contain h-40 rounded-lg p-5'
+                className='loan cap bg-blend-screen flex flex-col w-full gap-2 items-center  max-w-md mx-auto  justify-center  cursor-pointer bg-contain h-40 rounded-lg p-5'
                 onClick={() => {
                   setpopUp(!popUp);
                   setSuccessMsg(false);
                   setType('loan');
                 }}
               >
+                <div className='glass rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-1 px-1 shadow-2xl mx-auto'>
+                  <FaHandHoldingUsd color='green' />
+                </div>
                 <p>Request Loan</p>
               </section>
 
               <section
-                className='white shadow-2xl bg-contain gap-2  flex flex-col items-center md:items-start max-w-md mx-auto w-full justify-center  bg-gray-900 cursor-pointer cap h-40 rounded-lg p-5'
+                className='white shadow-2xl bg-contain gap-2  flex flex-col items-center  max-w-md mx-auto w-full justify-center  bg-gray-900 cursor-pointer cap h-40 rounded-lg p-5'
                 onClick={() => {
                   setpopUp(!popUp);
                   setSuccessMsg(false);
                   setType('close');
                 }}
               >
+                <div className='glass rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-1 px-1 shadow-2xl mx-auto'>
+                  <FaSadTear color='brown' />
+                </div>
+
                 <p>Close Account</p>
               </section>
             </section>
             <section className='lg:w-8/12 order-1 lg:order-none  flex flex-col gap-3'>
               <p className='text-base lg:text-xl greentxt '>Transactions</p>
 
-              <section className='flex bg-white shadow-lg border border-gray-300 rounded-lg px-3 py-4  text-gray-800 justify-between items-center'>
+              <section className='flex glass shadow-lg border border-gray-300 rounded-lg px-3 py-4  text-gray-800 justify-between items-center'>
                 <p className='text-sm greentxt lg:text-base'>
                   {Number(selected.type) === 1
                     ? 'All Transactions'
@@ -176,7 +192,7 @@ const Profile = () => {
                   </label> */}
 
                   <select
-                    className='py-0 text-sm lg-text-base greentxt border border-green-600 focus:outline-none focus:ring-green-500  w-28 rounded'
+                    className='py-0 text-sm lg-text-base greentxt border border-green-600 focus:outline-none focus:ring-green-500 focus:border-green-500   w-28 rounded'
                     value={selected.type}
                     onChange={selectChange}
                   >
@@ -188,13 +204,13 @@ const Profile = () => {
                   </select>
                 </div>
               </section>
-              <section className='green  w-full  cap bg-blend-color-burn rounded-lg bg-contain flex flex-col gap-2 p-4 text-white h-full'>
+              <section className='w-full glass  rounded-lg bg-contain flex flex-col gap-2 p-4 text-black h-full'>
                 <div className='flex gap-2 justify-between flex-col md:flex-row items-center'>
-                  <div className='flex gap-2 items-center'>
-                    <FaHistory /> Transaction History
+                  <div className='flex gap-2 items-center text-gray-700'>
+                    <FaHistory className='text-gray-700' /> Transaction History
                   </div>
 
-                  <div className='bg-white items-center px-3 rounded-3xl w-10/12 sm:w-auto overflow-hidden flex gap-2'>
+                  <div className='bg-white items-center px-3 rounded-3xl w-10/12 sm:w-auto border border-gray-300 overflow-hidden flex gap-2'>
                     <FaSearch size='10px' className='text-gray-700' />
                     <input
                       type='text'
@@ -207,14 +223,14 @@ const Profile = () => {
 
                   {asc ? (
                     <div
-                      className='flex gap-2 bg-gray-50 text-gray-800 cursor-pointer text-sm rounded-xl px-3 py-1 items-center   w-20'
+                      className='flex gap-2 bg-white text-gray-800 cursor-pointer text-sm rounded-xl px-3 py-1 items-center w-20 border-gray-300 border'
                       onClick={handleSortDesc}
                     >
                       <FaSortAmountDown color='green' /> Desc
                     </div>
                   ) : (
                     <div
-                      className='flex gap-2 bg-gray-50 text-gray-800 cursor-pointer rounded-xl px-3 w-20 py-1 items-center text-sm '
+                      className='flex gap-2 bg-white text-gray-800 cursor-pointer rounded-xl px-3 w-20 py-1 items-center text-sm border border-gray-300 '
                       onClick={handleSortAsc}
                     >
                       <FaSortAmountUp color='cadetblue' /> Asc
@@ -257,7 +273,7 @@ const Profile = () => {
               <Analytics
                 counts={totalWithdrawalCount.toLocaleString()}
                 color={'loan'}
-                icon={<FaArrowUp color='red' />}
+                icon={<FaArrowUp color='brown' />}
               />
               <Analytics
                 counts={10}

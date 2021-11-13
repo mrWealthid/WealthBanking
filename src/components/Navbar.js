@@ -14,7 +14,7 @@ const Navbar = () => {
     padding: '4px 10px',
   };
   return (
-    <div className='bg-white  relative greentxt py-6'>
+    <div className='bg-gray-50 relative greentxt py-4'>
       <div className='w-11/12 text-sm mx-auto flex-wrap flex justify-between items-center'>
         <div>
           <div className='text-lg flex items-center gap-2'>

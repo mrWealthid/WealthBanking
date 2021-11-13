@@ -55,13 +55,13 @@ const ProfilePopup = ({ type, color }) => {
           >
             {type === 'transfer' ? (
               !successMsg ? (
-                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 mx-auto'>
+                <div className='glass rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 mx-auto'>
                   <FaArrowRight color='green' />
 
                   <FaArrowLeft color='brown' />
                 </div>
               ) : (
-                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 mx-auto'>
+                <div className='glass rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 mx-auto'>
                   <FaClipboardCheck color='green' />
 
                   {/* <FaArrowLeft color='brown' /> */}
@@ -69,17 +69,17 @@ const ProfilePopup = ({ type, color }) => {
               )
             ) : type === 'loan' ? (
               !successMsg ? (
-                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 mx-auto'>
+                <div className='glass rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 mx-auto'>
                   {' '}
                   <FaHandHoldingUsd color='green' />
                 </div>
               ) : (
-                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 mx-auto'>
+                <div className='glass rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 mx-auto'>
                   <FaClipboardCheck color='green' />
                 </div>
               )
             ) : (
-              <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-1 px-3 mx-auto'>
+              <div className='glass rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-1 px-3 mx-auto'>
                 <FaSadTear color='brown' />
               </div>
             )}
@@ -109,17 +109,17 @@ const ProfilePopup = ({ type, color }) => {
           >
             <div className=' sm:hidden'>
               {type === 'transfer' ? (
-                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 shadow-2xl mx-auto'>
+                <div className='glass rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 shadow-2xl mx-auto'>
                   <FaArrowRight color='green' />
 
                   <FaArrowLeft color='brown' />
                 </div>
               ) : type === 'loan' ? (
-                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 shadow-2xl  mx-auto'>
+                <div className='glass rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 shadow-2xl  mx-auto'>
                   <FaHandHoldingUsd color='green' />
                 </div>
               ) : (
-                <div className='bg-white rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 shadow-2xl  mx-auto'>
+                <div className='glass rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-2 px-2 shadow-2xl  mx-auto'>
                   {' '}
                   <FaSadTear color='brown' />
                 </div>
@@ -156,7 +156,7 @@ const ProfilePopup = ({ type, color }) => {
 
                 {transferAccount && type === 'transfer' ? (
                   <FaCheck
-                    className='absolute animate-slideIn check'
+                    className='absolute animate-slideIn glass check'
                     color='green'
                   />
                 ) : null}
