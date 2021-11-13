@@ -15,7 +15,7 @@ const Signup = () => {
 
   return (
     <div className='min-h-screen animate-slideIn flex flex-col items-center justify-center'>
-      <div className='w-8/12  md:w-8/12  flex flex-col max-w-xl gap-2 transform hover:scale-105 transition ease-in-out duration-500'>
+      <div className='w-8/12  md:w-8/12  flex flex-col max-w-xl gap-2  transition ease-in-out duration-500'>
         <form
           className='py-6 px-8 flex rounded-lg cap bg-contain shadow-lg flex-col gap-1 items-center glass '
           onSubmit={handleSignup}
@@ -63,7 +63,7 @@ const Signup = () => {
           <button
             className={` ${
               confirmFields ? 'bg-green-200' : ' bg-green-700 '
-            }  text-white text-sm w-6/12 lg:w-4/12 md:text-base rounded-lg cap  py-2 px-7 text-white transition ease-linear duration-1000`}
+            }  text-white text-sm w-5/12  md:w-4/12 md:text-base rounded-lg cap  py-2  text-white transition ease-linear duration-1000`}
             disabled={confirmFields}
           >
             {buttonLoader ? 'Loading...' : 'Register'}

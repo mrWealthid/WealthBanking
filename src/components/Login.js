@@ -16,7 +16,7 @@ const Login = () => {
 
   return (
     <div className='min-h-screen animate-slideOut flex flex-col items-center justify-center'>
-      <div className='w-10/12 sm:w-8/12 md:w-6/12 lg:w-4/12 flex flex-col max-w-xl  gap-1 transform hover:scale-105 transition ease-in-out duration-500'>
+      <div className='w-10/12 sm:w-8/12 md:w-5/12 lg:w-4/12 flex flex-col max-w-xl  gap-1  transition ease-in-out duration-500'>
         <form
           className='py-6 px-8 cap  bg-contain rounded-xl shadow-lg flex flex-col gap-2 items-center glass '
           onSubmit={handleLogin}
@@ -48,10 +48,10 @@ const Login = () => {
           <button
             className={` ${
               confirmFields ? 'bg-green-200' : ' bg-green-700 '
-            } text-white cap text-sm w-4/12 md:text-base rounded-lg  py-2 px-7 text-white transition ease-linear duration-1000`}
+            } text-white cap text-xs  w-4/12 md:text-base rounded-lg text-center py-2 text-white transition ease-linear duration-1000`}
             disabled={confirmFields}
           >
-            {buttonLoader ? 'Loading...' : 'Login'}
+            {buttonLoader ? 'Verifying...' : 'Login'}
           </button>
           {/* <Link className='text-sm' to='/resetPassword'>
             Forgot Password{' '}

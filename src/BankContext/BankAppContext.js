@@ -91,7 +91,7 @@ const BankAppProvider = ({ children }) => {
     type: 1,
   });
 
-  // const [buttonLoader, setButtonLoader] = useState(false);
+  const [buttonLoader, setButtonLoader] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [total, setTotal] = useState(0);
   const [deposit, setDeposit] = useState(0);
@@ -362,13 +362,9 @@ const BankAppProvider = ({ children }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const data = await signInWithEmailAndPassword(
-        auth,
-        login.email,
-        login.password
-      );
+      await signInWithEmailAndPassword(auth, login.email, login.password);
 
-      console.log(data.user.uid);
+      // console.log(data.user.uid);
 
       // dispatch(
       //   logIn({
@@ -379,9 +375,7 @@ const BankAppProvider = ({ children }) => {
       //   })
       // );
 
-      // setButtonLoader(true);
-
-      history.push('/loginState')
+      setButtonLoader(true);
 
       setLogin({
         email: '',
@@ -390,22 +384,19 @@ const BankAppProvider = ({ children }) => {
 
       setConfirmFields(true);
       setTimeout(() => {
-        // setButtonLoader(false);
+        setButtonLoader(false);
         history.push('/profile');
       }, 1500);
     } catch (error) {
       console.log(error.message);
       errorChecker(error);
       setConfirmFields(false);
-      // setAlert({
-      //   type: true,
-      //   msg: 'Failed To Login Try Again!!',
-      // });
-      // setButtonLoader(true);
 
-      // setTimeout(() => {
-      //   setButtonLoader(false);
-      // }, 3000);
+      setButtonLoader(true);
+
+      setTimeout(() => {
+        setButtonLoader(false);
+      }, 3000);
     }
   };
 
@@ -629,6 +620,7 @@ const BankAppProvider = ({ children }) => {
         successMsg,
         setSuccessMsg,
         capitalize,
+        buttonLoader,
       }}
     >
       {children}
