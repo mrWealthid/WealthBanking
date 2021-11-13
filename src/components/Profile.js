@@ -166,7 +166,7 @@ const Profile = () => {
                 <p>Close Account</p>
               </section>
             </section>
-            <section className='lg:w-8/12 order-1 lg:order-none  flex flex-col gap-3'>
+            <section className='lg:w-8/12 flex-shrink-0 order-1 lg:order-none  flex flex-col gap-3'>
               <p className='text-base lg:text-xl greentxt '>Transactions</p>
 
               <section className='flex glass shadow-lg border border-gray-300 rounded-lg px-3 py-4  text-gray-800 justify-between items-center'>
