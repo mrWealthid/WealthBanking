@@ -29,6 +29,8 @@ import {
   createUserStore,
   convertTime,
   formatDate,
+  formatCurrency,
+  calcLoanPayBackTime,
 } from '../components/Utils';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -502,8 +504,10 @@ const BankAppProvider = ({ children }) => {
         {
           Depositor: 'WealthBank',
           account: 'Loan',
+          type: 'Loan',
           time: new Date().toISOString(),
           amount: Number(loanRef.current.value),
+          dueTime: calcLoanPayBackTime(7, new Date().toISOString()),
         },
       ];
 
@@ -628,6 +632,7 @@ const BankAppProvider = ({ children }) => {
         buttonLoader,
         convertTime,
         formatDate,
+        formatCurrency,
       }}
     >
       {children}

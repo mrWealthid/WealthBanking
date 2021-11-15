@@ -32,9 +32,9 @@ const Profile = () => {
     setSuccessMsg,
     asc,
     capitalize,
+    formatCurrency,
+    handleLogout,
   } = useBankContext();
-
-  const [counter, setCounter] = useState(0);
 
   const [totalDepCount, setTotalDepCount] = useState(0);
 
@@ -44,16 +44,6 @@ const Profile = () => {
 
   const [input, setInput] = useState('');
   const [type, setType] = useState('');
-
-  const value = 1000;
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      counter < value && setCounter(counter + 1);
-    }, 500);
-
-    return () => clearInterval(timer);
-  }, [counter, value]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -102,17 +92,42 @@ const Profile = () => {
 
     const locale = navigator.language;
 
-    const TodaysDate = new Intl.DateTimeFormat(locale, options).format(now);
-    return TodaysDate;
+    return new Intl.DateTimeFormat(locale, options).format(now);
   };
 
+  const [minutes, setMinutes] = useState(60);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      minutes > 0 && setMinutes(minutes - 1);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [minutes]);
+
+  const formatTimer = (val) => {
+    const min = String(Math.trunc(val / 60)).padStart(2, 0);
+    const sec = String(val % 60).padStart(2, 0);
+
+    return `${min}:${sec}`;
+  };
+
+  //logout user if account is inactive for 5mins
+  useEffect(() => {
+    if (minutes === 0) {
+      return handleLogout;
+    }
+  }, [minutes, handleLogout]);
+
   return (
-    <div className='flex flex-col animate-slideOut  w-11/12 mx-auto'>
+    <div
+      className='flex flex-col animate-slideOut  w-11/12 mx-auto'
+      onClick={() => setMinutes(300)}
+    >
       {userDetails && (
         <div className={`${popUp && 'filter blur'} px-4 my-2 lg:my-4`}>
           <p className='text-base flex gap-3 text-gray-800  md:text-xl'>
             Welcome Back,
-            <span className='text-gray-800 '>{userDetails.name}!</span>
+            <span className='text-gray-800'>{userDetails.name}!</span>
           </p>
 
           <p className='text-sm text-gray-800  md:text-base'>
@@ -127,7 +142,7 @@ const Profile = () => {
             <div className='animate-slideIn'>
               <p className='text-sm lg:text-base'>Balance</p>
               <p className=' text-lg lg:text-2xl text-gray-900 font-bold '>
-                ₦{totalCount?.toLocaleString()}
+                {formatCurrency('en-US', userData.currency, totalCount)}
               </p>{' '}
             </div>
           </div>
@@ -282,12 +297,20 @@ const Profile = () => {
 
             <div className='lg:w-4/12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  w-full order-3 lg:sticky top-3 lg:h-full gap-3 lg:grid-cols-1'>
               <Analytics
-                counts={totalDepCount.toLocaleString()}
+                counts={formatCurrency(
+                  'en-US',
+                  userData.currency,
+                  totalDepCount
+                )}
                 icon={<FaArrowDown color='green' />}
                 color='transfer'
               />
               <Analytics
-                counts={totalWithdrawalCount.toLocaleString()}
+                counts={formatCurrency(
+                  'en-US',
+                  userData.currency,
+                  totalWithdrawalCount
+                )}
                 color={'loan'}
                 icon={<FaArrowUp color='brown' />}
               />
@@ -298,6 +321,7 @@ const Profile = () => {
               />
             </div>
           </section>
+          <p className='text-center'>{formatTimer(minutes)}</p>
         </div>
       )}
       {popUp ? (
@@ -312,6 +336,8 @@ const Profile = () => {
           }
         />
       ) : null}
+
+      {/* logout timer */}
     </div>
   );
 };
