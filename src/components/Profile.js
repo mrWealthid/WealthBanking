@@ -223,7 +223,7 @@ const Profile = () => {
                     <FaHistory className='text-gray-700' /> Transaction History
                   </div>
 
-                  <div className='bg-white items-center px-3 rounded-3xl  lg:w-5/12 sm:w-auto border border-gray-300 overflow-hidden flex gap-2'>
+                  <div className='bg-white items-center px-3 rounded-3xl w-10/12  lg:w-5/12 sm:w-auto border border-gray-300 overflow-hidden flex gap-2'>
                     <FaSearch
                       size='10px'
                       className='text-gray-700 flex-shrink-0'
