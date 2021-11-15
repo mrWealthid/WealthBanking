@@ -11,6 +11,7 @@ import {
   FaArrowLeft,
   FaSadTear,
   FaHandHoldingUsd,
+  FaUserCog,
 } from 'react-icons/fa';
 import Transactions from './Transactions';
 import ProfilePopup from './ProfilePopup';
@@ -193,6 +194,21 @@ const Profile = () => {
 
                 <p>Close Account</p>
               </section>
+
+              <section
+                className='white shadow-2xl bg-contain gap-2  flex flex-col items-center  max-w-md mx-auto w-full justify-center glass cursor-pointer cap h-40 rounded-lg p-5'
+                onClick={() => {
+                  setpopUp(!popUp);
+                  setSuccessMsg(false);
+                  setType('close');
+                }}
+              >
+                <div className='glass rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-1 px-1 shadow-2xl mx-auto'>
+                  <FaUserCog color='brown' />
+                </div>
+
+                <p className='text-black'>Account Settings</p>
+              </section>
             </section>
             <section className='lg:w-7/12 flex-shrink-0 order-1 lg:order-none  flex flex-col gap-3'>
               <p className='text-base lg:text-xl greentxt '>Transactions</p>
@@ -245,10 +261,10 @@ const Profile = () => {
                     />
                     <input
                       type='text'
-                      className='border-transparent focus:outline-none text-black focus:py-0 focus:ring-2 focus:ring-white focus:border-transparent  py-0'
+                      className='border-transparent focus:outline-none text-black  focus:ring-2 focus:ring-white focus:border-transparent text-sm  py-1'
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
-                      placeholder='Search...'
+                      placeholder='Search By Name...'
                     />
                   </div>
 
@@ -318,6 +334,12 @@ const Profile = () => {
                 counts={10}
                 color={'bg-gray-900'}
                 icon={<FaArrowDown color='green' />}
+              />
+
+              <Analytics
+                counts={'Interest'}
+                color={'glass'}
+                icon={<FaArrowUp color='green' />}
               />
             </div>
           </section>

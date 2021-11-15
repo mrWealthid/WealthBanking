@@ -9,7 +9,7 @@ const Analytics = ({ counts, color, icon }) => {
         {icon}
       </div>
 
-      <p className='text-lg'>{counts}</p>
+      <p className={`${color === 'glass' && 'text-black'} text-lg`}>{counts}</p>
     </section>
   );
 };
