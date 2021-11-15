@@ -24,7 +24,12 @@ import {
   signOut,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { generateAccNums, createUserStore } from '../components/Utils';
+import {
+  generateAccNums,
+  createUserStore,
+  convertTime,
+  formatDate,
+} from '../components/Utils';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   isLoggedIn,
@@ -621,6 +626,8 @@ const BankAppProvider = ({ children }) => {
         setSuccessMsg,
         capitalize,
         buttonLoader,
+        convertTime,
+        formatDate,
       }}
     >
       {children}

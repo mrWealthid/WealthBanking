@@ -17,7 +17,7 @@ const Signup = () => {
     <div className='min-h-screen animate-slideIn flex flex-col items-center justify-center'>
       <div className='w-8/12  md:w-8/12  flex flex-col max-w-xl gap-2  transition ease-in-out duration-500'>
         <form
-          className='py-6 px-8 flex rounded-lg cap bg-contain shadow-lg flex-col gap-1 items-center glass '
+          className='py-6 px-8 flex rounded-lg cap bg-contain shadow-lg flex-col gap-1 lg:gap-4 items-center glass '
           onSubmit={handleSignup}
         >
           <p className='text-xl'> Sign Up</p>
@@ -45,7 +45,7 @@ const Signup = () => {
           <div className='flex flex-col md:flex-row  item-center w-full gap-2 md:gap-4'>
             <input
               type='text'
-              placeholder='email'
+              placeholder='Email'
               value={register.email}
               name='email'
               onChange={handleChangeRegister}
@@ -53,7 +53,7 @@ const Signup = () => {
             />
             <input
               type='password'
-              placeholder='password'
+              placeholder='Password'
               value={register.password}
               name='password'
               onChange={handleChangeRegister}

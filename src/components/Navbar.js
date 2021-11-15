@@ -14,15 +14,15 @@ const Navbar = () => {
     padding: '4px 10px',
   };
   return (
-    <div className='bg-gray-50 relative greentxt py-4'>
+    <div className='App border border-b border-white relative greentxt py-4'>
       <div className='w-11/12 text-sm mx-auto flex-wrap flex justify-between items-center'>
         <div>
           <div className='text-lg flex items-center gap-2'>
             <span>
               <Fa500Px
                 color='seagreen'
-                className='w-6 h-6 md:w-10 p-2 shadow-xl
-              animate-bounce md:h-10 object-fit bg-white border border-green-700 rounded-full'
+                className='w-6 h-6 md:w-10 p-2 flex-shrink-0 shadow-xl
+              animate-bounce md:h-10 object-fit glass  border border-green-700 rounded-full'
               />
             </span>
             <span> BankApp</span>

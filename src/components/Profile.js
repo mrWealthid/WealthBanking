@@ -89,7 +89,22 @@ const Profile = () => {
     return () => clearInterval(timer);
   }, [totalWithdrawalCount, withdrawal]);
 
-  // To capitalize input
+  const globalizeDate = () => {
+    const now = new Date();
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      weekday: 'short',
+    };
+
+    const locale = navigator.language;
+
+    const TodaysDate = new Intl.DateTimeFormat(locale, options).format(now);
+    return TodaysDate;
+  };
 
   return (
     <div className='flex flex-col animate-slideOut  w-11/12 mx-auto'>
@@ -107,9 +122,7 @@ const Profile = () => {
           <div className='flex md:flex-row flex-col  justify-between md:items-center gap-2 py-8 lg:py-16 '>
             <div className='flex text-sm lg:text-base  flex-col text-gray-800 '>
               Current Balance
-              <p className='text-sm text-gray-800 '>
-                As at {new Date().toDateString()}
-              </p>
+              <p className='text-sm text-gray-800 '>As at {globalizeDate()}</p>
             </div>
             <div className='animate-slideIn'>
               <p className='text-sm lg:text-base'>Balance</p>
@@ -134,7 +147,7 @@ const Profile = () => {
 
                   <FaArrowLeft color='brown' />
                 </div>
-                <p> Make A Transfer</p>
+                <p className='text-center'> Make A Transfer</p>
               </section>
 
               <section
@@ -166,7 +179,7 @@ const Profile = () => {
                 <p>Close Account</p>
               </section>
             </section>
-            <section className='lg:w-8/12 flex-shrink-0 order-1 lg:order-none  flex flex-col gap-3'>
+            <section className='lg:w-7/12 flex-shrink-0 order-1 lg:order-none  flex flex-col gap-3'>
               <p className='text-base lg:text-xl greentxt '>Transactions</p>
 
               <section className='flex glass shadow-lg border border-gray-300 rounded-lg px-3 py-4  text-gray-800 justify-between items-center'>
@@ -205,13 +218,16 @@ const Profile = () => {
                 </div>
               </section>
               <section className='w-full glass  rounded-lg bg-contain flex flex-col gap-2 p-4 text-black h-full'>
-                <div className='flex gap-2 justify-between flex-col md:flex-row items-center'>
-                  <div className='flex gap-2 items-center text-gray-700'>
+                <div className='flex gap-2 justify-between  flex-col md:flex-row items-center'>
+                  <div className='flex gap-2 items-center flex-shrink-0 text-gray-700'>
                     <FaHistory className='text-gray-700' /> Transaction History
                   </div>
 
-                  <div className='bg-white items-center px-3 rounded-3xl w-10/12 sm:w-auto border border-gray-300 overflow-hidden flex gap-2'>
-                    <FaSearch size='10px' className='text-gray-700' />
+                  <div className='bg-white items-center px-3 rounded-3xl  lg:w-5/12 sm:w-auto border border-gray-300 overflow-hidden flex gap-2'>
+                    <FaSearch
+                      size='10px'
+                      className='text-gray-700 flex-shrink-0'
+                    />
                     <input
                       type='text'
                       className='border-transparent focus:outline-none text-black focus:py-0 focus:ring-2 focus:ring-white focus:border-transparent  py-0'

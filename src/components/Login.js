@@ -18,7 +18,7 @@ const Login = () => {
     <div className='min-h-screen animate-slideOut flex flex-col items-center justify-center'>
       <div className='w-10/12 sm:w-8/12 md:w-5/12 lg:w-4/12 flex flex-col max-w-xl  gap-1  transition ease-in-out duration-500'>
         <form
-          className='py-6 px-8 cap  bg-contain rounded-xl shadow-lg flex flex-col gap-2 items-center glass '
+          className='py-6 px-8 cap  bg-contain rounded-xl shadow-lg flex flex-col gap-2 lg:gap-4 items-center glass '
           onSubmit={handleLogin}
         >
           <p className='text-xl'> Login</p>
