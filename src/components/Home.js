@@ -1,33 +1,131 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { FaWifi } from 'react-icons/fa';
 
+import { currency, cryptoCurrency } from './currencyList';
 const Home = () => {
+  const [type, setType] = useState(1);
   return (
-    <div className='min-h-screen w-10/12 mx-auto flex flex-col items-center justify-center'>
-      <div>This is my Home route</div>
+    <div className='min-h-screen  flex flex-col items-center justify-center'>
+      <section className='flex justify-between w-11/12 '>
+        <div className='flex flex-col w-1/2 gap-3'>
+          <p className='text-5xl'>
+            The Easiest Way <br></br> To Manage Personal <br></br> Finances
+          </p>
 
-      <div>
-        <p>How to test App</p>
-        <p>
-          Create an account using email and password(should be at least 6
-          characters)
-        </p>
-        <p>
-          Have another create an account also to test realtime transactions,
-          instant messages without refresh
-        </p>
-        <p>Use account number to make a transfer, request loan etc.</p>
+          <p className='text-base'>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat.
+          </p>
+        </div>
 
-        <p>
-          Features includes: Protected routes, user authentication, realtime
-          database, search, sort, animations, responsiveness accross all device
-          breakpoints, sleek user experience... enjoy 👌 etc.
-        </p>
+        <section className='flex w-1/2 gap-8 justify-between'>
+          <div className='flex w-1/2'>
+            <section className='w-60 flex flex-col  box-border rounded-lg cap green text-white'>
+              <div className='flex flex-1 justify-between p-3'>
+                <p>WealthPay</p>
+                <FaWifi className='transform  rotate-45 block' />
+              </div>
 
-        <p>
-          Kindly test all functionalities. Landing Page coming shortly, on or
-          before 13/11 2021
-        </p>
-      </div>
+              <div className=' p-3 flex flex-col mb-5'>
+                <div className=' flex justify-between items-center'>
+                  <div className='flex text-sm gap-1'>
+                    <p>5123</p>
+                    <p>5123</p>
+                    <p>5123</p>
+                    <p>5123</p>
+                  </div>
+                  {/* <p>Wealth Iduwe</p> */}
+                  <div className='flex  '>
+                    <p className='bg-yellow-500 z-10  opacity-80  rounded-full w-8 h-8'></p>
+                    <p className='bg-red-800 -ml-4 rounded-full w-8 h-8'></p>
+                  </div>
+                </div>
+                <p>Wealth Iduwe</p>
+              </div>
+            </section>
+          </div>
+
+          <section className='w-full border glass p-2 px-4 rounded-lg  flex gap-3 flex-col'>
+            <div className=' flex gap-2'>
+              <p
+                onClick={() => setType(1)}
+                className={`${
+                  type === 1 ? 'border-b-2 border-green-600' : ''
+                } cursor-pointer`}
+              >
+                Currency
+              </p>
+              <p
+                onClick={() => setType(2)}
+                className={`${
+                  type === 2 ? 'border-b-2 border-gray-600' : ''
+                } cursor-pointer`}
+              >
+                Crypto
+              </p>
+            </div>
+
+            <p>{type === 1 ? 'Currency Converter' : 'Crypto Converter'}</p>
+
+            <form className=' flex flex-col py-4 px-4  gap-4 border'>
+              {type === 1 ? (
+                <>
+                  {' '}
+                  <select
+                    className='py-2 px-2 text-sm lg-text-base greentxt animate-slideIn w-full border border-green-600 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-lg'
+                    // value={selected.type}
+                    // onChange={selectChange}
+                  >
+                    <option>Currency</option>
+                    {currency.map((curr) => (
+                      <option value={curr.code}>{curr.code}</option>
+                    ))}
+                  </select>
+                  <select
+                    className='py-2 px-2 text-sm lg-text-base greentxt w-full  animate-slideIn border border-green-600 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-lg'
+                    // value={selected.type}
+                    // onChange={selectChange}
+                  >
+                    <option>Currency</option>
+                    {currency.map((curr) => (
+                      <option value={curr.code}>{curr.code}</option>
+                    ))}
+                  </select>
+                </>
+              ) : (
+                <>
+                  {' '}
+                  <select
+                    className='py-2 px-2 text-sm lg-text-base greentxt w-full  animate-slideOut border border-green-600 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-lg'
+                    // value={selected.type}
+                    // onChange={selectChange}
+                  >
+                    <option>Crypto Currency</option>
+                    {cryptoCurrency.map((curr) => (
+                      <option value={curr.code}>{curr.code}</option>
+                    ))}
+                  </select>
+                  <select
+                    className='py-2 px-2 text-sm lg-text-base greentxt w-full border animate-slideOut border-green-600 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-lg'
+                    // value={selected.type}
+                    // onChange={selectChange}
+                  >
+                    <option>Crypto Currency</option>
+                    {cryptoCurrency.map((curr) => (
+                      <option value={curr.code}>{curr.code}</option>
+                    ))}
+                  </select>
+                </>
+              )}
+              <p>Currency Rate</p>
+
+              <button>Convert</button>
+            </form>
+          </section>
+        </section>
+      </section>
     </div>
   );
 };
