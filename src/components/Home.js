@@ -6,13 +6,13 @@ const Home = () => {
   const [type, setType] = useState(1);
   return (
     <div className='min-h-screen  flex flex-col items-center justify-center'>
-      <section className='flex justify-between w-11/12 '>
+      <section className='flex flex-col md:flex-row justify-between items-center w-11/12 '>
         <div className='flex flex-col w-1/2 gap-3'>
-          <p className='text-5xl'>
+          <p className='text-3xl lg:text-4xl'>
             The Easiest Way <br></br> To Manage Personal <br></br> Finances
           </p>
 
-          <p className='text-base'>
+          <p className='text-sm'>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
             ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -20,8 +20,8 @@ const Home = () => {
           </p>
         </div>
 
-        <section className='flex w-1/2 gap-8 justify-between'>
-          <div className='flex w-1/2'>
+        <section className='flex w-1/2 gap-8  justify-between'>
+          <div className='w-1/2 hidden lg:flex '>
             <section className='w-60 flex flex-col  box-border rounded-lg cap green text-white'>
               <div className='flex flex-1 justify-between p-3'>
                 <p>WealthPay</p>
@@ -47,7 +47,7 @@ const Home = () => {
             </section>
           </div>
 
-          <section className='w-full border glass p-2 px-4 rounded-lg  flex gap-3 flex-col'>
+          <section className='w-3/4 lg:w-1/2 justify-center mx-auto lg:w-full border glass p-2 px-4 rounded-lg flex gap-3 flex-col'>
             <div className=' flex gap-2'>
               <p
                 onClick={() => setType(1)}
@@ -79,8 +79,10 @@ const Home = () => {
                     // onChange={selectChange}
                   >
                     <option>Currency</option>
-                    {currency.map((curr) => (
-                      <option value={curr.code}>{curr.code}</option>
+                    {currency.map((curr, index) => (
+                      <option value={curr.code} key={index}>
+                        {curr.code}
+                      </option>
                     ))}
                   </select>
                   <select
@@ -89,8 +91,10 @@ const Home = () => {
                     // onChange={selectChange}
                   >
                     <option>Currency</option>
-                    {currency.map((curr) => (
-                      <option value={curr.code}>{curr.code}</option>
+                    {currency.map((curr, index) => (
+                      <option value={curr.code} key={index}>
+                        {curr.code}
+                      </option>
                     ))}
                   </select>
                 </>
@@ -103,8 +107,10 @@ const Home = () => {
                     // onChange={selectChange}
                   >
                     <option>Crypto Currency</option>
-                    {cryptoCurrency.map((curr) => (
-                      <option value={curr.code}>{curr.code}</option>
+                    {cryptoCurrency.map((curr, index) => (
+                      <option value={curr.code} key={index}>
+                        {curr.code}
+                      </option>
                     ))}
                   </select>
                   <select
@@ -113,15 +119,24 @@ const Home = () => {
                     // onChange={selectChange}
                   >
                     <option>Crypto Currency</option>
-                    {cryptoCurrency.map((curr) => (
-                      <option value={curr.code}>{curr.code}</option>
+                    {cryptoCurrency.map((curr, index) => (
+                      <option value={curr.code} key={index}>
+                        {curr.code}
+                      </option>
                     ))}
                   </select>
                 </>
               )}
               <p>Currency Rate</p>
-
-              <button>Convert</button>
+              <div className='text-center'>
+                <button
+                  className={
+                    'bg-green-700 text-white cap text-xs w-full  md:w-6/12 md:text-base rounded-lg text-center py-2 text-white transition ease-linear duration-1000'
+                  }
+                >
+                  Convert
+                </button>
+              </div>
             </form>
           </section>
         </section>

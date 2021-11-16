@@ -18,10 +18,10 @@ const Signup = () => {
     <div className='min-h-screen animate-slideIn flex flex-col items-center justify-center'>
       <div className='w-8/12  md:w-8/12  flex flex-col max-w-xl gap-2  transition ease-in-out duration-500'>
         <form
-          className='py-6 px-8 flex rounded-lg cap bg-contain shadow-lg flex-col gap-1 lg:gap-4  glass '
+          className='py-6 px-8 flex rounded-lg cap bg-contain shadow-lg flex-col gap-2 lg:gap-2 glass '
           onSubmit={handleSignup}
         >
-          <p className='text-xl'> Sign Up</p>
+          <p className='text-xl text-center mb-3'> Sign Up</p>
           {type ? (
             <p className='text-red-900  animate-slideIn p-2 rounded'>{msg}</p>
           ) : null}
@@ -61,20 +61,22 @@ const Signup = () => {
               className='my-2 block w-full py-2 px-2  focus:outline-none border-green-500 text-black rounded-lg focus:ring-2 focus:ring-green-500 text-sm focus:border-transparent'
             />
           </div>
-          <div className='flex flex-col md:flex-row w-6/12 gap-2 justify-start md:gap-4'>
+          <div className='flex flex-col md:flex-row w-full gap-2 md:gap-4'>
             <select
-              className='py-2 px-2 text-sm lg-text-base greentxt w-full border border-green-600 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-lg'
+              className='py-2 my-2 px-2 text-sm lg-text-base greentxt w-full border border-green-600 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-lg'
               // value={selected.type}
               // onChange={selectChange}
             >
               <option>Currency</option>
-              {currency.map((curr) => (
-                <option value={curr.code}>{curr.name}</option>
+              {currency.map((curr, index) => (
+                <option value={curr.code} key={index}>
+                  {curr.name}
+                </option>
               ))}
             </select>
 
             <select
-              className='py-2 px-2 text-sm lg-text-base w-full greentxt border border-green-600 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-lg'
+              className='py-2 px-2 my-2 text-sm lg-text-base w-full greentxt border border-green-600 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-lg'
               // value={selected.type}
               // onChange={selectChange}
             >
@@ -85,7 +87,7 @@ const Signup = () => {
               <option value={'Female'}>Female</option>
             </select>
           </div>
-          <div className='w-full flex justify-end'>
+          <div className='w-full flex  justify-end'>
             <button
               className={` ${
                 confirmFields ? 'bg-green-200' : ' bg-green-700 '
@@ -95,10 +97,10 @@ const Signup = () => {
               {buttonLoader ? 'Loading...' : 'Register'}
             </button>
           </div>
-          <p className=' text-sm text-center'>
+          <p className=' text-sm text-center flex gap-2 justify-center'>
             {' '}
             Already Have An Account
-            <Link className='text-blue-700 text-center text-sm' to='/login'>
+            <Link className='text-blue-700  text-sm' to='/login'>
               Login
             </Link>{' '}
           </p>{' '}
