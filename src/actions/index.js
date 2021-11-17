@@ -1,3 +1,4 @@
+//authentication state
 export const isLoggedIn = (payload) => {
   return {
     type: 'ISLOGGEDIN',
@@ -18,6 +19,15 @@ export const isLoggedOut = () => {
   };
 };
 
+//All accounts
+export const getAccounts = (payload) => {
+  return {
+    type: 'LOAD_ACCOUNTS',
+    payload: payload,
+  };
+};
+
+//user data
 export const getDebits = (payload) => {
   return {
     type: 'DEBIT',
@@ -35,13 +45,6 @@ export const getCredits = (payload) => {
 export const getAll = (payload) => {
   return {
     type: 'ALL',
-    payload: payload,
-  };
-};
-
-export const getAccounts = (payload) => {
-  return {
-    type: 'LOAD_ACCOUNTS',
     payload: payload,
   };
 };
@@ -69,6 +72,12 @@ export const getTotalCredit = (payload) => {
 export const getTotalDebit = (payload) => {
   return {
     type: 'TOTAL_DEBIT',
+    payload: payload,
+  };
+};
+export const getBalance = (payload) => {
+  return {
+    type: 'TOTAL',
     payload: payload,
   };
 };

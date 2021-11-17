@@ -1,4 +1,4 @@
-import Navbar from './components/Navbar';
+// import Navbar from './components/Navbar';
 
 import { useBankContext } from './BankContext/BankAppContext';
 import Signup from './components/Signup';
@@ -15,7 +15,7 @@ function App() {
   const { handleModal, isOpen } = useBankContext();
   return (
     <div className='App min-h-screen'>
-      <Navbar />
+      {/* <Navbar /> */}
 
       <Switch>
         <Route exact path='/' component={Home} />

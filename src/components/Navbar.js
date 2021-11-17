@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import Popup from './Popup';
 import { useBankContext } from '../BankContext/BankAppContext';
 
-const Navbar = () => {
+const Navbar = ({ background }) => {
   const { handleModal, authenticated, isOpen, handleLogout } = useBankContext();
 
   const styles = {
@@ -14,14 +14,16 @@ const Navbar = () => {
     padding: '4px 10px',
   };
   return (
-    <div className='App border border-b border-white relative greentxt py-4'>
+    <div
+      className={`${background} bg-contain relative cap greentxt w-full py-4`}
+    >
       <div className='w-11/12 text-sm mx-auto flex-wrap flex justify-between items-center'>
         <div>
           <div className='text-lg flex items-center gap-2'>
             <span>
               <Fa500Px
                 color='seagreen'
-                className='w-6 h-6 md:w-10 p-2 flex-shrink-0 shadow-xl
+                className='w-6 h-6 md:w-10 p-1 lg:p-2 flex-shrink-0 shadow-xl
               animate-bounce md:h-10 object-fit glass  border border-green-700 rounded-full'
               />
             </span>

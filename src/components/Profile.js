@@ -16,6 +16,7 @@ import {
 import Transactions from './Transactions';
 import ProfilePopup from './ProfilePopup';
 import Analytics from './Analytics';
+import Navbar from './Navbar';
 
 const Profile = () => {
   const {
@@ -121,11 +122,16 @@ const Profile = () => {
 
   return (
     <div
-      className='flex flex-col animate-slideOut  w-11/12 mx-auto'
+      className='flex flex-col animate-slideOut Apps '
       onClick={() => setMinutes(300)}
     >
+      <Navbar background={'glass2'} />
       {userDetails && (
-        <div className={`${popUp && 'filter blur'} px-4 my-2 lg:my-4`}>
+        <div
+          className={`${
+            popUp && 'filter blur'
+          } px-4 my-2 w-11/12 mx-auto lg:my-4`}
+        >
           <p className='text-base flex gap-3 text-gray-800  md:text-xl'>
             Welcome Back,
             <span className='text-gray-800'>{userDetails.name}!</span>
@@ -248,7 +254,11 @@ const Profile = () => {
                   </select>
                 </div>
               </section>
-              <section className='w-full glass  rounded-lg bg-contain flex flex-col gap-2 p-4 text-black h-full'>
+              <section
+                className={`w-full glass  rounded-lg bg-contain flex flex-col gap-2 p-4 text-black ${
+                  userData.transactions?.length > 10 ? 'h-auto' : 'h-screen'
+                } lg:h-full`}
+              >
                 <div className='flex gap-2 justify-between  flex-col md:flex-row items-center'>
                   <div className='flex gap-2 items-center flex-shrink-0 text-gray-700'>
                     <FaHistory className='text-gray-700' /> Transaction History
@@ -285,7 +295,7 @@ const Profile = () => {
                   )}
                 </div>
                 {asc ? (
-                  <div className='flex gap-2 flex-col animate-slideIn min-w-full overflow-auto w-full '>
+                  <div className='flex gap-2 flex-1 flex-col animate-slideIn min-w-full overflow-auto w-full '>
                     {userData.transactions?.length > 0 &&
                       userData.transactions
                         .filter((item) =>
@@ -296,7 +306,7 @@ const Profile = () => {
                         ))}
                   </div>
                 ) : (
-                  <div className='flex flex-col animate-slideOut gap-2 min-w-full w-full overflow-auto '>
+                  <div className='flex flex-1 flex-col animate-slideOut gap-2 min-w-full w-full overflow-auto '>
                     {userData.transactions?.length > 0 &&
                       userData.transactions
                         .filter((item) =>

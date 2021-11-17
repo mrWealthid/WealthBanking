@@ -42,6 +42,9 @@ import {
   getAccounts,
   sortByDesc,
   sortByAsc,
+  getTotalCredit,
+  getTotalDebit,
+  getBalance,
 } from '../actions';
 
 const BankAppContext = createContext();
@@ -100,9 +103,9 @@ const BankAppProvider = ({ children }) => {
 
   const [buttonLoader, setButtonLoader] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [total, setTotal] = useState(0);
-  const [deposit, setDeposit] = useState(0);
-  const [withdrawal, setWithdrawal] = useState(0);
+  // const [total, setTotal] = useState(0);
+  // const [deposit, setDeposit] = useState(0);
+  // const [withdrawal, setWithdrawal] = useState(0);
   const [asc, setAsc] = useState(false);
   const [successMsg, setSuccessMsg] = useState(false);
 
@@ -164,7 +167,11 @@ const BankAppProvider = ({ children }) => {
   //pulling from redux store
   const authenticated = useSelector((state) => state.Authentication);
 
-  const userData = useSelector((state) => state.userData);
+  const userData = useSelector((state) => state.userData.data);
+
+  const deposit = useSelector((state) => state.userData.totalCredits);
+  const withdrawal = useSelector((state) => state.userData.totalDebits);
+  const total = useSelector((state) => state.userData.total);
 
   const accounts = useSelector((state) => state.Accounts);
 
@@ -176,32 +183,38 @@ const BankAppProvider = ({ children }) => {
   }, [accounts, authenticated]);
 
   useEffect(() => {
-    setTotal(
-      userDetails?.transactions
-        ?.map((mov) => Number(mov.amount))
-        .reduce((arr, mov) => arr + mov, 0)
-    );
-  }, [userDetails]);
-
-  useEffect(() => {
-    setDeposit(
-      userDetails?.transactions
-        ?.map((mov) => Number(mov.amount))
-        .filter((mov) => mov > 0)
-        .reduce((arr, mov) => arr + mov, 0)
-    );
-  }, [userDetails]);
-
-  useEffect(() => {
-    setWithdrawal(
-      Math.abs(
+    dispatch(
+      getBalance(
         userDetails?.transactions
           ?.map((mov) => Number(mov.amount))
-          .filter((mov) => mov < 0)
           .reduce((arr, mov) => arr + mov, 0)
       )
     );
-  }, [userDetails]);
+  }, [dispatch, userDetails]);
+
+  useEffect(() => {
+    dispatch(
+      getTotalCredit(
+        userDetails?.transactions
+          ?.map((mov) => Number(mov.amount))
+          .filter((mov) => mov > 0)
+          .reduce((arr, mov) => arr + mov, 0)
+      )
+    );
+  }, [dispatch, userDetails]);
+
+  useEffect(() => {
+    dispatch(
+      getTotalDebit(
+        Math.abs(
+          userDetails?.transactions
+            ?.map((mov) => Number(mov.amount))
+            .filter((mov) => mov < 0)
+            .reduce((arr, mov) => arr + mov, 0)
+        )
+      )
+    );
+  }, [dispatch, userDetails]);
 
   useEffect(() => {
     if (Number(selected.type) === 2) {
@@ -307,7 +320,7 @@ const BankAppProvider = ({ children }) => {
         register.password
       );
 
-      const { uid } = data.user;
+      const { uid, email } = data.user;
 
       // dispatch(
       //   logIn({
@@ -320,6 +333,7 @@ const BankAppProvider = ({ children }) => {
         name:
           capitalize(register.firstname) + ' ' + capitalize(register.lastname),
         id: uid,
+        email: email,
         transactions: [
           {
             Depositor: 'WealthBank',
@@ -329,7 +343,7 @@ const BankAppProvider = ({ children }) => {
           },
         ],
         timestamp: serverTimestamp(),
-        accountNumber: generateAccNums(),
+        accountNumber: generateAccNums(11111, 99999),
       };
 
       await setDoc(docRef, payload);
