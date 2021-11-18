@@ -4,12 +4,13 @@ import { useBankContext } from './BankContext/BankAppContext';
 import Signup from './components/Signup';
 import { Route, Switch } from 'react-router-dom';
 import Login from './components/Login';
-import Home from './components/Home';
+// import Home from './components/Home';
 import PrivateRoute from './components/PrivateRoute';
 import LoginState from './components/LoginState';
 import Profile from './components/Profile';
 import Creating from './components/Creating';
 import Logout from './components/Logout';
+import LandingPage from './components/LandingPage';
 
 function App() {
   const { handleModal, isOpen } = useBankContext();
@@ -18,7 +19,7 @@ function App() {
       {/* <Navbar /> */}
 
       <Switch>
-        <Route exact path='/' component={Home} />
+        <Route exact path='/' component={LandingPage} />
 
         <PrivateRoute path='/profile' component={Profile} />
         <Route path='/create' component={Signup} />

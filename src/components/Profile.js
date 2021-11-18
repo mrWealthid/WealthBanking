@@ -125,7 +125,7 @@ const Profile = () => {
       className='flex flex-col animate-slideOut Apps '
       onClick={() => setMinutes(300)}
     >
-      <Navbar background={'glass2'} />
+      <Navbar background={'glass21'} />
       {userDetails && (
         <div
           className={`${

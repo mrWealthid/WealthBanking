@@ -427,6 +427,7 @@ const BankAppProvider = ({ children }) => {
     setTimeout(() => {
       dispatch(isLoggedOut());
       signOut(auth);
+      setUserDetails({});
       history.push('/login');
     }, 3000);
   };

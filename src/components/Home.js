@@ -3,8 +3,11 @@ import { FaWifi } from 'react-icons/fa';
 
 import { currency, cryptoCurrency } from './currencyList';
 import Navbar from './Navbar';
+import { useBankContext } from '../BankContext/BankAppContext';
 const Home = () => {
   const [type, setType] = useState(1);
+
+  const { userDetails } = useBankContext();
   return (
     <div className='home min-h-screen  flex flex-col justify-center  items-center'>
       <Navbar background='glass21' />
@@ -15,19 +18,21 @@ const Home = () => {
               The Easiest Way <br></br> To Manage Personal <br></br> Finances
             </p>
 
-            <p className='text-sm leading-normal  '>
+            <p className='text-sm leading-normal max-w-xl lg:max-w-full  '>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
               nisi ut aliquip ex ea commodo consequat.
             </p>
 
-            <button className='w-1/2 glass2 px-2 py-1'>Explore</button>
+            <button className='w-1/3 cap bg-contain glass21 px-2 py-4 rounded-lg'>
+              Explore
+            </button>
           </div>
 
           <section className='flex w-full md:w-1/2 gap-8 glassTxt justify-between'>
             <div className='w-1/2 hidden lg:flex '>
-              <section className='w-60 flex flex-col  box-border rounded-lg cap  border border-green-300 glass2 text-white'>
+              <section className='w-60 flex flex-col  box-border rounded-lg cap  border border-green-300 glass2 text-yellow-200'>
                 <div className='flex flex-1 justify-between p-3'>
                   <p>WealthPay</p>
                   <FaWifi className='transform  rotate-45 block' />
@@ -47,12 +52,12 @@ const Home = () => {
                       <p className='bg-red-800 -ml-4 rounded-full w-8 h-8'></p>
                     </div>
                   </div>
-                  <p>Wealth Iduwe</p>
+                  <p>{userDetails?.name || 'Wealth Iduwe'}</p>
                 </div>
               </section>
             </div>
 
-            <section className='w-full lg:w-1/2 justify-center mx-auto lg:w-full border cap border-green-400 glass2 text-white p-2 px-4 rounded-lg flex gap-3 flex-col'>
+            <section className='w-full lg:w-1/2 justify-center mx-auto text-yellow-200 lg:w-full border cap border-green-400 glass2 text-white p-2 px-4 rounded-lg flex gap-3 flex-col max-w-lg lg:max-w-full'>
               <div className=' flex gap-2'>
                 <p
                   onClick={() => setType(1)}
