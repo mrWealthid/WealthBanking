@@ -145,6 +145,7 @@
 .home {
   background-image: url('../src/components/background.jpg');
   background-size: contain;
+  height: 80vh;
 }
 .glass {
   background-color: rgba(255, 255, 255, 0.5);
@@ -156,6 +157,12 @@
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: opacity(60px);
   border: 20px solid transparent;
+  background-size: contain;
+}
+.glass21 {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: opacity(60px);
+
   background-size: contain;
 }
 

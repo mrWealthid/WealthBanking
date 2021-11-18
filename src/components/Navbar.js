@@ -15,7 +15,7 @@ const Navbar = ({ background }) => {
   };
   return (
     <div
-      className={`${background} bg-contain relative cap greentxt w-full py-4`}
+      className={`${background} bg-contain relative cap greentxt w-full py-5`}
     >
       <div className='w-11/12 text-sm mx-auto flex-wrap flex justify-between items-center'>
         <div>

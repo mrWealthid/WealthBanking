@@ -6,9 +6,9 @@ import Navbar from './Navbar';
 const Home = () => {
   const [type, setType] = useState(1);
   return (
-    <div className='min-h-screen home   items-center'>
-      <Navbar background='glass2' />
-      <div className='min-h-screen flex flex-col justify-center  items-center'>
+    <div className=' home lg:min-h-screen lg:h-full   items-center'>
+      <Navbar background='glass21' />
+      <div className='min-h-full lg:min-h-screen flex flex-col justify-center  items-center'>
         <section className='flex flex-col gap-10 md:gap-1 md:flex-row justify-between mt-10 md:mt-0 items-center w-11/12 '>
           <div className='flex flex-col text  md:w-1/2 gap-3 glassTxt'>
             <p className='text-3xl lg:text-4xl'>
