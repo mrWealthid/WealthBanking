@@ -6,9 +6,9 @@ import Pop from './pops.png';
 
 const ShowCase = () => {
   return (
-    <div className=' min-h-screen gap-16 md:gap-28 flex flex-col my-20 lg:my-28  w-11/12 mx-auto justify-center items-center'>
+    <div className=' min-h-screen gap-10 md:gap-28 flex flex-col  lg:my-28  w-11/12 mx-auto justify-center items-center'>
       <section className='flex md:flex-row flex-col-reverse justify-between gap-10 items-center'>
-        <div className='lg:max-w-lg max-w-md'>
+        <div className='lg:max-w-lg sm:max-w-md'>
           <p>Make Seamless Transfers</p>
 
           <p>
@@ -20,16 +20,24 @@ const ShowCase = () => {
           </p>
         </div>
 
-        <div className='w-full'>
-          <img className='max-w-md' src={Page} alt='home' />
+        <div className='w-full '>
+          <img
+            className='max-w-md w-1/2 mx-auto md:w-full'
+            src={Page}
+            alt='home'
+          />
         </div>
       </section>
       <section className='flex md:flex-row flex-col gap-10 justify-between items-center'>
         <div className='w-full '>
-          <img className='lg:max-w-lg max-w-md' src={Wallet} alt='home' />
+          <img
+            className='lg:max-w-lg mx-auto sm:max-w-md w-1/2 md:w-full'
+            src={Wallet}
+            alt='home'
+          />
         </div>
 
-        <div className='max-w-md'>
+        <div className='sm:max-w-md'>
           <p>Customized Wallet </p>
 
           <p>
@@ -43,7 +51,7 @@ const ShowCase = () => {
       </section>
 
       <section className='flex md:flex-row flex-col-reverse justify-between gap-10 items-center'>
-        <div className='md:max-w-lg max-w-md'>
+        <div className='md:max-w-lg sm:max-w-md'>
           <p>Make Real-Time Transfers</p>
 
           <p>
@@ -56,7 +64,11 @@ const ShowCase = () => {
         </div>
 
         <div className='w-full'>
-          <img className='max-w-md' src={Pop} alt='home' />
+          <img
+            className='sm:max-w-md w-1/2 mx-auto md:w-full'
+            src={Pop}
+            alt='home'
+          />
         </div>
       </section>
     </div>
