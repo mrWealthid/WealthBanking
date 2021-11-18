@@ -6,12 +6,12 @@ import Navbar from './Navbar';
 const Home = () => {
   const [type, setType] = useState(1);
   return (
-    <div className='home h-full  flex flex-col justify-center  items-center'>
+    <div className='home min-h-screen  flex flex-col justify-center  items-center'>
       <Navbar background='glass21' />
-      <div className='min-h-screen flex flex-col justify-center  items-center'>
+      <div className='flex-1 flex flex-col justify-center  items-center'>
         <section className='flex flex-col gap-10 md:gap-1 md:flex-row justify-between mt-10 md:mt-0 items-center w-11/12 '>
           <div className='flex flex-col text  md:w-1/2 gap-6 glassTxt'>
-            <p className='text-4xl lg:text-4xl leading-normal '>
+            <p className='text-4xl lg:text-4xl  '>
               The Easiest Way <br></br> To Manage Personal <br></br> Finances
             </p>
 

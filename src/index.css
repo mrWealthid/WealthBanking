@@ -144,8 +144,8 @@
 
 .home {
   background-image: url('../src/components/background.jpg');
-  background-size: contain;
-  /* height: 80vh; */
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 .glass {
   background-color: rgba(255, 255, 255, 0.5);
