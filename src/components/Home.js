@@ -11,14 +11,14 @@ const Home = () => {
   return (
     <div className='home min-h-screen  flex flex-col justify-center  items-center'>
       <Navbar background='glass21' />
-      <div className='flex-1 flex flex-col justify-center  items-center'>
+      <div className='flex-1 min-h-screen md:min-h-full flex flex-col justify-center  items-center'>
         <section className='flex flex-col gap-10 md:gap-1 md:flex-row justify-between mt-10 md:mt-0 items-center w-11/12 '>
-          <div className='flex flex-col text  md:w-1/2 gap-6 glassTxt'>
+          <div className='flex flex-col text  md:w-1/2  gap-6 glassTxt'>
             <p className='text-4xl lg:text-4xl  '>
               The Easiest Way <br></br> To Manage Personal <br></br> Finances
             </p>
 
-            <p className='text-sm leading-normal max-w-xl lg:max-w-full  '>
+            <p className='text-sm leading-normal lg:max-w-full  '>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -57,7 +57,7 @@ const Home = () => {
               </section>
             </div>
 
-            <section className='w-full lg:w-1/2 justify-center mx-auto text-yellow-200 lg:w-full border cap border-green-400 glass2 text-white p-2 px-4 rounded-lg flex gap-3 flex-col max-w-lg lg:max-w-full'>
+            <section className='w-full lg:w-1/2 justify-center mx-auto text-yellow-200 lg:w-full border cap border-green-400 glass2 text-white p-2 px-4 rounded-lg flex gap-3 flex-col  lg:max-w-full'>
               <div className=' flex gap-2'>
                 <p
                   onClick={() => setType(1)}

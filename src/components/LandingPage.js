@@ -4,7 +4,7 @@ import ShowCase from './ShowCase';
 
 const LandingPage = () => {
   return (
-    <div className='Apps pb-10'>
+    <div className='Apps '>
       <Home />
       <ShowCase />
     </div>
