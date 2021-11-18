@@ -145,7 +145,7 @@
 .home {
   background-image: url('../src/components/background.jpg');
   background-size: contain;
-  height: 80vh;
+  /* height: 80vh; */
 }
 .glass {
   background-color: rgba(255, 255, 255, 0.5);
@@ -169,7 +169,6 @@
 .glassTxt {
   /* background-color: rgba(255, 255, 255, 0.5); */
   backdrop-filter: opacity(60px);
-
   color: rgba(255, 255, 255, 0.7);
 }
 

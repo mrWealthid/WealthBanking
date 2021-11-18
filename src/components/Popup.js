@@ -12,7 +12,7 @@ import {
 const Popup = () => {
   const { authenticated, handleLogout } = useBankContext();
   return (
-    <div className='glass cap bg-blend-darken bg-contain shadow-lg flex flex-col gap-1 text-gray-700 rounded-b-lg group'>
+    <div className='glass21 cap bg-blend-darken bg-contain shadow-lg flex flex-col gap-1 glassTxt rounded-b-lg group'>
       <div className='flex items-center justify-between py-1 px-2'>
         {' '}
         <NavLink className='p-2 hover:bg-gray-200 focus:text-green-500' to='/'>

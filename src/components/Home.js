@@ -6,21 +6,23 @@ import Navbar from './Navbar';
 const Home = () => {
   const [type, setType] = useState(1);
   return (
-    <div className=' home lg:min-h-screen lg:h-full   items-center'>
+    <div className='home h-full  flex flex-col justify-center  items-center'>
       <Navbar background='glass21' />
-      <div className='min-h-full lg:min-h-screen flex flex-col justify-center  items-center'>
+      <div className='min-h-screen flex flex-col justify-center  items-center'>
         <section className='flex flex-col gap-10 md:gap-1 md:flex-row justify-between mt-10 md:mt-0 items-center w-11/12 '>
-          <div className='flex flex-col text  md:w-1/2 gap-3 glassTxt'>
-            <p className='text-3xl lg:text-4xl'>
+          <div className='flex flex-col text  md:w-1/2 gap-6 glassTxt'>
+            <p className='text-4xl lg:text-4xl leading-normal '>
               The Easiest Way <br></br> To Manage Personal <br></br> Finances
             </p>
 
-            <p className='text-sm'>
+            <p className='text-sm leading-normal  '>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
               nisi ut aliquip ex ea commodo consequat.
             </p>
+
+            <button className='w-1/2 glass2 px-2 py-1'>Explore</button>
           </div>
 
           <section className='flex w-full md:w-1/2 gap-8 glassTxt justify-between'>
