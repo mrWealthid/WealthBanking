@@ -6,7 +6,7 @@ import Pop from './pops.png';
 
 const ShowCase = () => {
   return (
-    <div className='min-h-screen gap-10 py-14 md:py-0 lg:py-10 flex flex-col w-11/12 mx-auto justify-center items-center'>
+    <div className='lg:min-h-screen gap-10 py-14 md:py-0 lg:py-10 flex flex-col w-11/12 mx-auto justify-center items-center'>
       <section className='flex md:flex-row flex-col-reverse justify-between gap-10 items-center'>
         <div className='lg:max-w-lg sm:max-w-md'>
           <p>Make Seamless Transfers</p>

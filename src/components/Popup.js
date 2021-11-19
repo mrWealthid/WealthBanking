@@ -12,7 +12,7 @@ import {
 const Popup = () => {
   const { authenticated, handleLogout } = useBankContext();
   return (
-    <div className='glass21 cap bg-blend-darken bg-contain shadow-lg flex flex-col gap-1 glassTxt rounded-b-lg group'>
+    <div className='bg-white cap bg-blend-darken bg-contain shadow-lg flex flex-col gap-1 color-gray-800 rounded-b-lg group'>
       <div className='flex items-center justify-between py-1 px-2'>
         {' '}
         <NavLink className='p-2 hover:bg-gray-200 focus:text-green-500' to='/'>
@@ -24,7 +24,7 @@ const Popup = () => {
       {!authenticated ? (
         <div className='flex items-center justify-between py-1 px-2'>
           <NavLink
-            className=' p-2 hover:bg-gray-200 focus:text-yellow-300'
+            className=' p-2 hover:bg-gray-200 focus:text-green-500'
             to='/create'
           >
             Create Account
@@ -33,7 +33,10 @@ const Popup = () => {
         </div>
       ) : (
         <div className='flex items-center justify-between py-1 px-2'>
-          <NavLink className='p-2 hover:focus:text-yellow-300' to='/profile'>
+          <NavLink
+            className='p-2 hover:bg-gray-200 focus:text-green-500'
+            to='/profile'
+          >
             Profile
           </NavLink>
           <FaUserCircle />
@@ -43,7 +46,7 @@ const Popup = () => {
         <div className='flex items-center justify-between py-1 px-2'>
           <p
             className='p-2 hover:bg-gray-200
-            focus:text-yellow-300'
+            focus:text-green-500'
             onClick={handleLogout}
           >
             Logout
@@ -54,7 +57,7 @@ const Popup = () => {
         <div className='flex items-center justify-between py-1 px-2'>
           <NavLink
             className=' p-2 hover:bg-gray-200 
-            focus:text-yellow-300 trans'
+            focus:text-green-500'
             to='/login'
           >
             {' '}

@@ -133,7 +133,7 @@ const BankAppProvider = ({ children }) => {
     return () => clearTimeout(timeout);
   }, [alert, closeAlert, transferError, loanAlert]);
 
-  //To order by timestamp
+  // To order by timestamp
   useEffect(() => {
     const q = query(collection(db, 'Accounts'), orderBy('timestamp', 'desc'));
 
@@ -144,24 +144,27 @@ const BankAppProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  //get all documents in a collection
+  // get currrent logged in user
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      // setUsers(currentUser);
+      if (currentUser) {
+        dispatch(isLoggedIn(currentUser));
+      } else {
+        dispatch(isLoggedOut());
+        console.log('error occured');
+      }
+    });
+    return unsubscribe;
+  }, [dispatch]);
 
+  //get all documents in a collection
   useEffect(() => {
     onSnapshot(collection(db, 'Accounts'), (snapshot) => {
       dispatch(
         getAccounts(snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
       );
     });
-  }, [dispatch]);
-
-  // get currrent logged in user
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      // setUsers(currentUser);
-      currentUser ? dispatch(isLoggedIn(currentUser)) : dispatch(isLoggedOut());
-    });
-
-    return unsubscribe;
   }, [dispatch]);
 
   //pulling from redux store

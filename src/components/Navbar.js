@@ -24,7 +24,7 @@ const Navbar = ({ background }) => {
               <Fa500Px
                 color='seagreen'
                 className='w-6 h-6 md:w-10 p-1 lg:p-2 flex-shrink-0 shadow-xl
-              animate-bounce md:h-10 object-fit glass  border border-green-700 rounded-full'
+              animate-bounce md:h-10 object-fit glass21  border border-green-700 rounded-full'
               />
             </span>
             <span> BankApp</span>

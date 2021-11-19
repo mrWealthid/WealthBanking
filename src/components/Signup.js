@@ -17,7 +17,7 @@ const Signup = () => {
 
   return (
     <div className='min-h-screen animate-slideIn Apps flex flex-col '>
-      <Navbar />
+      <Navbar background='bg-black opacity-80' />
 
       <div className='h-screen flex flex-col  justify-center items-center'>
         <div className='w-8/12    md:w-8/12  flex flex-col max-w-xl gap-2  transition ease-in-out duration-500'>
