@@ -79,10 +79,15 @@ const Home = () => {
 
               <p>{type === 1 ? 'Currency Converter' : 'Crypto Converter'}</p>
 
-              <form className=' flex flex-col py-4 px-4  gap-4 '>
+              <form className=' flex flex-col py-2 px-4  gap-4 '>
                 {type === 1 ? (
                   <>
                     {' '}
+                    <input
+                      type='text'
+                      placeholder='Enter Amount '
+                      className='py-2 px-2 text-sm lg-text-base greentxt animate-slideIn w-full border border-green-600 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-lg'
+                    />
                     <select
                       className='py-2 px-2 text-sm lg-text-base greentxt animate-slideIn w-full border border-green-600 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-lg'
                       // value={selected.type}
