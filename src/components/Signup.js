@@ -22,7 +22,7 @@ const Signup = () => {
       <div className='h-screen flex flex-col  justify-center items-center'>
         <div className='w-8/12    md:w-8/12  flex flex-col max-w-xl gap-2  transition ease-in-out duration-500'>
           <form
-            className='py-6 px-8 flex rounded-lg cap bg-contain shadow-lg flex-col gap-2 lg:gap-2 glass2 '
+            className='py-6 px-8 flex rounded-lg cap bg-contain animate-slideOut shadow-2xl flex-col gap-2 lg:gap-2 glass21 '
             onSubmit={handleSignup}
           >
             <p className='text-xl text-center mb-3'> Sign Up</p>

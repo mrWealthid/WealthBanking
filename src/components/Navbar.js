@@ -12,6 +12,7 @@ const Navbar = ({ background }) => {
     border: '1px solid seagreen',
     borderRadius: '20px',
     padding: '4px 10px',
+    backgroundColor: 'glass21',
   };
   return (
     <div
