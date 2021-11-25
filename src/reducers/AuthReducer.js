@@ -1,4 +1,4 @@
-const AuthReducer = (user = null, action) => {
+const AuthReducer = (user = {}, action) => {
   switch (action.type) {
     case 'ISLOGGEDIN':
       return (user = action.payload);
@@ -7,7 +7,7 @@ const AuthReducer = (user = null, action) => {
       return (user = action.payload);
 
     case 'LOGOUT':
-      return (user = null);
+      return (user = {});
 
     default:
       return user;
