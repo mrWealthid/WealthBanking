@@ -121,16 +121,13 @@ const Profile = () => {
   }, [minutes, handleLogout]);
 
   return (
-    <div
-      className='flex flex-col animate-slideOut Apps '
-      onClick={() => setMinutes(300)}
-    >
+    <div className='flex flex-col  Apps ' onClick={() => setMinutes(300)}>
       <Navbar background='bg-black opacity-80' />
       {userDetails && (
         <div
           className={`${
             popUp && 'filter blur'
-          } px-4 my-2 w-11/12 mx-auto lg:my-4`}
+          } px-4 my-2 w-11/12 mx-auto lg:my-4 animate-slideOut`}
         >
           <p className='text-base flex gap-3 text-gray-800  md:text-xl'>
             Welcome Back,

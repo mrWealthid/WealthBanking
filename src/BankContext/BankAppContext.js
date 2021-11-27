@@ -148,12 +148,7 @@ const BankAppProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       // setUsers(currentUser);
-      if (currentUser) {
-        dispatch(isLoggedIn(currentUser));
-      } else {
-        dispatch(isLoggedOut());
-        console.log('error occured');
-      }
+      currentUser && dispatch(isLoggedIn(currentUser));
     });
     return unsubscribe;
   }, [dispatch]);
@@ -401,14 +396,13 @@ const BankAppProvider = ({ children }) => {
 
       setButtonLoader(true);
 
-      setLogin({
-        email: '',
-        password: '',
-      });
-
       setConfirmFields(true);
       setTimeout(() => {
         setButtonLoader(false);
+        setLogin({
+          email: '',
+          password: '',
+        });
         history.push('/profile');
       }, 1500);
     } catch (error) {
@@ -435,8 +429,15 @@ const BankAppProvider = ({ children }) => {
     }, 3000);
   };
 
-  const handleModal = () => {
-    setIsOpen(!isOpen);
+  const handleModal = (e) => {
+    // console.log(e.target);
+    // console.log(e.target.closest('menu-btn'));
+
+    if (e.target.classList.contains('Pop')) {
+      setIsOpen(!isOpen);
+    } else {
+      setIsOpen(false);
+    }
   };
   const transferCheck = (find, user, transfer, total) => {
     if (find === undefined) {
@@ -610,27 +611,31 @@ const BankAppProvider = ({ children }) => {
 
   //sticky headers on scroll
   useEffect(() => {
-    const Navs = NavRef.current.getBoundingClientRect();
-    console.log(Navs);
-    console.log(NavRef.current.classList);
+    if (NavRef.current) {
+      const Navs = NavRef.current.getBoundingClientRect();
+      console.log(Navs);
+      console.log(NavRef.current.classList);
+    }
   }, [NavRef]);
 
   useEffect(() => {
-    const Navss = NavRef.current.getBoundingClientRect().height;
-    const stickyNav = function (entries) {
-      const [entry] = entries;
+    if (NavRef.current) {
+      const Navss = NavRef.current.getBoundingClientRect().height;
+      const stickyNav = function (entries) {
+        const [entry] = entries;
 
-      if (!entry.isIntersecting) NavRef.current.classList.add('sticky');
-      else NavRef.current.classList.remove('sticky');
-    };
+        if (!entry.isIntersecting) NavRef.current.classList.add('sticky');
+        else NavRef.current.classList.remove('sticky');
+      };
 
-    const headerObserver = new IntersectionObserver(stickyNav, {
-      root: null,
-      threshold: 0,
-      rootMargin: `-${Navss}px`,
-    });
+      const headerObserver = new IntersectionObserver(stickyNav, {
+        root: null,
+        threshold: 0,
+        rootMargin: `-${Navss}px`,
+      });
 
-    headerRef.current && headerObserver.observe(headerRef.current);
+      headerRef.current && headerObserver.observe(headerRef.current);
+    }
   }, [headerRef]);
 
   //you can use one observer api for several elements- you will get your nodelist then you can use foreach on them.

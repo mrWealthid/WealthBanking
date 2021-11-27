@@ -5,13 +5,7 @@ import Popup from './Popup';
 import { useBankContext } from '../BankContext/BankAppContext';
 
 const Navbar = ({ background }) => {
-  const {
-    handleModal,
-    authenticated,
-    isOpen,
-    handleLogout,
-    NavRef,
-  } = useBankContext();
+  const { authenticated, isOpen, handleLogout, NavRef } = useBankContext();
 
   const styles = {
     color: 'seagreen',
@@ -50,7 +44,7 @@ const Navbar = ({ background }) => {
           >
             Home
           </NavLink>
-          {!authenticated ? (
+          {!authenticated.uid ? (
             <NavLink
               activeStyle={styles}
               className='hidden md:block '
@@ -67,7 +61,7 @@ const Navbar = ({ background }) => {
               Profile
             </NavLink>
           )}
-          {authenticated ? (
+          {authenticated.uid ? (
             <p
               className='hidden md:block  
              cursor-pointer'
@@ -87,7 +81,7 @@ const Navbar = ({ background }) => {
           )}
 
           <div className='nav md:hidden  '>
-            <nav className='Pop' onClick={handleModal}>
+            <nav className='Pop'>
               <div className={`${isOpen && 'open'}     menu-btn`}>
                 <div className='menu-btn__burger'></div>
               </div>
