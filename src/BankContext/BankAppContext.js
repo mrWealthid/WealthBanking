@@ -608,6 +608,7 @@ const BankAppProvider = ({ children }) => {
   const NavRef = useRef();
   const ShowCaseRef = useRef();
 
+  //sticky headers on scroll
   useEffect(() => {
     const Navs = NavRef.current.getBoundingClientRect();
     console.log(Navs);
@@ -618,7 +619,6 @@ const BankAppProvider = ({ children }) => {
     const Navss = NavRef.current.getBoundingClientRect().height;
     const stickyNav = function (entries) {
       const [entry] = entries;
-      console.log(entry);
 
       if (!entry.isIntersecting) NavRef.current.classList.add('sticky');
       else NavRef.current.classList.remove('sticky');
@@ -630,11 +630,12 @@ const BankAppProvider = ({ children }) => {
       rootMargin: `-${Navss}px`,
     });
 
-    headerObserver.observe(headerRef.current);
+    headerRef.current && headerObserver.observe(headerRef.current);
   }, [headerRef]);
 
   //you can use one observer api for several elements- you will get your nodelist then you can use foreach on them.
 
+  //reveal on scroll using the observer api
   useEffect(() => {
     const showsCB = (entries, observer) => {
       const [entry] = entries;
@@ -651,8 +652,12 @@ const BankAppProvider = ({ children }) => {
       threshold: 0.15,
     });
 
-    showCaseObserver.observe(ShowCaseRef.current);
+    ShowCaseRef.current && showCaseObserver.observe(ShowCaseRef.current);
   }, [ShowCaseRef]);
+
+  // useEffect(() => {
+
+  // }, [])
 
   return (
     <BankAppContext.Provider
