@@ -11,6 +11,10 @@ import Profile from './components/Profile';
 import Creating from './components/Creating';
 import Logout from './components/Logout';
 import LandingPage from './components/LandingPage';
+// import Sidebar from './components/Sidebar';
+import Home from './components/sidebar/Home';
+import Credit from './components/sidebar/Credit';
+import Debit from './components/sidebar/Debit';
 
 function App() {
   const { handleModal, isOpen } = useBankContext();
@@ -30,6 +34,12 @@ function App() {
         <Route path='/Logout' component={Logout} />
 
         <Route path='/creating' component={Creating} />
+        {/* <Route exact path='/sidebar' component={Sidebar} /> */}
+        <Route exact path='/sidebar' component={Home} />
+        <Route exact path='/sidebar/credit' component={Credit} />
+        <Route exact path='/sidebar/debit' component={Debit} />
+
+        {/* <Route path='/sidebar/settings' component={Sidebar} /> */}
       </Switch>
 
       {isOpen ? <div className='overlay' onClick={handleModal}></div> : null}

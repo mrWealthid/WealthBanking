@@ -3,10 +3,15 @@ import Page from './page.png';
 import Wallet from './wallet.png';
 
 import Pop from './pops.png';
+import { useBankContext } from '../BankContext/BankAppContext';
 
 const ShowCase = () => {
+  const { ShowCaseRef } = useBankContext();
   return (
-    <div className='lg:min-h-screen gap-10 py-14 lg:py-10 flex flex-col w-11/12 mx-auto justify-center items-center'>
+    <div
+      className='lg:min-h-screen gap-10 py-14 transition transition-opacity ease-in-out transition-transform duration-1000 hides lg:py-10 flex flex-col w-11/12 mx-auto justify-center items-center'
+      ref={ShowCaseRef}
+    >
       <section className='flex md:flex-row flex-col-reverse justify-between gap-10 items-center'>
         <div className='lg:max-w-lg sm:max-w-md'>
           <p>Make Seamless Transfers</p>

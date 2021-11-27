@@ -7,10 +7,16 @@ import { useBankContext } from '../BankContext/BankAppContext';
 const Home = () => {
   const [type, setType] = useState(1);
 
-  const { userDetails } = useBankContext();
+  // const [intersects, setIntersects] = useState(false);
+
+  const { userDetails, headerRef } = useBankContext();
+
   return (
-    <div className='home min-h-screen  flex flex-col justify-center  items-center'>
-      <Navbar background='glass21' />
+    <div
+      className='home min-h-screen  flex flex-col justify-center  items-center'
+      ref={headerRef}
+    >
+      <Navbar background={'glass21'} />
       <div className='md:flex-1 my-12 md:my-0 min-h-screen md:min-h-full flex flex-col justify-center  items-center'>
         <section className='flex flex-col gap-10 md:gap-1 md:flex-row justify-between mt-10 md:mt-0 items-center w-11/12 '>
           <div className='flex flex-col text  md:w-1/2  gap-6 glassTxt'>

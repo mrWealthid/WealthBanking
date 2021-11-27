@@ -5,7 +5,13 @@ import Popup from './Popup';
 import { useBankContext } from '../BankContext/BankAppContext';
 
 const Navbar = ({ background }) => {
-  const { handleModal, authenticated, isOpen, handleLogout } = useBankContext();
+  const {
+    handleModal,
+    authenticated,
+    isOpen,
+    handleLogout,
+    NavRef,
+  } = useBankContext();
 
   const styles = {
     color: 'seagreen',
@@ -14,9 +20,13 @@ const Navbar = ({ background }) => {
     padding: '4px 10px',
     backgroundColor: 'glass21',
   };
+
+  // const intersection = () => {};
+
   return (
     <div
-      className={`${background} bg-contain relative cap greentxt w-full py-4`}
+      className={`${background} bg-contain  cap  greentxt w-full py-4`}
+      ref={NavRef}
     >
       <div className='w-11/12 text-sm mx-auto flex-wrap flex justify-between items-center'>
         <div>

@@ -603,6 +603,57 @@ const BankAppProvider = ({ children }) => {
     setAsc(!asc);
   };
 
+  //Intersection  Observer API
+  const headerRef = useRef();
+  const NavRef = useRef();
+  const ShowCaseRef = useRef();
+
+  useEffect(() => {
+    const Navs = NavRef.current.getBoundingClientRect();
+    console.log(Navs);
+    console.log(NavRef.current.classList);
+  }, [NavRef]);
+
+  useEffect(() => {
+    const Navss = NavRef.current.getBoundingClientRect().height;
+    const stickyNav = function (entries) {
+      const [entry] = entries;
+      console.log(entry);
+
+      if (!entry.isIntersecting) NavRef.current.classList.add('sticky');
+      else NavRef.current.classList.remove('sticky');
+    };
+
+    const headerObserver = new IntersectionObserver(stickyNav, {
+      root: null,
+      threshold: 0,
+      rootMargin: `-${Navss}px`,
+    });
+
+    headerObserver.observe(headerRef.current);
+  }, [headerRef]);
+
+  //you can use one observer api for several elements- you will get your nodelist then you can use foreach on them.
+
+  useEffect(() => {
+    const showsCB = (entries, observer) => {
+      const [entry] = entries;
+      console.log('showcase', entry);
+
+      if (!entry.isIntersecting) return false;
+      ShowCaseRef.current.classList.remove('hides');
+      //this is to stop observer to improve performance
+      observer.unobserve(ShowCaseRef.current);
+    };
+
+    const showCaseObserver = new IntersectionObserver(showsCB, {
+      root: null,
+      threshold: 0.15,
+    });
+
+    showCaseObserver.observe(ShowCaseRef.current);
+  }, [ShowCaseRef]);
+
   return (
     <BankAppContext.Provider
       value={{
@@ -651,6 +702,9 @@ const BankAppProvider = ({ children }) => {
         convertTime,
         formatDate,
         formatCurrency,
+        headerRef,
+        NavRef,
+        ShowCaseRef,
       }}
     >
       {children}
