@@ -4,6 +4,7 @@ import { FaWifi } from 'react-icons/fa';
 import { currency, cryptoCurrency } from './currencyList';
 import Navbar from './Navbar';
 import { useBankContext } from '../BankContext/BankAppContext';
+import { Link } from 'react-router-dom';
 const Home = () => {
   const [type, setType] = useState(1);
 
@@ -31,9 +32,11 @@ const Home = () => {
               nisi ut aliquip ex ea commodo consequat.
             </p>
 
-            <button className='w-1/3 cap bg-contain glass21 px-2 py-4 rounded-lg'>
-              Explore
-            </button>
+            <Link to='/login'>
+              <button className='w-1/3 cap bg-contain glass21 px-2 py-4 rounded-lg'>
+                Explore
+              </button>
+            </Link>
           </div>
 
           <section className='flex w-full md:w-1/2 gap-8 glassTxt justify-between'>

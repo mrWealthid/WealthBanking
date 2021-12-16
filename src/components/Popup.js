@@ -13,32 +13,38 @@ const Popup = () => {
   const { authenticated, handleLogout } = useBankContext();
   return (
     <div className='bg-white cap bg-blend-darken bg-contain shadow-lg  flex flex-col gap-1 color-gray-800 rounded-b-lg group'>
-      <div className='flex items-center hover:bg-gray-200 justify-between py-1 '>
-        <NavLink className='p-2  focus:text-green-500' to='/'>
+      <div className='flex items-center hover:bg-gray-200 justify-between p-2 '>
+        <NavLink className='hover:bg-gray-200   focus:text-green-500' to='/'>
           Home
         </NavLink>
         <FaHome />
       </div>
 
       {!authenticated.uid ? (
-        <div className='flex items-center hover:bg-gray-200 justify-between py-1 '>
-          <NavLink className=' px-2  focus:text-green-500' to='/create'>
+        <div className='flex items-center hover:bg-gray-200 justify-between p-2 '>
+          <NavLink
+            className='hover:bg-gray-200   focus:text-green-500'
+            to='/create'
+          >
             Create Account
           </NavLink>
           <FaRegUserCircle />
         </div>
       ) : (
-        <div className='flex items-center hover:bg-gray-200 justify-between py-1'>
-          <NavLink className='p-2  focus:text-green-500' to='/profile'>
+        <div className='flex items-center hover:bg-gray-200 justify-between p-2'>
+          <NavLink
+            className=' hover:bg-gray-200  focus:text-green-500'
+            to='/profile'
+          >
             Profile
           </NavLink>
           <FaUserCircle />
         </div>
       )}
       {authenticated.uid ? (
-        <div className='flex items-center justify-between hover:bg-gray-200 py-1 '>
+        <div className='flex items-center justify-between hover:bg-gray-200 p-2 '>
           <p
-            className='p-2 
+            className='hover:bg-gray-200 
             focus:text-green-500'
             onClick={handleLogout}
           >
@@ -47,9 +53,9 @@ const Popup = () => {
           <FaSignOutAlt />
         </div>
       ) : (
-        <div className='flex items-center hover:bg-gray-200  justify-between py-1'>
+        <div className='flex items-center hover:bg-gray-200  justify-between p-2'>
           <NavLink
-            className=' p-2 hover:bg-gray-200 
+            className='hover:bg-gray-200 
             focus:text-green-500'
             to='/login'
           >
@@ -60,9 +66,9 @@ const Popup = () => {
         </div>
       )}
 
-      <div className='flex items-center justify-between hover:bg-gray-200  py-1 '>
+      <div className='flex items-center justify-between hover:bg-gray-200  p-2 '>
         <NavLink
-          className=' p-2 
+          className='hover:bg-gray-200 
             focus:text-green-500'
           to='/'
         >

@@ -430,10 +430,11 @@ const BankAppProvider = ({ children }) => {
   };
 
   const handleModal = (e) => {
-    // console.log(e.target);
-    // console.log(e.target.closest('menu-btn'));
-
-    if (e.target.classList.contains('Pop')) {
+    console.log(e);
+    const case1 = e.target.parentNode.classList.contains('Pop');
+    const case2 = e.target.parentNode.classList.contains('menu-btn');
+    const case3 = e.target.classList.contains('Pop');
+    if (case1 || case2 || case3) {
       setIsOpen(!isOpen);
     } else {
       setIsOpen(false);
