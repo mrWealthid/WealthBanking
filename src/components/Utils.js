@@ -16,8 +16,8 @@ export function CheckAccNums(acc, num) {
   return acc.includes(num) ? CheckAccNums(acc, generateAccNums()) : num;
 }
 
-//create a store for each user
-export async function createUserStore(userid) {
+//get the document for each user using id
+export async function getUserByID(userid) {
   const docRef = doc(collectionRef, userid);
 
   const userRef = await getDoc(docRef);

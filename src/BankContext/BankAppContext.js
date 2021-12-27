@@ -26,7 +26,7 @@ import {
 } from 'firebase/auth';
 import {
   generateAccNums,
-  createUserStore,
+  getUserByID,
   convertTime,
   formatDate,
   formatCurrency,
@@ -348,7 +348,7 @@ const BankAppProvider = ({ children }) => {
 
       history.push('/creating');
 
-      const myStore = await createUserStore(uid);
+      const myStore = await getUserByID(uid);
       setUserDetails(myStore.data());
 
       setRegister({
