@@ -6,7 +6,7 @@ import { BankAppProvider } from "./BankContext/BankAppContext";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
-import "./sass/main.scss";
+
 
 // import reportWebVitals from './reportWebVitals';
 
