@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useBankContext } from '../BankContext/BankAppContext';
-import { currency } from './currencyList';
+import {Link} from 'react-router-dom';
+import {useBankContext} from '../BankContext/BankAppContext';
 import Navbar from './Navbar';
 
 const Signup = () => {
@@ -36,7 +35,7 @@ const Signup = () => {
                 value={register.firstname}
                 name='firstname'
                 onChange={handleChangeRegister}
-                className='my-2 block w-full py-2 px-2 focus:outline-none border-green-500 text-black rounded-lg focus:ring-2 focus:ring-green-500 text-sm focus:border-transparent'
+                className='my-2 block w-full p-4 focus:outline-none border-green-500 text-black rounded-lg focus:ring-2 focus:ring-green-500 text-sm focus:border-transparent'
               />
               <input
                 type='text'
@@ -44,7 +43,7 @@ const Signup = () => {
                 value={register.lastname}
                 name='lastname'
                 onChange={handleChangeRegister}
-                className='my-2 block w-full py-2 px-2 focus:outline-none border-green-500 text-black rounded-lg focus:ring-2 focus:ring-green-500 text-sm focus:border-transparent'
+                className='my-2 block w-full p-4 focus:outline-none border-green-500 text-black rounded-lg focus:ring-2 focus:ring-green-500 text-sm focus:border-transparent'
               />
             </div>
             <div className='flex flex-col md:flex-row  item-center w-full gap-2 md:gap-4'>
@@ -54,7 +53,7 @@ const Signup = () => {
                 value={register.email}
                 name='email'
                 onChange={handleChangeRegister}
-                className='my-2 block w-full py-2 px-2 focus:outline-none border-green-500 text-black rounded-lg focus:ring-2 focus:ring-green-500 text-sm focus:border-transparent'
+                className='my-2 block w-full p-4 focus:outline-none border-green-500 text-black rounded-lg focus:ring-2 focus:ring-green-500 text-sm focus:border-transparent'
               />
               <input
                 type='password'
@@ -62,40 +61,40 @@ const Signup = () => {
                 value={register.password}
                 name='password'
                 onChange={handleChangeRegister}
-                className='my-2 block w-full py-2 px-2  focus:outline-none border-green-500 text-black rounded-lg focus:ring-2 focus:ring-green-500 text-sm focus:border-transparent'
+                className='my-2 block w-full p-4  focus:outline-none border-green-500 text-black rounded-lg focus:ring-2 focus:ring-green-500 text-sm focus:border-transparent'
               />
             </div>
-            <div className='flex flex-col md:flex-row w-full gap-2 md:gap-4'>
-              <select
-                className='py-2 my-2 px-2 text-sm lg-text-base greentxt w-full border border-green-600 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-lg'
-                // value={selected.type}
-                // onChange={selectChange}
-              >
-                <option>Currency</option>
-                {currency.map((curr, index) => (
-                  <option value={curr.code} key={index}>
-                    {curr.name}
-                  </option>
-                ))}
-              </select>
-
-              <select
-                className='py-2 px-2 my-2 text-sm lg-text-base w-full greentxt border border-green-600 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-lg'
-                // value={selected.type}
-                // onChange={selectChange}
-              >
-                <option>Gender</option>
-
-                <option value='Male'>Male</option>
-
-                <option value={'Female'}>Female</option>
-              </select>
-            </div>
+            {/*<div className='flex flex-col md:flex-row w-full gap-2 md:gap-4'>*/}
+            {/*  <select*/}
+            {/*    className=' my-2 p-4 text-sm lg-text-base greentxt w-full border border-green-600 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-lg'*/}
+            {/*    // value={selected.type}*/}
+            {/*    // onChange={selectChange}*/}
+            {/*  >*/}
+            {/*    <option>Currency</option>*/}
+            {/*    {currency.map((curr, index) => (*/}
+            {/*      <option value={curr.code} key={index}>*/}
+            {/*        {curr.name}*/}
+            {/*      </option>*/}
+            {/*    ))}*/}
+            {/*  </select>*/}
+            
+            {/*  <select*/}
+            {/*    className='p-4 my-2 text-sm lg-text-base w-full greentxt border border-green-600 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-lg'*/}
+            {/*    // value={selected.type}*/}
+            {/*    // onChange={selectChange}*/}
+            {/*  >*/}
+            {/*    <option>Gender</option>*/}
+            
+            {/*    <option value='Male'>Male</option>*/}
+            
+            {/*    <option value={'Female'}>Female</option>*/}
+            {/*  </select>*/}
+            {/*</div>*/}
             <div className='w-full flex  justify-end'>
               <button
                 className={` ${
                   confirmFields ? 'bg-green-200' : ' bg-green-700 '
-                }  text-white text-sm w-5/12 md:w-4/12 md:text-base rounded-lg cap   py-2  text-white transition ease-linear duration-1000`}
+                }  text-white text-sm w-5/12 md:w-4/12 md:text-base rounded-lg cap   p-3  text-white transition ease-linear duration-1000`}
                 disabled={confirmFields}
               >
                 {buttonLoader ? 'Loading...' : 'Register'}
