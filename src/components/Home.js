@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FaWifi } from 'react-icons/fa';
 
-import { currency, cryptoCurrency } from './currencyList';
+
 import Navbar from './Navbar';
 import { useBankContext } from '../BankContext/BankAppContext';
 import { Link } from 'react-router-dom';
 const Home = () => {
-  const [type, setType] = useState(1);
+
 
   // const [intersects, setIntersects] = useState(false);
 
