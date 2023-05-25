@@ -26,7 +26,7 @@ function App() {
         <Route exact path="/" component={LandingPage} />
 
         <PrivateRoute path="/profile" component={Profile} />
-        <Route path="/create" component={Signup} />
+        <Route path="/register" component={Signup} />
 
         <Route path="/loginState" component={LoginState} />
         <Route path="/login" component={Login} />

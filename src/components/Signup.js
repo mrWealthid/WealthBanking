@@ -35,7 +35,7 @@ const Signup = () => {
                 value={register.firstname}
                 name='firstname'
                 onChange={handleChangeRegister}
-                className='my-2 block w-full p-4 focus:outline-none border-green-500 text-black rounded-lg focus:ring-2 focus:ring-green-500 text-sm focus:border-transparent'
+                className="input-styles"
               />
               <input
                 type='text'
@@ -43,8 +43,7 @@ const Signup = () => {
                 value={register.lastname}
                 name='lastname'
                 onChange={handleChangeRegister}
-                className='my-2 block w-full p-4 focus:outline-none border-green-500 text-black rounded-lg focus:ring-2 focus:ring-green-500 text-sm focus:border-transparent'
-              />
+                className="input-styles"              />
             </div>
             <div className='flex flex-col md:flex-row  item-center w-full gap-2 md:gap-4'>
               <input
@@ -53,7 +52,7 @@ const Signup = () => {
                 value={register.email}
                 name='email'
                 onChange={handleChangeRegister}
-                className='my-2 block w-full p-4 focus:outline-none border-green-500 text-black rounded-lg focus:ring-2 focus:ring-green-500 text-sm focus:border-transparent'
+                className="input-styles"
               />
               <input
                 type='password'
@@ -61,8 +60,7 @@ const Signup = () => {
                 value={register.password}
                 name='password'
                 onChange={handleChangeRegister}
-                className='my-2 block w-full p-4  focus:outline-none border-green-500 text-black rounded-lg focus:ring-2 focus:ring-green-500 text-sm focus:border-transparent'
-              />
+                className="input-styles"              />
             </div>
             {/*<div className='flex flex-col md:flex-row w-full gap-2 md:gap-4'>*/}
             {/*  <select*/}
@@ -103,7 +101,7 @@ const Signup = () => {
             <p className=' text-sm text-center flex gap-2 justify-center'>
               {' '}
               Already Have An Account
-              <Link className='text-blue-700  text-sm' to='/login'>
+              <Link className='text-green-600   text-sm' to='/login'>
                 Login
               </Link>{' '}
             </p>{' '}

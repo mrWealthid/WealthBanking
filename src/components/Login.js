@@ -1,8 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { useBankContext } from '../BankContext/BankAppContext';
 import Navbar from './Navbar';
+import {BiCopy} from "react-icons/bi"
 
+
+const Tooltip = ({ text }) => {
+  return <div className=" glass2 w-full tooltip">{text}</div>;
+};
 const Login = () => {
   const {
     handleChangeLogin,
@@ -15,15 +20,46 @@ const Login = () => {
     msg,
   } = useBankContext();
 
+
+  const [isCopiedEmail, setIsCopiedEmail]= useState(false)
+  const [isCopiedPassword, setIsCopiedPassword]= useState(false)
+
+
+
+  const handleCopy = (setVal, val)=> (e) => {
+
+    //To clear any existing popup
+    setIsCopiedPassword(false)
+    setIsCopiedEmail(false)
+
+//Write to clipboard
+    navigator.clipboard.writeText(val);
+    setVal(true);
+    // Reset the "isCopied" state after a certain duration (e.g., 2 seconds)
+    setTimeout(() => {
+      setVal(false);
+    }, 2000);
+  }
   return (
     <div className='min-h-screen  Apps flex flex-col'>
       <Navbar background='bg-black  opacity-80' />
       <div className='h-screen flex flex-col  justify-center items-center'>
         
-        <div className="bg-white flex justify-center items-center flex-col gap-2 p-4 mb-3 w-10/12 sm:w-8/12 md:w-5/12 lg:w-4/12 rounded">
-          <h1 className='text-2xl'>Test Credentials</h1>
-          <p>Email : tests@gmail.com</p>
-          <p>Password: 123456</p>
+        <div className="  glass2 relative cap flex justify-center items-end flex-col gap-2 p-4 mb-3 w-10/12 sm:w-8/12 md:w-5/12 lg:w-4/12 rounded">
+          <h1 className='text-xl text-green-700 border-b border-gray-300  '>Test Credentials</h1>
+
+         <div className='flex gap-3  items-center '>
+           {isCopiedEmail && <Tooltip text="Email copied to clipboard! ✅" />}
+
+           <p className='text-sm'>Email : tests@gmail.com</p>
+           <BiCopy className='text-green-600 cursor-pointer' onClick={handleCopy( setIsCopiedEmail, 'tests@gmail.com')}/>
+         </div>
+         <div className='flex gap-3 items-center '>
+
+           {isCopiedPassword && <Tooltip text="Password copied to clipboard! ✅" />}
+           <p className='text-sm' >Password: 123456</p>
+           <BiCopy className='text-green-600 cursor-pointer' onClick={handleCopy(setIsCopiedPassword,'123456')}/>
+         </div>
         </div>
         
         <div className='w-10/12 sm:w-8/12 md:w-5/12 lg:w-4/12 flex flex-col max-w-2xl  gap-1  transition ease-in-out duration-500'>
@@ -41,7 +77,7 @@ const Login = () => {
               type='email'
               placeholder='Enter Email'
               name='email'
-              className='my-2 block w-full p-4 focus:outline-none text-black rounded-lg focus:ring-2 border-green-500 focus:ring-green-500 focus:border-transparent text-sm'
+              className="input-styles"
               value={email}
               onChange={handleChangeLogin}
             />
@@ -50,7 +86,7 @@ const Login = () => {
               type='password'
               placeholder='Enter Password'
               name='password'
-              className='my-2 block w-full p-4 focus:outline-none border-green-500 text-black rounded-lg focus:ring-2 focus:ring-green-500 text-sm focus:border-transparent'
+              className="input-styles"
               value={password}
               onChange={handleChangeLogin}
             />
@@ -69,7 +105,7 @@ const Login = () => {
 
             <p className=' flex gap-3 text-sm text-gray-800'>
               Need An Account {''}{' '}
-              <Link className='text-blue-600 text-sm' to='/create'>
+              <Link className='text-green-600 text-sm' to='/register'>
                 Sign up
               </Link>
             </p>
