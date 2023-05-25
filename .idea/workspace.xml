@@ -6,12 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1813e49c-e3d3-4dea-a2d5-a527fa204f05" name="Changes" comment="Updated  Project with clipboard and cleaned up styles">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_.env.local" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ShowCase.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ShowCase.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Signup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,7 +66,7 @@
       <workItem from="1659636902290" duration="1991000" />
       <workItem from="1659639531665" duration="2181000" />
       <workItem from="1684934698179" duration="2157000" />
-      <workItem from="1685041816803" duration="8290000" />
+      <workItem from="1685041816803" duration="9023000" />
     </task>
     <task id="LOCAL-00001" summary="Updated  Project with test credentials">
       <created>1659638925526</created>
@@ -88,7 +82,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684935516879</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Updated  Project with clipboard and cleaned up styles">
+      <created>1685050839255</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1685050839255</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

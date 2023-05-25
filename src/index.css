@@ -171,6 +171,7 @@
   background-image: url("../src/components/background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  clip-path: polygon(0 0, 100% 0, 100% 90vh, 0 100%);
 }
 .glass {
   background-color: rgba(255, 255, 255, 0.5);
