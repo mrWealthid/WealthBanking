@@ -9,9 +9,20 @@
   box-sizing: border-box;
 }
 
-/* html {
-  font-size: 7.5%;
-} */
+
+:root {
+  --nav-height: 10vh;
+}
+
+
+.nav-height {
+  height : var(--nav-height)
+}
+
+
+.layout-height {
+  height: calc(100vh - var(--nav-height));;
+}
 
 .input-styles {
   @apply my-2 block w-full p-4 focus:outline-none  text-black rounded-lg border border-transparent focus:ring-0  text-sm focus:border-transparent

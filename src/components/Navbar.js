@@ -19,7 +19,7 @@ const Navbar = ({ background }) => {
 
   return (
     <div
-      className={`${background} bg-contain  cap  greentxt w-full py-4`}
+      className={`${background} bg-contain  cap flex items-center  greentxt w-full nav-height`}
       ref={NavRef}
     >
       <div className='w-11/12 text-sm mx-auto flex-wrap flex justify-between items-center'>

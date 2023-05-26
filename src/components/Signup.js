@@ -19,7 +19,7 @@ const Signup = () => {
     <div className='min-h-screen animate-slideIn Apps flex flex-col '>
       <Navbar background='bg-black opacity-80' />
 
-      <div className='h-screen flex flex-col  justify-center items-center'>
+      <div className='layout-height flex flex-col  justify-center items-center'>
         <div className='w-8/12    md:w-8/12  flex flex-col max-w-xl gap-2  transition ease-in-out duration-500'>
           <form
             className='py-6 px-8 flex rounded-lg cap bg-contain animate-slideOut shadow-2xl flex-col gap-2 lg:gap-2 glass21 '
@@ -64,13 +64,7 @@ const Signup = () => {
 <div className='w-1/2'>
               <PasswordInput  control={register.password} changeHandler={handleChangeRegister}/>
 </div>
-              {/*<input*/}
-              {/*  type='password'*/}
-              {/*  placeholder='Password'*/}
-              {/*  value={register.password}*/}
-              {/*  name='password'*/}
-              {/*  onChange={handleChangeRegister}*/}
-              {/*  className="input-styles"              />*/}
+
             </div>
             {/*<div className='flex flex-col md:flex-row w-full gap-2 md:gap-4'>*/}
             {/*  <select*/}
