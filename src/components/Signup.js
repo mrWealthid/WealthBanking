@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {useBankContext} from '../BankContext/BankAppContext';
 import Navbar from './Navbar';
+import PasswordInput from "./forms-inputs/password-input";
 
 const Signup = () => {
   const {
@@ -29,7 +30,8 @@ const Signup = () => {
               <p className='text-red-900  animate-slideIn p-2 rounded'>{msg}</p>
             ) : null}
             <div className='flex flex-col md:flex-row item-center w-full gap-2 md:gap-4'>
-              <input
+             <div className='w-1/2'>
+               <input
                 type='text'
                 placeholder='First Name'
                 value={register.firstname}
@@ -37,6 +39,9 @@ const Signup = () => {
                 onChange={handleChangeRegister}
                 className="input-styles"
               />
+             </div>
+
+              <div className='w-1/2'>
               <input
                 type='text'
                 placeholder='Last Name'
@@ -44,9 +49,10 @@ const Signup = () => {
                 name='lastname'
                 onChange={handleChangeRegister}
                 className="input-styles"              />
+              </div>
             </div>
             <div className='flex flex-col md:flex-row  item-center w-full gap-2 md:gap-4'>
-              <input
+            <div className='w-1/2'  >  <input
                 type='text'
                 placeholder='Email'
                 value={register.email}
@@ -54,13 +60,17 @@ const Signup = () => {
                 onChange={handleChangeRegister}
                 className="input-styles"
               />
-              <input
-                type='password'
-                placeholder='Password'
-                value={register.password}
-                name='password'
-                onChange={handleChangeRegister}
-                className="input-styles"              />
+            </div>
+<div className='w-1/2'>
+              <PasswordInput  control={register.password} changeHandler={handleChangeRegister}/>
+</div>
+              {/*<input*/}
+              {/*  type='password'*/}
+              {/*  placeholder='Password'*/}
+              {/*  value={register.password}*/}
+              {/*  name='password'*/}
+              {/*  onChange={handleChangeRegister}*/}
+              {/*  className="input-styles"              />*/}
             </div>
             {/*<div className='flex flex-col md:flex-row w-full gap-2 md:gap-4'>*/}
             {/*  <select*/}

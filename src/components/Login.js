@@ -4,6 +4,7 @@ import { useBankContext } from '../BankContext/BankAppContext';
 import Navbar from './Navbar';
 import {BiCopy} from "react-icons/bi"
 import {FaEye, FaEyeSlash} from "react-icons/all";
+import PasswordInput from "./forms-inputs/password-input";
 
 
 const Tooltip = ({ text }) => {
@@ -88,25 +89,29 @@ const Login = () => {
               onChange={handleChangeLogin}
             />
 
-            <div className='bg-white rounded-lg overflow-hidden w-full border flex items-center'>
-            <input
-              type={showPassword ?'text': 'password' }
-              placeholder='Enter Password'
-              name='password'
-              className=" py-4 w-11/12 text-sm focus:ring-0 border-none "
-              value={password}
-              onChange={handleChangeLogin}
-            />
 
-              {!showPassword ? <FaEyeSlash className='text-green-600'  onClick={togglePassword}/>
-                  :<FaEye className='text-green-600' onClick={togglePassword}/>
-              }
-            </div>
+
+            <PasswordInput control={password} changeHandler={handleChangeLogin} />
+
+            {/*<div className='bg-white rounded-lg overflow-hidden w-full border flex items-center'>*/}
+            {/*<input*/}
+            {/*  type={showPassword ?'text': 'password' }*/}
+            {/*  placeholder='Enter Password'*/}
+            {/*  name='password'*/}
+            {/*  className=" py-4 w-11/12 text-sm focus:ring-0 border-none "*/}
+            {/*  value={password}*/}
+            {/*  onChange={handleChangeLogin}*/}
+            {/*/>*/}
+
+            {/*  {!showPassword ? <FaEyeSlash className='text-green-600'  onClick={togglePassword}/>*/}
+            {/*      :<FaEye className='text-green-600' onClick={togglePassword}/>*/}
+            {/*  }*/}
+            {/*</div>*/}
 
             <button
               className={` ${
                 confirmFields ? 'bg-green-200' : ' bg-green-700 '
-              } text-white cap text-xs  w-full md:text-base rounded-lg text-center p-3 text-white transition ease-linear duration-1000`}
+              } text-white cap text-xs  w-full md:text-base rounded-lg mt-2 text-center p-3 text-white transition ease-linear duration-1000`}
               disabled={confirmFields}
             >
               {buttonLoader ? 'Verifying...' : 'Login'}
@@ -116,7 +121,7 @@ const Login = () => {
           </Link> */}
 
             <p className=' flex gap-3 text-sm text-gray-800'>
-              Need An Account {''}{' '}
+              Need An Account {''}{' '}?
               <Link className='text-green-600 text-sm' to='/register'>
                 Sign up
               </Link>
