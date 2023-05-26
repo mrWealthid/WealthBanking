@@ -11,7 +11,7 @@ const PasswordInput = ({control,changeHandler }) =>  {
     return (
     <div className='bg-white rounded-lg overflow-hidden  w-full my-2 border flex items-center'>
         <input
-            type={showPassword ?'text': 'password' }
+            type={showPassword ? 'text' : 'password'}
             placeholder='Enter Password'
             name='password'
             className=" py-4 pl-4 w-11/12 text-sm focus:ring-0 border-none "
@@ -19,8 +19,8 @@ const PasswordInput = ({control,changeHandler }) =>  {
             onChange={changeHandler}
         />
 
-        {!showPassword ? <FaEyeSlash className='text-green-600'  onClick={togglePassword}/>
-            :<FaEye className='text-green-600' onClick={togglePassword}/>
+        {!showPassword ? <FaEyeSlash className='text-green-600 cursor-pointer' onClick={togglePassword}/>
+            : <FaEye className='text-green-600 cursor-pointer' onClick={togglePassword}/>
         }
     </div>
 
@@ -29,7 +29,7 @@ const PasswordInput = ({control,changeHandler }) =>  {
 
 PasswordInput.propTypes = {
     control: PropTypes.string,
-    changeHandle:PropTypes.func
+    changeHandler: PropTypes.func
 
 }
 
