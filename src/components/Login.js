@@ -1,17 +1,13 @@
-import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
-import { useBankContext } from '../BankContext/BankAppContext';
+import React from 'react';
+import {Link} from 'react-router-dom';
+import {useBankContext} from '../BankContext/BankAppContext';
 import Navbar from './Navbar';
-import {BiCopy} from "react-icons/bi"
-import {FaEye, FaEyeSlash} from "react-icons/all";
 import PasswordInput from "./forms-inputs/password-input";
+import Clipboard from "./forms-inputs/clipboard";
 
-
-const Tooltip = ({ text }) => {
-  return <div className=" glass2 w-full tooltip">{text}</div>;
-};
 const Login = () => {
   const {
+
     handleChangeLogin,
     handleLogin,
     email,
@@ -22,52 +18,27 @@ const Login = () => {
     msg,
   } = useBankContext();
 
-
-  const [isCopiedEmail, setIsCopiedEmail]= useState(false)
-  const [isCopiedPassword, setIsCopiedPassword]= useState(false)
-  const [showPassword, setShowPassword]= useState(false)
-
-
-
-  const handleCopy = (setVal, val)=> (e) => {
-
-    //To clear any existing popup
-    setIsCopiedPassword(false)
-    setIsCopiedEmail(false)
-
-//Write to clipboard
-    navigator.clipboard.writeText(val);
-    setVal(true);
-    // Reset the "isCopied" state after a certain duration (e.g., 2 seconds)
-    setTimeout(() => {
-      setVal(false);
-    }, 2000);
-  }
-
-  const togglePassword =()=> {
-    setShowPassword(!showPassword)
-  }
   return (
-    <div className='min-h-screen  Apps flex flex-col'>
-      <Navbar background='bg-black  opacity-80' />
-      <div className='h-screen flex flex-col  justify-center items-center'>
-        
-        <div className="  glass2 relative cap flex justify-center items-end flex-col gap-2 p-4 mb-3 w-10/12 sm:w-8/12 md:w-5/12 lg:w-4/12 rounded">
-          <h1 className='text-xl text-green-700 border-b border-gray-300  '>Test Credentials</h1>
+      <div className='min-h-screen  Apps flex flex-col'>
+        <Navbar background='bg-black  opacity-80'/>
+        <div className='layout-height flex flex-col  justify-center items-center'>
 
-         <div className='flex gap-3  items-center '>
-           {isCopiedEmail && <Tooltip text="Email copied to clipboard! ✅" />}
+          <div
+              className="  glass2 relative cap flex justify-center items-end flex-col gap-2 p-4 mb-3 w-10/12 sm:w-8/12 md:w-5/12 lg:w-4/12 rounded">
+            <h1 className='text-xl text-green-700 border-b border-gray-300  '>Test Credentials</h1>
 
-           <p className='text-sm'>Email : tests@gmail.com</p>
-           <BiCopy className='text-green-600 cursor-pointer' onClick={handleCopy( setIsCopiedEmail, 'tests@gmail.com')}/>
-         </div>
-         <div className='flex gap-3 items-center '>
+            <section className='flex gap-4'>
+              <p className='text-sm'>Email : tests@gmail.com</p>
+              <Clipboard text={'tests@gmail.com'} msg={'Email copied to clipboard! ✅'}/>
 
-           {isCopiedPassword && <Tooltip text="Password copied to clipboard! ✅" />}
-           <p className='text-sm' >Password: 123456</p>
-           <BiCopy className='text-green-600 cursor-pointer' onClick={handleCopy(setIsCopiedPassword,'123456')}/>
-         </div>
-        </div>
+
+            </section>
+
+            <section className='flex gap-4'>
+              <p className='text-sm'>Password : 123456</p>
+              <Clipboard text={'123456'} msg={'Password copied to clipboard! ✅'}/>
+            </section>
+          </div>
         
         <div className='w-10/12 sm:w-8/12 md:w-5/12 lg:w-4/12 flex flex-col max-w-2xl  gap-1  transition ease-in-out duration-500'>
           <form
@@ -93,20 +64,7 @@ const Login = () => {
 
             <PasswordInput control={password} changeHandler={handleChangeLogin} />
 
-            {/*<div className='bg-white rounded-lg overflow-hidden w-full border flex items-center'>*/}
-            {/*<input*/}
-            {/*  type={showPassword ?'text': 'password' }*/}
-            {/*  placeholder='Enter Password'*/}
-            {/*  name='password'*/}
-            {/*  className=" py-4 w-11/12 text-sm focus:ring-0 border-none "*/}
-            {/*  value={password}*/}
-            {/*  onChange={handleChangeLogin}*/}
-            {/*/>*/}
 
-            {/*  {!showPassword ? <FaEyeSlash className='text-green-600'  onClick={togglePassword}/>*/}
-            {/*      :<FaEye className='text-green-600' onClick={togglePassword}/>*/}
-            {/*  }*/}
-            {/*</div>*/}
 
             <button
               className={` ${

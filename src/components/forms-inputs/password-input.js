@@ -14,7 +14,7 @@ const PasswordInput = ({control,changeHandler }) =>  {
             type={showPassword ?'text': 'password' }
             placeholder='Enter Password'
             name='password'
-            className=" py-4 w-11/12 text-sm focus:ring-0 border-none "
+            className=" py-4 pl-4 w-11/12 text-sm focus:ring-0 border-none "
             value={control}
             onChange={changeHandler}
         />
