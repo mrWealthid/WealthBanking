@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useBankContext } from '../BankContext/BankAppContext';
 import Navbar from './Navbar';
 import {BiCopy} from "react-icons/bi"
+import {FaEye, FaEyeSlash} from "react-icons/all";
 
 
 const Tooltip = ({ text }) => {
@@ -23,6 +24,7 @@ const Login = () => {
 
   const [isCopiedEmail, setIsCopiedEmail]= useState(false)
   const [isCopiedPassword, setIsCopiedPassword]= useState(false)
+  const [showPassword, setShowPassword]= useState(false)
 
 
 
@@ -39,6 +41,10 @@ const Login = () => {
     setTimeout(() => {
       setVal(false);
     }, 2000);
+  }
+
+  const togglePassword =()=> {
+    setShowPassword(!showPassword)
   }
   return (
     <div className='min-h-screen  Apps flex flex-col'>
@@ -82,14 +88,20 @@ const Login = () => {
               onChange={handleChangeLogin}
             />
 
+            <div className='bg-white rounded-lg overflow-hidden w-full border flex items-center'>
             <input
-              type='password'
+              type={showPassword ?'text': 'password' }
               placeholder='Enter Password'
               name='password'
-              className="input-styles"
+              className=" py-4 w-11/12 text-sm focus:ring-0 border-none "
               value={password}
               onChange={handleChangeLogin}
             />
+
+              {!showPassword ? <FaEyeSlash className='text-green-600'  onClick={togglePassword}/>
+                  :<FaEye className='text-green-600' onClick={togglePassword}/>
+              }
+            </div>
 
             <button
               className={` ${
