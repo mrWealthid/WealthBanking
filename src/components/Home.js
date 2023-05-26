@@ -19,7 +19,7 @@ const Home = () => {
     >
       <p className=''></p>
       <Navbar background={'glass21'} />
-      <div className='md:flex-1 my-12 p-10 md:my-0 min-h-screen md:min-h-full flex flex-col justify-center  items-center'>
+      <div className='md:flex-1 my-12 p-2 md:my-0 min-h-screen md:min-h-full flex flex-col justify-center  items-center'>
         <section className='flex flex-col gap-10 md:gap-1 md:flex-row justify-between mt-10 md:mt-0 items-center w-11/12 '>
           <div className='flex flex-col text  md:w-1/2  flex-1 gap-6 glassTxt'>
             <p className='text-4xl lg:text-4xl  '>
@@ -34,7 +34,7 @@ const Home = () => {
             </p>
 
             <Link to='/login'>
-              <button className='w-1/3 cap bg-contain glass21 px-2 py-4 rounded-lg'>
+              <button className='w-1/3 cap bg-contain glass21 px-2 py-4 rounded-full'>
                 Explore
               </button>
             </Link>

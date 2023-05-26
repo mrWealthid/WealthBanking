@@ -48,7 +48,7 @@ const Navbar = ({ background }) => {
             <NavLink
               activeStyle={styles}
               className='hidden md:block '
-              to='/create'
+              to='/register'
             >
               Register
             </NavLink>

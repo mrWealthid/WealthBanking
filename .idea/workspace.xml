@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1813e49c-e3d3-4dea-a2d5-a527fa204f05" name="Changes" comment="Clean up for deployment">
+    <list default="true" id="1813e49c-e3d3-4dea-a2d5-a527fa204f05" name="Changes" comment="Add: Implemented hide and show password feature">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Home.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Popup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Popup.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +68,7 @@
       <workItem from="1659636902290" duration="1991000" />
       <workItem from="1659639531665" duration="2181000" />
       <workItem from="1684934698179" duration="2157000" />
-      <workItem from="1685041816803" duration="13144000" />
+      <workItem from="1685041816803" duration="13607000" />
     </task>
     <task id="LOCAL-00001" summary="Updated  Project with test credentials">
       <created>1659638925526</created>
@@ -110,7 +112,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685107548667</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Add: Implemented hide and show password feature">
+      <created>1685110102612</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1685110102612</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -131,6 +140,7 @@
     <MESSAGE value="Updated  Project with test credentials" />
     <MESSAGE value="Updated  Project with clipboard and cleaned up styles" />
     <MESSAGE value="Clean up for deployment" />
-    <option name="LAST_COMMIT_MESSAGE" value="Clean up for deployment" />
+    <MESSAGE value="Add: Implemented hide and show password feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add: Implemented hide and show password feature" />
   </component>
 </project>

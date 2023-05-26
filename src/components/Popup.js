@@ -24,7 +24,7 @@ const Popup = () => {
         <div className='flex items-center hover:bg-gray-200 justify-between p-2 '>
           <NavLink
             className='hover:bg-gray-200   focus:text-green-500'
-            to='/create'
+            to='/register'
           >
             Create Account
           </NavLink>
