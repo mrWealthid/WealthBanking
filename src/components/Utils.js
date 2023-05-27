@@ -1,5 +1,8 @@
-import { getDoc, doc, collection } from 'firebase/firestore';
-import { db } from '../firebase-config';
+import {collection, doc, getDoc} from 'firebase/firestore';
+import {db} from '../firebase-config';
+
+const crypto = require('crypto');
+
 const collectionRef = collection(db, 'Accounts');
 
 //Generate Account Number
@@ -7,14 +10,23 @@ const collectionRef = collection(db, 'Accounts');
 //   return Math.floor(Math.random() * 10e4);
 // }
 
-export const generateAccNums = (min, max) => {
-  return Math.floor(Math.random() * (max - min) + 1) + min;
-};
+// export const generateAccNums = (min, max) => {
+//   return Math.floor(Math.random() * (max - min) + 1) + min;
+// };
+
+export function generateUniqueAccountNumber() {
+  const timestamp = Date.now().toString();
+  const randomDigits = crypto.randomBytes(2).readUInt16BE(0).toString();
+
+  const accountNumber = timestamp + randomDigits;
+
+  return accountNumber.slice(-7);
+}
 
 //Check if account num exsit
-export function CheckAccNums(acc, num) {
-  return acc.includes(num) ? CheckAccNums(acc, generateAccNums()) : num;
-}
+// export function CheckAccNums(acc, num) {
+//   return acc.includes(num) ? CheckAccNums(acc, generateAccNums()) : num;
+// }
 
 //get the document for each user using id
 export async function getUserByID(userid) {

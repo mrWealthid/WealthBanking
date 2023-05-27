@@ -30,60 +30,60 @@ const Signup = () => {
               <p className='text-red-900  animate-slideIn p-2 rounded'>{msg}</p>
             ) : null}
             <div className='flex flex-col md:flex-row item-center w-full gap-2 md:gap-4'>
-             <div className='w-1/2'>
-               <input
-                type='text'
-                placeholder='First Name'
-                value={register.firstname}
-                name='firstname'
-                onChange={handleChangeRegister}
-                className="input-styles"
-              />
-             </div>
+                <div className='w-full lg:w-1/2'>
+                    <input
+                        type='text'
+                        placeholder='First Name'
+                        value={register.firstname}
+                        name='firstname'
+                        onChange={handleChangeRegister}
+                        className="input-styles"
+                    />
+                </div>
 
-              <div className='w-1/2'>
-              <input
-                type='text'
-                placeholder='Last Name'
-                value={register.lastname}
-                name='lastname'
-                onChange={handleChangeRegister}
-                className="input-styles"              />
+                <div className='w-full lg:w-1/2'>
+                    <input
+                        type='text'
+                        placeholder='Last Name'
+                        value={register.lastname}
+                        name='lastname'
+                        onChange={handleChangeRegister}
+                        className="input-styles"/>
+                </div>
+            </div>
+              <div className='flex flex-col md:flex-row  item-center w-full gap-2 md:gap-4'>
+                  <div className='w-full lg:w-1/2'><input
+                      type='text'
+                      placeholder='Email'
+                      value={register.email}
+                      name='email'
+                      onChange={handleChangeRegister}
+                      className="input-styles"
+                  />
+                  </div>
+                  <div className='w-full lg:w-1/2'>
+                      <PasswordInput control={register.password} changeHandler={handleChangeRegister}/>
+                  </div>
+
               </div>
-            </div>
-            <div className='flex flex-col md:flex-row  item-center w-full gap-2 md:gap-4'>
-            <div className='w-1/2'  >  <input
-                type='text'
-                placeholder='Email'
-                value={register.email}
-                name='email'
-                onChange={handleChangeRegister}
-                className="input-styles"
-              />
-            </div>
-<div className='w-1/2'>
-              <PasswordInput  control={register.password} changeHandler={handleChangeRegister}/>
-</div>
+              {/*<div className='flex flex-col md:flex-row w-full gap-2 md:gap-4'>*/}
+              {/*  <select*/}
+              {/*    className=' my-2 p-4 text-sm lg-text-base greentxt w-full border border-green-600 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-lg'*/}
+              {/*    // value={selected.type}*/}
+              {/*    // onChange={selectChange}*/}
+              {/*  >*/}
+              {/*    <option>Currency</option>*/}
+              {/*    {currency.map((curr, index) => (*/}
+              {/*      <option value={curr.code} key={index}>*/}
+              {/*        {curr.name}*/}
+              {/*      </option>*/}
+              {/*    ))}*/}
+              {/*  </select>*/}
 
-            </div>
-            {/*<div className='flex flex-col md:flex-row w-full gap-2 md:gap-4'>*/}
-            {/*  <select*/}
-            {/*    className=' my-2 p-4 text-sm lg-text-base greentxt w-full border border-green-600 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-lg'*/}
-            {/*    // value={selected.type}*/}
-            {/*    // onChange={selectChange}*/}
-            {/*  >*/}
-            {/*    <option>Currency</option>*/}
-            {/*    {currency.map((curr, index) => (*/}
-            {/*      <option value={curr.code} key={index}>*/}
-            {/*        {curr.name}*/}
-            {/*      </option>*/}
-            {/*    ))}*/}
-            {/*  </select>*/}
-            
-            {/*  <select*/}
-            {/*    className='p-4 my-2 text-sm lg-text-base w-full greentxt border border-green-600 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-lg'*/}
-            {/*    // value={selected.type}*/}
-            {/*    // onChange={selectChange}*/}
+              {/*  <select*/}
+              {/*    className='p-4 my-2 text-sm lg-text-base w-full greentxt border border-green-600 focus:outline-none focus:ring-green-500 focus:border-green-500 rounded-lg'*/}
+              {/*    // value={selected.type}*/}
+              {/*    // onChange={selectChange}*/}
             {/*  >*/}
             {/*    <option>Gender</option>*/}
             
@@ -99,7 +99,7 @@ const Signup = () => {
                 }  text-white text-sm w-5/12 md:w-4/12 md:text-base rounded-lg cap   p-3  text-white transition ease-linear duration-1000`}
                 disabled={confirmFields}
               >
-                {buttonLoader ? 'Loading...' : 'Register'}
+                  {buttonLoader ? 'Loading...' : 'Register'}
               </button>
             </div>
             <p className=' text-sm text-center flex gap-2 justify-center'>

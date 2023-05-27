@@ -1,22 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { useBankContext } from '../BankContext/BankAppContext';
+import React, {useEffect, useState} from 'react';
+import {useBankContext} from '../BankContext/BankAppContext';
 import {
   FaArrowDown,
+  FaArrowLeft,
+  FaArrowRight,
   FaArrowUp,
+  FaHandHoldingUsd,
+  FaHistory,
+  FaSadTear,
   FaSearch,
   FaSortAmountDown,
   FaSortAmountUp,
-  FaHistory,
-  FaArrowRight,
-  FaArrowLeft,
-  FaSadTear,
-  FaHandHoldingUsd,
   FaUserCog,
 } from 'react-icons/fa';
 import Transactions from './Transactions';
 import ProfilePopup from './ProfilePopup';
 import Analytics from './Analytics';
 import Navbar from './Navbar';
+import Clipboard from "./forms-inputs/clipboard";
 
 const Profile = () => {
   const {
@@ -120,90 +121,97 @@ const Profile = () => {
     }
   }, [minutes, handleLogout]);
 
+
   return (
-    <div className='flex flex-col  Apps ' onClick={() => setMinutes(300)}>
-      <Navbar background='bg-black opacity-80' />
-      {userDetails && (
-        <div
-          className={`${
-            popUp && 'filter blur'
-          } px-4 my-2 w-11/12 mx-auto lg:my-4 animate-slideOut`}
-        >
-          <p className='text-base flex gap-3 text-gray-800  md:text-xl'>
-            Welcome Back,
-            <span className='text-gray-800'>{userDetails.name}!</span>
-          </p>
+      <div className='flex flex-col  Apps ' onClick={() => setMinutes(300)}>
+        <Navbar background='bg-black opacity-80'/>
+        {userDetails && (
+            <div
+                className={`${
+                    popUp && 'filter blur'
+                } px-4 my-2 w-11/12 mx-auto lg:my-4 animate-slideOut`}
+            >
+              <p className='text-base flex gap-3 text-gray-800  md:text-xl'>
+                Welcome Back,
+                <span className='text-gray-800'>{userDetails.name}!</span>
+              </p>
 
-          <p className='text-sm text-gray-800  md:text-base'>
-            Account Number : {userDetails.accountNumber}
-          </p>
+              <p className='text-sm flex gap-4 text-gray-800  md:text-base'>
+                Account Number : {userDetails.accountNumber}
 
-          <div className='flex md:flex-row flex-col  justify-between md:items-center gap-2 py-8 lg:py-16 '>
-            <div className='flex text-sm lg:text-base  flex-col text-gray-800 '>
-              Current Balance
-              <p className='text-sm text-gray-800 '>As at {globalizeDate()}</p>
-            </div>
-            <div className='animate-slideIn'>
-              <p className='text-sm lg:text-base'>Balance</p>
-              <p className=' text-lg lg:text-2xl text-gray-900 font-bold '>
-                {formatCurrency('en-US', userData.currency, totalCount)}
-              </p>{' '}
-            </div>
-          </div>
+                <Clipboard text={userDetails.accountNumber} showMessage={false}/>
+              </p>
 
-          <section className='flex flex-col lg:flex-row-reverse gap-5 justify-between '>
-            <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 lg:w-5/12 w-full lg:sticky top-3 order-2 lg:order-none  h-full rounded-lg  text-gray-200 gap-3'>
-              <section
-                className='transfer flex flex-col gap-2 w-full items-center  max-w-md mx-auto justify-center bg-blend-screen bg-contain h-40 cap rounded-lg cursor-pointer p-5'
-                onClick={() => {
-                  setpopUp(!popUp);
-                  setSuccessMsg(false);
-                  setType('transfer');
-                }}
-              >
-                <div className='glass rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-1 px-1 shadow-2xl mx-auto'>
-                  <FaArrowRight color='green' />
-
-                  <FaArrowLeft color='brown' />
+              <div className='flex md:flex-row flex-col  justify-between md:items-center gap-2 py-8 lg:py-16 '>
+                <div className='flex text-sm lg:text-base  flex-col text-gray-800 '>
+                  Current Balance
+                  <p className='text-sm text-gray-800 '>As at {globalizeDate()}</p>
                 </div>
-                <p className='text-center'> Make A Transfer</p>
-              </section>
-
-              <section
-                className='loan cap bg-blend-screen flex flex-col w-full gap-2 items-center  max-w-md mx-auto  justify-center  cursor-pointer bg-contain h-40 rounded-lg p-5'
-                onClick={() => {
-                  setpopUp(!popUp);
-                  setSuccessMsg(false);
-                  setType('loan');
-                }}
-              >
-                <div className='glass rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-1 px-1 shadow-2xl mx-auto'>
-                  <FaHandHoldingUsd color='green' />
+                <div className='animate-slideIn'>
+                  <p className='text-sm lg:text-base'>Balance</p>
+                  <p className=' text-lg lg:text-2xl text-gray-900 font-bold '>
+                    {formatCurrency('en-US', userData.currency, totalCount)}
+                  </p>{' '}
                 </div>
-                <p>Request Loan</p>
-              </section>
+              </div>
 
-              <section
-                className='white shadow-2xl bg-contain gap-2  flex flex-col items-center  max-w-md mx-auto w-full justify-center  bg-gray-900 cursor-pointer cap h-40 rounded-lg p-5'
-                onClick={() => {
-                  setpopUp(!popUp);
-                  setSuccessMsg(false);
-                  setType('close');
-                }}
-              >
-                <div className='glass rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-1 px-1 shadow-2xl mx-auto'>
-                  <FaSadTear color='brown' />
-                </div>
+              <section className='flex flex-col lg:flex-row-reverse gap-5 justify-between '>
+                <section
+                    className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 lg:w-5/12 w-full lg:sticky top-3 order-2 lg:order-none  h-full rounded-lg  text-gray-200 gap-3'>
+                  <section
+                      className='transfer flex flex-col gap-2 w-full items-center  max-w-md mx-auto justify-center bg-blend-screen bg-contain h-40 cap rounded-lg cursor-pointer p-5'
+                      onClick={() => {
+                        setpopUp(!popUp);
+                        setSuccessMsg(false);
+                        setType('transfer');
+                      }}
+                  >
+                    <div
+                        className='glass rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-1 px-1 shadow-2xl mx-auto'>
+                      <FaArrowRight color='green'/>
 
-                <p>Close Account</p>
-              </section>
+                      <FaArrowLeft color='brown'/>
+                    </div>
+                    <p className='text-center'> Make A Transfer</p>
+                  </section>
 
-              <section
-                className='white shadow-2xl bg-contain gap-2  flex flex-col items-center  max-w-md mx-auto w-full justify-center glass cursor-pointer cap h-40 rounded-lg p-5'
-                onClick={() => {
-                  setpopUp(!popUp);
-                  setSuccessMsg(false);
-                  setType('close');
+                  <section
+                      className='loan cap bg-blend-screen flex flex-col w-full gap-2 items-center  max-w-md mx-auto  justify-center  cursor-pointer bg-contain h-40 rounded-lg p-5'
+                      onClick={() => {
+                        setpopUp(!popUp);
+                        setSuccessMsg(false);
+                        setType('loan');
+                      }}
+                  >
+                    <div
+                        className='glass rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-1 px-1 shadow-2xl mx-auto'>
+                      <FaHandHoldingUsd color='green'/>
+                    </div>
+                    <p>Request Loan</p>
+                  </section>
+
+                  <section
+                      className='white shadow-2xl bg-contain gap-2  flex flex-col items-center  max-w-md mx-auto w-full justify-center  bg-gray-900 cursor-pointer cap h-40 rounded-lg p-5'
+                      onClick={() => {
+                        setpopUp(!popUp);
+                        setSuccessMsg(false);
+                        setType('close');
+                      }}
+                  >
+                    <div
+                        className='glass rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-1 px-1 shadow-2xl mx-auto'>
+                      <FaSadTear color='brown'/>
+                    </div>
+
+                    <p>Close Account</p>
+                  </section>
+
+                  <section
+                      className='white shadow-2xl bg-contain gap-2  flex flex-col items-center  max-w-md mx-auto w-full justify-center glass cursor-pointer cap h-40 rounded-lg p-5'
+                      onClick={() => {
+                        setpopUp(!popUp);
+                        setSuccessMsg(false);
+                        setType('close');
                 }}
               >
                 <div className='glass rounded-full animate-slideOut flex-col items-center w-10 h-10  object-cover flex justify-center py-1 px-1 shadow-2xl mx-auto'>

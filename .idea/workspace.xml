@@ -4,9 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1813e49c-e3d3-4dea-a2d5-a527fa204f05" name="Changes" comment="Add: Implemented a reusable clipboard component accross application">
+    <list default="true" id="1813e49c-e3d3-4dea-a2d5-a527fa204f05" name="Changes" comment="Updates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/forms-inputs/password-input.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms-inputs/password-input.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BankContext/BankAppContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/BankContext/BankAppContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Signup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Signup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Utils.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/forms-inputs/clipboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/forms-inputs/clipboard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,26 +35,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Project.color": "ff23af",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "code.cleanup.on.save": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/WEALTH IDUWE/workspace/web/WealthBanking",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "settings.editor.selected.configurable": "actions.on.save",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Project.color&quot;: &quot;ff23af&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;code.cleanup.on.save&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/WEALTH IDUWE/workspace/web/WealthBanking&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/components/forms-inputs" />
@@ -86,7 +90,8 @@
       <workItem from="1685114501520" duration="13000" />
       <workItem from="1685114544119" duration="13000" />
       <workItem from="1685114573677" duration="6000" />
-      <workItem from="1685114592019" duration="5001000" />
+      <workItem from="1685114592019" duration="6222000" />
+      <workItem from="1685195520646" duration="4987000" />
     </task>
     <task id="LOCAL-00001" summary="Updated  Project with test credentials">
       <created>1659638925526</created>
@@ -165,7 +170,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685117603818</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Updates">
+      <created>1685120112559</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1685120112559</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -190,6 +202,7 @@
     <MESSAGE value="Add: Updated routes and alignment" />
     <MESSAGE value="Add: Updated layout for routes using a dynamic calc method" />
     <MESSAGE value="Add: Implemented a reusable clipboard component accross application" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add: Implemented a reusable clipboard component accross application" />
+    <MESSAGE value="Updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updates" />
   </component>
 </project>

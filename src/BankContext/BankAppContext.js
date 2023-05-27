@@ -1,50 +1,39 @@
-import React, {
-  useContext,
-  useState,
-  useEffect,
-  createContext,
-  useRef,
-} from 'react';
+import React, {createContext, useContext, useEffect, useRef, useState,} from 'react';
 import {
-  doc,
-  setDoc,
-  onSnapshot,
   collection,
+  deleteDoc,
+  doc,
+  onSnapshot,
   orderBy,
   query,
   serverTimestamp,
+  setDoc,
   updateDoc,
-  deleteDoc,
 } from 'firebase/firestore';
-import { useHistory } from 'react-router-dom';
-import { auth, db } from '../firebase-config';
+import {useHistory} from 'react-router-dom';
+import {auth, db} from '../firebase-config';
+import {createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut,} from 'firebase/auth';
 import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut,
-  signInWithEmailAndPassword,
-} from 'firebase/auth';
-import {
-  generateAccNums,
-  getUserByID,
-  convertTime,
-  formatDate,
-  formatCurrency,
   calcLoanPayBackTime,
+  convertTime,
+  formatCurrency,
+  formatDate,
+  generateUniqueAccountNumber,
+  getUserByID,
 } from '../components/Utils';
-import { useDispatch, useSelector } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {
-  isLoggedIn,
-  isLoggedOut,
-  getDebits,
-  getCredits,
-  getAll,
   getAccounts,
-  sortByDesc,
-  sortByAsc,
+  getAll,
+  getBalance,
+  getCredits,
+  getDebits,
   getTotalCredit,
   getTotalDebit,
-  getBalance,
+  isLoggedIn,
+  isLoggedOut,
+  sortByAsc,
+  sortByDesc,
 } from '../actions';
 
 const BankAppContext = createContext();
@@ -311,6 +300,7 @@ const BankAppProvider = ({ children }) => {
   const handleSignup = async (e) => {
     e.preventDefault();
 
+    setButtonLoader(true)
     try {
       const data = await createUserWithEmailAndPassword(
         auth,
@@ -320,11 +310,7 @@ const BankAppProvider = ({ children }) => {
 
       const { uid, email } = data.user;
 
-      // dispatch(
-      //   logIn({
-      //     ...data,
-      //   })
-      // );
+
 
       const docRef = doc(collectionRef, uid);
       const payload = {
@@ -341,7 +327,7 @@ const BankAppProvider = ({ children }) => {
           },
         ],
         timestamp: serverTimestamp(),
-        accountNumber: generateAccNums(11111, 99999),
+        accountNumber: generateUniqueAccountNumber(),
       };
 
       await setDoc(docRef, payload);
@@ -365,6 +351,8 @@ const BankAppProvider = ({ children }) => {
       errorChecker(error);
       console.log(error);
       setConfirmFields(false);
+    } finally {
+      setButtonLoader(false)
     }
   };
 
@@ -380,41 +368,26 @@ const BankAppProvider = ({ children }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    setButtonLoader(true)
     try {
       await signInWithEmailAndPassword(auth, login.email, login.password);
 
-      // console.log(data.user.uid);
-
-      // dispatch(
-      //   logIn({
-      //     email: data.user.email,
-      //     uid: data.user.uid,
-      //     displayName: data.user.displayName,
-      //     photoUrl: data.user.photoURL,
-      //   })
-      // );
-
-      setButtonLoader(true);
+      setLogin({
+        email: '',
+        password: '',
+      });
+      history.push('/profile');
 
       setConfirmFields(true);
-      setTimeout(() => {
-        setButtonLoader(false);
-        setLogin({
-          email: '',
-          password: '',
-        });
-        history.push('/profile');
-      }, 1500);
+
     } catch (error) {
       console.log(error.message);
       errorChecker(error);
       setConfirmFields(false);
 
-      setButtonLoader(true);
-
-      setTimeout(() => {
-        setButtonLoader(false);
-      }, 3000);
+    } finally {
+      setButtonLoader(false)
     }
   };
 
