@@ -105,8 +105,8 @@ const Signup = () => {
             <p className=' text-sm text-center flex gap-2 justify-center'>
               {' '}
               Already Have An Account
-              <Link className='text-green-600   text-sm' to='/login'>
-                Login
+              <Link className='text-green-600 cursor-pointer   text-sm' to='/login'>
+                  Login
               </Link>{' '}
             </p>{' '}
           </form>

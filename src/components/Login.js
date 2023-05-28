@@ -80,7 +80,7 @@ const Login = () => {
 
             <p className=' flex gap-3 text-sm text-gray-800'>
               Need An Account {''}{' '}?
-              <Link className='text-green-600 text-sm' to='/register'>
+              <Link className='text-green-600 text-sm cursor-pointer' to='/register'>
                 Sign up
               </Link>
             </p>

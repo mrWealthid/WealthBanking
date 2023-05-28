@@ -20,7 +20,7 @@ export function generateUniqueAccountNumber() {
 
   const accountNumber = timestamp + randomDigits;
 
-  return accountNumber.slice(-7);
+  return Number(accountNumber.slice(-7));
 }
 
 //Check if account num exsit
