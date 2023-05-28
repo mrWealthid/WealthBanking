@@ -15,12 +15,10 @@ const collectionRef = collection(db, 'Accounts');
 // };
 
 export function generateUniqueAccountNumber() {
-  const timestamp = Date.now().toString();
-  const randomDigits = crypto.randomBytes(2).readUInt16BE(0).toString();
-
-  const accountNumber = timestamp + randomDigits;
-
-  return accountNumber.slice(-7);
+  const timestamp = Date.now();
+  const randomDigits = +crypto.randomBytes(2).readUInt16BE(0).toString();
+  const result = timestamp + randomDigits;
+  return Number(result.toString().slice(-7));
 }
 
 //Check if account num exsit
